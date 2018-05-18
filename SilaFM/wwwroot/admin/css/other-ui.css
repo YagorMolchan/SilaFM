@@ -1,0 +1,116 @@
+﻿.menu-tabs{ list-style: none;margin: 30px 0;border-bottom: solid 1px #808080;}
+.menu-tabs li{ display: inline-block;padding: 15px;-webkit-border-radius: 10px 10px 0px 0px;border-radius: 10px 10px 0px 0px;margin-bottom: -1px;}
+.menu-tabs li:hover{ background-color: #d3d3d3;cursor: pointer;}
+.menu-tabs li.active, .menu-tabs li.active:hover{border: solid 1px #808080;border-bottom: solid 1px #fff; background-color: #fff;cursor: default;}
+
+.content-tabs{list-style: none;}
+.content-tabs li{ display: none;}
+.content-tabs li.active{ display: block;}
+.content-tabs li label{ margin-top: 30px;}
+.preloader {display: inline-block;width: 24px;height: 24px;background: url(/Content/admin/preloader.gif) no-repeat;}
+
+.view{ }
+.not-view{ display: none;}
+
+.label-green {
+    color: limegreen;
+    font-weight: bold;
+}
+
+
+#news-prasby p.h4 {
+    margin-top: 20px;
+    color: #d80042;
+    text-transform: uppercase;
+}
+#news-prasby p.h5 {
+    font-weight: bold !important;
+    margin-bottom: 0;
+}
+#news-prasby .new-item {
+    margin-bottom: 10px;
+}
+#news-prasby .new-item img{
+    width: 30%;
+    float: left;
+    padding: 10px 10px 0 0;
+}
+#news-prasby .new-item p.summary{
+    margin-bottom: 15px;
+}
+#news-prasby .new-item a,
+#news-prasby .new-item a:visited {
+    font-weight: bold !important;
+}
+#news-prasby .new-item a:hover,
+#news-prasby .new-item a:active {
+    color: #d80042;
+}
+#news-prasby .new-item a:hover {
+    color: #000;
+}
+.box-prasby > .box-header {
+    background: #d80042 !important;
+    background-color: #d80042 !important;
+}
+
+.news-block {
+    margin-bottom: 20px;
+}
+
+.block-title {
+    color: #d80042;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-left: 10px;
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 7px;
+}
+.news-title a {
+    color: #000;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.news-body {
+    margin-top: 10px;
+}
+.news-body>div {
+    width: 100px; 
+    float: left; 
+    padding-right: 7px;
+    padding-top: 5px
+}
+.news-body>p {
+    margin-top: -7px;
+}
+#pras-tape .box-content {
+    width: 100%;
+    display: table;
+    vertical-align: middle;
+    padding: 10px;
+    padding-top: 5px !important;
+    padding-bottom: 10px !important;
+}
+
+.news-body img {
+    max-width: 100%;
+}
+
+.alert {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    width: 400px;
+    z-index: 30000;
+    -ms-opacity: .9;
+    opacity: .9;
+}
+
+.img-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}

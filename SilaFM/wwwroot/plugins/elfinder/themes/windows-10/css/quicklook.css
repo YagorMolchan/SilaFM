@@ -1,0 +1,60 @@
+﻿.elfinder .elfinder-quicklook {
+    background: rgb(0, 0, 0);
+    border: 1px solid rgb(105, 188, 238);
+    box-shadow: rgb(205, 205, 205) 0px 0px 5px;
+    border-radius: 0px;
+}
+
+    .elfinder .elfinder-quicklook .ui-resizable-handle {
+        background: url(../../../img/toolbar.png) 0px -496px no-repeat;
+    }
+
+    .elfinder .elfinder-quicklook .elfinder-quicklook-titlebar {
+        background-color: #fff;
+        border-radius: 0;
+    }
+
+    .elfinder .elfinder-quicklook .elfinder-quicklook-titlebar-icon.elfinder-platformWin .ui-icon {
+        background-size: cover !important;
+        width: 30px;
+        height: 20px;
+        top: -12px;
+        left: 0;
+        position: relative;
+        float: right;
+    }
+
+    .elfinder .elfinder-quicklook .ui-icon.ui-icon-closethick {
+        background: url(../images/close.png) 0 0 no-repeat;
+    }
+
+        .elfinder .elfinder-quicklook .ui-icon.ui-icon-closethick:hover {
+            background: url(../images/close-hover.png) 0 0 no-repeat;
+        }
+
+
+    .elfinder .elfinder-quicklook .ui-icon.ui-icon-minusthick {
+        background: url(../images/minimize.png) 0 0 no-repeat;
+    }
+
+        .elfinder .elfinder-quicklook .ui-icon.ui-icon-minusthick:hover {
+            background: url(../images/minimize-hover.png) 0 0 no-repeat;
+        }
+
+    .elfinder .elfinder-quicklook .ui-icon.elfinder-icon-full {
+        background: url(../images/maximize.png) 0 0 no-repeat;
+    }
+
+        .elfinder .elfinder-quicklook .ui-icon.elfinder-icon-full:hover {
+            background: url(../images/maximize-hover.png) 0 0 no-repeat;
+        }
+
+
+    .elfinder .elfinder-quicklook.elfinder-quicklook-fullscreen .elfinder-quicklook-navbar {
+        padding: 0px;
+        border: none;
+        margin: 0px auto;
+        left: 0px;
+        position: relative;
+        top: -32px;
+    }

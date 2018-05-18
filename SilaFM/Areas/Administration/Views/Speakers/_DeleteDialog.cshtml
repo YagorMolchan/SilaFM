@@ -1,0 +1,19 @@
+﻿@model Pras.Web.Areas.Administration.Models.SpeakerViewModel
+
+<div class="modal fade" id="myModal_@Model.Id" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Удаление</h3>
+            </div>
+            <div class="modal-body">
+                <p>Удалить диктора @Model.Name ?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Нет</a>
+                <a href="@Url.Action("Delete", "Speakers", new { id = Model.Id })" class="btn btn-danger">Да, удалить</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@using Microsoft.Extensions.Configuration
+@using Pras.Web.Areas.Administration.Models.AccountViewModels
+@model LoginViewModel
+@inject IConfiguration Configuration
+@{
+    ViewBag.Header = "Вход";
+    ViewBag.ContentClass = User.Identity.IsAuthenticated ? "col-sm-12 col-md-7 col-lg-9" : "col-sm-12 col-md-12 col-lg-12";
+    ViewBag.BoxClass = User.Identity.IsAuthenticated ? "col-sm-4" : "col-sm-3";
+}
+
+<div class="@ViewBag.ContentClass">
+    <div class="row">
+        <div class="@ViewBag.BoxClass" style="max-width: 450px; float: none; margin: 0 auto;">
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h3 class="box-title text-center" style="display: block;">Войти</h3>
+                </div>
+                <div class="box-body">
+                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                            @if (Boolean.Parse(Configuration.GetSection("AppSettings:IsClient").Value))
+                            {<span class="help-block">Email: test@pras.by</span>}
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            @if (Boolean.Parse(Configuration.GetSection("AppSettings:IsClient").Value))
+                            {<span class="help-block">Password: TestAdmin</span>}
+                        </div>
+                        <hr />
+                        <label asp-for="RememberMe">
+                            <input asp-for="RememberMe" class="checkbox minimal" />
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                        <hr />
+                        <p style="text-align: center;">
+                            <input type="submit" value="Войти" class="btn btn-danger btn-flat btn-large" style="padding: 10px 40px; font-size: 18px;" />
+                        </p>
+                    </form>
+                </div><!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

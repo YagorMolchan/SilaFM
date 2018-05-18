@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-SilaFM-0BCEAA74-3B15-4D15-AEED-83BA87CDE8A9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Files\123\**" />
+    <Content Remove="wwwroot\Files\123\**" />
+    <EmbeddedResource Remove="wwwroot\Files\123\**" />
+    <None Remove="wwwroot\Files\123\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ElFinder.NetCore\ElFinder.NetCore.csproj" />
+    <ProjectReference Include="..\Pras.Infrastructure\Pras.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\" />
+    <Folder Include="wwwroot\plugins\ckeditor\plugins\templates\icons\" />
+    <Folder Include="wwwroot\plugins\ckeditor\plugins\templates\lang\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\plugins\elfinder\js\extras\editors.default.js" />
+    <None Include="wwwroot\plugins\elfinder\js\extras\editors.default.min.js" />
+    <None Include="wwwroot\plugins\elfinder\js\extras\encoding-japanese.min.js" />
+    <None Include="wwwroot\plugins\elfinder\js\extras\quicklook.googledocs.js" />
+    <None Include="wwwroot\plugins\elfinder\js\extras\quicklook.googledocs.min.js" />
+    <None Include="wwwroot\plugins\elfinder\js\proxy\elFinderSupportVer1.js" />
+  </ItemGroup>
+
+</Project>

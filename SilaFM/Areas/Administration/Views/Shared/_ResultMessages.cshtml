@@ -1,0 +1,76 @@
+﻿@using Newtonsoft.Json
+@using Pras.Web.Areas.Administration.Models.HelperModels
+
+@if (TempData["Result"] != null)
+{
+    var result = JsonConvert.DeserializeObject<ResultMessages>(TempData["Result"].ToString());
+    if (result.ResultType == ResultsType.Success)
+    {
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="fa fa-check"></i> <b>Выполнено!</b></h4>
+            @if (result.MessageType == MessagesType.Create)
+            {
+                <text>Добавление новой записи произведено успешно.</text>
+            }
+            else if (result.MessageType == MessagesType.Edit)
+            {
+                <text>Редактирование записи произведено успешно.</text>
+            }
+            else if (result.MessageType == MessagesType.Save)
+            {
+                <text>Сохранение записи произведено успешно.</text>
+            }
+            else if (result.MessageType == MessagesType.Delete)
+            {
+                <text>Удаление записи произведено успешно.</text>
+            }
+        </div>
+    }
+    else if (result.ResultType == ResultsType.Warning)
+    {
+        <div class="alert alert-warning alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="fa fa-warning"></i> <b>Внимание!</b></h4>
+            @if (result.MessageType == MessagesType.Create)
+            {
+                <text>Добавление новой записи не было произведено. Проверьте введенные данные.</text>
+            }
+            else if (result.MessageType == MessagesType.Edit)
+            {
+                <text>Редактирование записи не было произведено. Проверьте введенные данные.</text>
+            }
+            else if (result.MessageType == MessagesType.Save)
+            {
+                <text>Сохранение записи не было произведено. Проверьте введенные данные.</text>
+            }
+            else if (result.MessageType == MessagesType.Delete)
+            {
+                <text>Удаление записи не было произведено. Проверьте введенные данные.</text>
+            }
+        </div>
+    }
+    else if (result.ResultType == ResultsType.Error)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="fa fa-ban"></i> <b>Ошибка!</b></h4>
+            @if (result.MessageType == MessagesType.Create)
+            {
+                <text>Добавление новой записи привело к ошибке.</text>
+            }
+            else if (result.MessageType == MessagesType.Edit)
+            {
+                <text>Редактирование записи привело к ошибке.</text>
+            }
+            else if (result.MessageType == MessagesType.Save)
+            {
+                <text>Сохранение записи привело к ошибке.</text>
+            }
+            else if (result.MessageType == MessagesType.Delete)
+            {
+                <text>Удаление записи привело к ошибке.</text>
+            }
+        </div>
+    }
+}

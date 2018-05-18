@@ -1,0 +1,13 @@
+packages/
+ElFinder.NetCore/bin/
+ElFinder.NetCore/obj/
+Pras.BLL/bin/
+Pras.BLL/obj/
+Pras.DAL/bin/
+Pras.DAL/obj/
+Pras.Infrastructure/bin/
+Pras.Infrastructure/obj/
+Pras.Shared/bin/
+Pras.Shared/obj/
+SilaFM/bin/
+SilaFM/obj/

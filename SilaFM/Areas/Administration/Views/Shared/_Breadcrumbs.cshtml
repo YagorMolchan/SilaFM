@@ -1,0 +1,21 @@
+﻿@using Pras.Web.Areas.Administration.Models.HelperModels
+@model List<UIBreadcrumbs>
+@{
+    if (Model != null)
+    {
+        var countBreadcrumb = Model.Count - 1;
+        <ol class="breadcrumb">
+            @foreach (var Item in Model.Select((value, index) => new { value, index }))
+            {
+                if (Item.index == countBreadcrumb)
+                {
+                    <li class="active">@Item.value.Title</li>
+                }
+                else
+                {
+                    <li><a href="@Item.value.Link">@Item.value.Title</a></li>
+                }
+            }
+        </ol>
+    }
+}

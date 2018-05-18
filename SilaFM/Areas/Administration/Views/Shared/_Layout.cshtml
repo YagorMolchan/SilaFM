@@ -1,0 +1,304 @@
+﻿@using Microsoft.Extensions.Configuration
+@using Pras.Shared.Helpers
+@using Pras.Web.Areas.Administration.Models.HelperModels
+@inject IConfiguration Configuration
+@{
+    ViewBag.BodyClass = User.Identity.IsAuthenticated ? "" : "sidebar-collapse";
+}
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - SilaFM</title>
+
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="~/css/site.css" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        </environment>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SilaFM</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2018 - SilaFM</p>
+            </footer>
+        </div>
+
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("Scripts", required: false)
+    </body>
+    </html>*@
+
+
+<!DOCTYPE html>
+<html style="min-height: 100%">
+<head>
+    @if (Boolean.Parse(Configuration.GetSection("AppSettings:IsClient").Value))
+    {
+        <base href="/lang-admin/">
+    }
+    else
+    {
+        <base href="/">
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@(ViewBag.Title ?? ViewBag.Header) :: Администраторская панель</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/plugins/iCheck/css/all.css" />
+        <link rel="stylesheet" href="~/plugins/select2/css/select2.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="~/plugins/elfinder/css/elfinder.full.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/css/theme.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/themes/windows-10/css/theme.css" />
+        <link rel="stylesheet" href="~/admin/css/AdminLTE.css" />
+        <link rel="stylesheet" href="~/admin/css/skin-black.min.css" />
+        <link rel="stylesheet" href="~/admin/css/other-ui.css" />
+        <link rel="stylesheet" href="~/admin/css/dev.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.min.css" />
+        <link rel="stylesheet" href="~/plugins/iCheck/css/all.css" />
+        <link rel="stylesheet" href="~/plugins/select2/css/select2.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="~/plugins/elfinder/css/elfinder.combine.min.css" />
+        <link rel="stylesheet" href="~/admin/css/admin.min.css" />
+    </environment>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- The fav icon -->
+    <link sizes="16x16" href="favicon-16x16.png" rel="icon" type="image/png">
+    <link sizes="32x32" href="favicon-32x32.png" rel="icon" type="image/png">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    @RenderSection("styles", false)
+</head>
+<body class="skin-black @ViewBag.BodyClass" data-ng-app="adminApp">
+    <!-- topbar starts -->
+    <div class="wrapper" @ViewBag.ngController>
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="http://www.pras.by" target="_blank" class="logo">
+                <img src="~/admin/images/log.jpg" alt="www.pras.by" style="vertical-align: top;" />
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                }
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu" style="min-width: 170px">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="~/admin/images/admin.jpg" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">@User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="~/admin/images/admin.jpg" class="img-circle" alt="User Image">
+                                        <p>
+                                            @User.Identity.Name
+                                            <small>site@belchas.by</small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="@Url.Action("Manage", "Account")" class="btn btn-default btn-flat" disabled="disabled">Смена пароля</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <a href="javascript:document.getElementById('logoutForm').submit();" class="btn btn-default btn-flat">Выйти</a>
+                                            }
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- topbar ends -->
+        @if (User.Identity.IsAuthenticated)
+        {
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                @Html.Partial("_Navigation")
+            </aside>
+        }
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.Description</small>
+                </h1>
+                @{
+                    Html.RenderPartial("_Breadcrumbs", (List<UIBreadcrumbs>)ViewBag.Breadcrumb);
+                }
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <noscript>
+                        <div class="alert alert-block span10">
+                            <h4 class="alert-heading">Warning!</h4>
+                            <p>Требуется включить <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> для работы этого сайта.</p>
+                        </div>
+                    </noscript>
+                    <!-- content starts -->
+                    @RenderBody()
+                    <!-- content ends -->
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="col-sm-12 col-md-5 col-lg-3">
+                            @if (ViewBag.IsComments != null && ViewBag.IsComments)
+                            {
+                                <div class="clear"></div>
+                            }
+                            <div id="pras-tape" class="box box-default box-solid box-pr">
+                                <div class="box-header">
+                                    <h3 class="box-title">ЛЕНТА АРТ-СТУДИИ PRAS</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" id="tool-collapse" data-widget="collapse">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <!-- api news here -->
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <p>Разработка сайта - <a href="http://pras.by">Арт-студия PRAS</a>.</p>
+            </div>
+            &copy; @DateTime.Today.Year <a href="http://pras.by">Арт-студия PRAS</a>. Все права защищены.
+        </footer>
+    </div><!-- ./wrapper -->
+    @*<!-- jQuery -->
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquery-plugins")
+        <!-- jQuery Translit -->
+        @Scripts.Render("~/bundles/jquery-translit")
+        <!-- iCheck -->
+        @Scripts.Render("~/bundles/iCheck")
+        <!-- AdminLTE App -->
+        @Scripts.Render("~/bundles/adminLTE")
+        <!-- ElFinder 2.1.19 -->
+        @Scripts.Render("~/bundles/elfinder")
+        <!-- ckeditor -->
+        <script src="~/Content/ckeditor/ckeditor.js"></script>
+        <!--Globalize-->
+        @Scripts.Render("~/bundles/globalize")
+        <!-- Validation -->
+        @Scripts.Render("~/bundles/jqueryval")
+        <!--Other js-styles for the admin panel-->
+        @Scripts.Render("~/bundles/other")
+        @Scripts.Render("~/bundles/angular-admin")*@
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+        <script src="~/lib/jquery-migrate/jquery-migrate-3.0.0.js"></script>
+        <script src="~/lib/jquery-cookie/jquery.cookie-1.4.1.min.js"></script>
+        <script src="~/plugins/iCheck/js/icheck.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/admin/js/app.js"></script>
+        <script src="~/plugins/elfinder/js/elfinder.full.js"></script>
+        <script src="~/plugins/ckeditor/ckeditor.js"></script>
+        <script src="~/admin/js/other-ui.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/lib/jquery-migrate/jquery-migrate-3.0.0.min.js"></script>
+        <script src="~/lib/jquery-cookie/jquery.cookie-1.4.1.min.js"></script>
+        <script src="~/plugins/iCheck/js/icheck.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/admin/js/app.js"></script>
+        <script src="~/plugins/elfinder/js/elfinder.full.js"></script>
+        <script src="~/plugins/ckeditor/ckeditor.js"></script>
+        <script src="~/admin/js/other-ui.js"></script>
+    </environment>
+    @RenderSection("scripts", false)
+</body>
+</html>

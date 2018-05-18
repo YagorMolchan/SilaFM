@@ -1,0 +1,74 @@
+﻿@using Pras.Shared.Enums
+@using Pras.Web.Helpers
+@{
+    const string className = "active";
+}
+<section class="sidebar">
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu">
+        <li class="header text-upper">Меню</li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Admin", "Index", className)">
+            <a href="@Url.Action("Index", "Admin")">
+                <i class="fa fa-files-o"></i> <span>Файловый менеджер</span>
+            </a>
+        </li>
+        <li class="header text-upper">Медиа</li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Audio", className)">
+            <a href="@Url.Action("Index", "Audio")">
+                <i class="fa fa-music"></i> <span>Аудиоролики</span>
+            </a>
+        </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Video", className)">
+            <a href="@Url.Action("Index", "Video")">
+                <i class="fa fa-play-circle"></i> <span>Видеоролики</span>
+            </a>
+        </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Speakers", className)">
+            <a href="@Url.Action("Index", "Speakers")">
+                <i class="fa fa-microphone"></i> <span>Дикторы</span>
+            </a>
+        </li>
+        <li class="header text-upper">Информация</li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-file-text"></i>
+                <span>Тексты</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Main})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Main})"><i class="fa fa-angle-double-right"></i>Главная страница</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Speakers})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Speakers})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы"</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Audio})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Audio})"><i class="fa fa-angle-double-right"></i>Текст "Аудиоролики"</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Video})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Video})"><i class="fa fa-angle-double-right"></i>Текст "Созд-е видеороликов"</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Games})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Games})"><i class="fa fa-angle-double-right"></i>Текст "Озвучивание игр"</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Music})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Music})"><i class="fa fa-angle-double-right"></i>Текст "Музык. подложки"</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Scenario})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Scenario})"><i class="fa fa-angle-double-right"></i>Текст "Сценарии"</a>
+                </li>
+                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Payment})">
+                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Payment})"><i class="fa fa-angle-double-right"></i>Текст "Оплата"</a>
+                </li>
+            </ul>
+        </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Team", className)">
+            <a href="@Url.Action("Index", "Team")">
+                <i class="fa fa-users"></i> <span>Команда</span>
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- /.sidebar -->
