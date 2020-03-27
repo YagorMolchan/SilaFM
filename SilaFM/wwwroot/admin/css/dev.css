@@ -756,3 +756,17 @@ table tr.dt-rowReorder-moving {
 .table-reorder td:first-child {
     cursor: move;
 }
+
+.btn-app {
+    max-width: 50px;
+}
+
+    .btn-app .btn-body {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+        .btn-app .btn-body > .fa, .btn-app .btn-body > .glyphicon, .btn-app .btn-body > .ion {
+            font-size: 20px;
+            display: block;
+        }

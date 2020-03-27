@@ -1,0 +1,36 @@
+﻿@using Pras.Shared.Helpers
+@{
+    var startDate = new DateTime(2019,08,25);
+}
+<section id="counts">
+    <div class="container">
+        <div class="layer1">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 hidden-xs">
+                    <div class="it_circle">
+                        @{ var years = DateTime.Today.Year - 1999;}
+                        <span><i class="spincrement">@years</i></span>@(GrammarHelper.GetDeclension(years, "год", "года", "лет")) на рынке<br>медиауслуг
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-xs">
+                    <div class="it_circle">
+                        @{ var orders = (int)(231246 + (DateTime.Today - startDate).TotalDays * 11);}
+                        <span><i class="spincrement">@orders</i></span>@Html.Raw(GrammarHelper.GetDeclension(orders, "выполненный<br/> заказ", "выполненных<br/> заказа", "выполненных<br/> заказов"))
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-xs">
+                    <div class="it_circle">
+                        @{ var clients = (int)(6570 + (DateTime.Today - startDate).TotalDays * 3);}
+                        <span><i class="spincrement">@clients</i></span>@Html.Raw(GrammarHelper.GetDeclension(clients, "довольный<br/> клиент", "довольных<br/> клиента", "довольных<br/> клиентов"))
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 hidden-xs">
+                    <div class="it_circle">
+                        @{ var voices = (int)(785 + (DateTime.Today - startDate).TotalDays / 30 * 3);}
+                        <span> <i class="spincrement">@voices</i></span>@Html.Raw(GrammarHelper.GetDeclension(voices, "дикторский<br/> голос", "дикторских<br/> голоса", "дикторских<br/> голосов"))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

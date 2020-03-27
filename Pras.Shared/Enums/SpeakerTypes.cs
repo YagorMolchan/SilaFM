@@ -6,10 +6,10 @@ namespace Pras.Shared.Enums
     {
         [Description("Детские голоса")]
         Child,
-        [Description("Женские Голоса")]
-        Female,
-        [Description("Мужские Голоса")]
-        Male,
+        [Description("Федеральные дикторы")]
+        Federal,
+        [Description("Дикторы")]
+        Speaker,
         [Description("Пародисты и актеры")]
         Parodist,
         [Description("Вокалисты")]

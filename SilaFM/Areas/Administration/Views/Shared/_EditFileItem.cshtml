@@ -1,0 +1,27 @@
+﻿@model Pras.Web.Areas.Administration.Models.HelperModels.FileItem
+
+<div class="form-group" data-ng-if="listItems">
+    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+    @Html.DropDownListFor(model => model.Name, new SelectList(new Dictionary<Guid, string>()), "", new
+    {
+        @class = "form-control",
+        data_ng_model = "toEdit.Obj.Name",
+        data_ng_options = "item for item in listItems"
+    })
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+<div class="form-group" data-ng-if="!listItems">
+    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", data_ng_model = "toEdit.Obj.Name" })
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Path, new { @class = "control-label" })
+    <div class="input-group">
+        @Html.TextBoxFor(model => model.Path, new { @class = "form-control", data_ng_model = "toEdit.Obj.Path" })
+        <span class="input-group-btn">
+            <a data-ng-click=" loadElfinder('Path'); " class="btn btn-danger">Выбрать файл</a>
+        </span>
+    </div>
+    @Html.ValidationMessageFor(m => m.Path)
+</div>

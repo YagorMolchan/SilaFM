@@ -1,4 +1,5 @@
-﻿@using Pras.Shared.Enums
+﻿@using Newtonsoft.Json
+@using Pras.Shared.Enums
 @using Pras.Shared.Enums.Extensions
 @using Pras.Web.Areas.Administration.Models.HelperModels
 @model Pras.Web.Areas.Administration.Models.SpeakerViewModel
@@ -7,13 +8,17 @@
     ViewBag.Title = "Дикторы";
     Layout = "_Layout";
     ViewBag.Breadcrumb = new List<UIBreadcrumbs>
-    {
-        new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
-        new UIBreadcrumbs {Link = Url.Action("Index", "Speakers"), Title = ViewBag.Title},
-        new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
-    };
+{
+new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
+new UIBreadcrumbs {Link = Url.Action("Index", "Speakers"), Title = ViewBag.Title},
+new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
+};
 
     Html.RenderPartial("_ResultMessages");
+
+    var culture = new System.Globalization.CultureInfo("ru-RU");
+    culture.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Monday;
+    var days = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().OrderBy(x => (x - DayOfWeek.Monday + 7) % 7);
 }
 @section Styles{
     <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" />
@@ -21,12 +26,17 @@
 @section Scripts{
     <script src="~/lib/moment/moment.min.js"></script>
     <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/lib/jquery-translit/jquery.translit.url.js"></script>
     <script src="~/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     @Html.Partial("_ValidationScriptsPartial")
+    <script src="~/angular/angular.min.js"></script>
+    <script src="~/angular/controllers/admin/adminApp.js"></script>
+    <script>var model = @Html.Raw(JsonConvert.SerializeObject(Model));</script>
+    <script src="~/angular/controllers/admin/speakerController.js"></script>
 }
-<div class="col-sm-12 col-md-7 col-lg-9">
+<div class="col-sm-12 col-md-7 col-lg-9" data-ng-controller="speakerController">
     <div class="box box-danger">
-        <form method="post">
+        <form action="@Url.Action("Edit", "Speakers")" method="post">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
@@ -35,15 +45,46 @@
             </div>
             <div class="box-body">
                 <div class="row">
-                    <div class="form-group col-lg-6">
-                        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Name)
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Url, new { @class = "control-label" })
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Url, new { @class = "form-control" })
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger" type="button" data-translit="#Url" data-source="#Name">Сформировать Url</button>
+                                        </span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Url)
+                                    <span class="help-block">Воспользуйтесь кнопкой для формирования корректного адреса страницы.</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group col-lg-6">
-                        @Html.LabelFor(model => model.Status, new { @class = "control-label" })
-                        @Html.DropDownListFor(model => model.Status, SpeakerStatuses.InStudio.ToSelectList(), new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Status)
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Image, new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(model => model.Image, new { @class = "form-control", @readonly = "readonly" })
+                                <span class="input-group-btn">
+                                    <a onclick=" loadElfinder('Image'); " class="btn btn-danger">Выбрать файл</a>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Image)
+                            <span class="help-block">Ширина: 160px. Высота: 200px.</span>
+                            <img class="preview" id="view-Image" style="width: 100px; height: auto;" src="@Model.Image" />
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Summary, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Summary, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Summary)
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -55,20 +96,39 @@
                                 @Html.ValidationMessageFor(model => model.Type)
                             </div>
                             <div class="form-group">
+                                @Html.LabelFor(model => model.Rating, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.Rating, new { @class = "form-control", type = "number" })
+                                @Html.ValidationMessageFor(model => model.Rating)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Nationality, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.Nationality, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Nationality)
+                            </div>
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.Country, new { @class = "control-label" })
                                 @Html.DropDownListFor(model => model.Country, SpeakerCountries.Russia.ToSelectList(), new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.Country)
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Language, new { @class = "control-label" })
-                                @Html.TextBoxFor(model => model.Language, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Language)
-                                <span class="help-block">Например: французский</span>
+                                @Html.LabelFor(model => model.Status, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.Status, SpeakerStatuses.InStudio.ToSelectList(), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Status)
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class=" well">
+                        <div class="well">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PriceCategory, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.PriceCategory, Model.PriceCategory.ToSelectList(), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PriceCategory)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Currency, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.Currency, Model.Currency.ToSelectList(), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Currency)
+                            </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Price30, new { @class = "control-label" })
                                 @Html.TextBoxFor(model => model.Price30, new { @class = "form-control" })
@@ -80,23 +140,194 @@
                                 @Html.ValidationMessageFor(model => model.Price90)
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Terms, new { @class = "control-label" })
-                                @Html.TextBoxFor(model => model.Terms, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Terms)
-                                <span class="help-block">Например: 6 часов 30 мин.</span>
+                                @Html.LabelFor(model => model.PricePage, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.PricePage, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PricePage)
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Track, new { @class = "control-label" })
-                    <div class="input-group">
-                        @Html.TextBoxFor(model => model.Track, new { @class = "form-control", @readonly = "readonly" })
-                        <span class="input-group-btn">
-                            <a onclick=" loadElfinder('Track'); " class="btn btn-danger btn-flat">Выбрать файл</a>
-                        </span>
+                <hr />
+                <h4>Время работы</h4>
+                <div class="well">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.WorkingDays, new { @class = "control-label" })
+                                <p>
+                                    @foreach (DayOfWeek day in days)
+                                    {
+                                        var ischecked = Model.ListDays.Any(p => p == (int)day) ? "checked" : "";
+                                        <span style="display: inline-block">
+                                            <input type="checkbox" class="checkbox minimal" name="ListDays" value="@((int) day)" @ischecked /> @(culture.DateTimeFormat.GetAbbreviatedDayName(day))
+                                            &nbsp;
+                                        </span>
+                                    }
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.WorkingHours, new { @class = "control-label" })
+                                <p>
+                                    @for (int i = 9; i < 24; i++)
+                                    {
+                                        var ischecked = Model.ListHours.Any(p => p == i) ? "checked" : "";
+                                        <span style="display: inline-block">
+                                            <input type="checkbox" class="checkbox minimal" name="ListHours" value="@i" @ischecked /> @i
+                                            &nbsp;
+                                        </span>
+                                    }
+                                </p>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.VacationStartDate, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.VacationStartDate, new { @class = "form-control datetimepicker" })
+                                    @Html.ValidationMessageFor(model => model.VacationStartDate)
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.VacationEndDate, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.VacationEndDate, new { @class = "form-control datetimepicker" })
+                                    @Html.ValidationMessageFor(model => model.VacationEndDate)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Terms, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.Terms, new SelectList(Model.TermsList, "Key", "Value", Model.Terms), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Terms)
+                            </div>
+                            <div class="form-group">
+                                @Html.CheckBoxFor(model => model.CanDirect, new { @class = "checkbox minimal" })
+                                @Html.LabelFor(model => model.CanDirect, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(model => model.CanDirect)
+                            </div>
+                        </div>
                     </div>
-                    @Html.ValidationMessageFor(model => model.Track)
+                </div>
+                <hr />
+                <h4>Голос</h4>
+                <div class="well">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VoiceDescription, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.VoiceDescription, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.VoiceDescription)
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.VoiceAge, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.VoiceAge, Model.VoiceAge.ToSelectList(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VoiceAge)
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Gender, Gender.Male.ToSelectList(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Gender)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Params, new { @class = "control-label" })
+                        <div class="input-group">
+                            <div class="input-group-addon" style="min-width: 200px">Низкий тембр</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.LowHighTone, new { @class = "form-control text-center", type = "number" })
+                            <div class="input-group-addon" style="min-width: 200px">Высокий тембр</div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VoiceParams.LowHighTone)
+                        <div class="input-group">
+                            <div class="input-group-addon" style="min-width: 200px">Мягкий</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.ConfidentVoice, new { @class = "form-control text-center", type = "number" })
+                            <div class="input-group-addon" style="min-width: 200px">Уверенный</div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VoiceParams.ConfidentVoice)
+                        <div class="input-group">
+                            <div class="input-group-addon" style="min-width: 200px">Сухой</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.RichVoice, new { @class = "form-control text-center", type = "number" })
+                            <div class="input-group-addon" style="min-width: 200px">Богатый</div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VoiceParams.RichVoice)
+                        <div class="input-group">
+                            <div class="input-group-addon" style="min-width: 200px">Хладнокровный</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.EnergeticVoice, new { @class = "form-control text-center", type = "number" })
+                            <div class="input-group-addon" style="min-width: 200px">Энергический</div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VoiceParams.EnergeticVoice)
+                        <div class="input-group">
+                            <div class="input-group-addon" style="min-width: 200px">Живой</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.BusinessVoice, new { @class = "form-control text-center", type = "number" })
+                            <div class="input-group-addon" style="min-width: 200px">Деловой</div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.VoiceParams.BusinessVoice)
+                        @Html.ValidationMessageFor(model => model.Params)
+                    </div>
+                </div>
+                <hr />
+                <h4>Демо</h4>
+                <div class="well">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Demo, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Demo, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-btn">
+                                <a onclick=" loadElfinder('Demo'); " class="btn btn-danger btn-flat">Выбрать файл</a>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Demo)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DemoAdvertising, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.DemoAdvertising, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-btn">
+                                <a onclick=" loadElfinder('DemoAdvertising'); " class="btn btn-danger btn-flat">Выбрать файл</a>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DemoAdvertising)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DemoVoiceOver, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.DemoVoiceOver, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-btn">
+                                <a onclick=" loadElfinder('DemoVoiceOver'); " class="btn btn-danger btn-flat">Выбрать файл</a>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.DemoVoiceOver)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Portfolio, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Portfolio, new { @class = "form-control" })
+                            <span class="input-group-btn">
+                                <a onclick=" loadElfinder('Portfolio'); " class="btn btn-danger btn-flat">Выбрать файл</a>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Portfolio)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Languages, new { @class = "control-label" }) <a href="#" class="fa fa-plus-circle" title="Добавить" data-ng-click="addLang($event);"></a>
+                        @Html.Partial("_EditLang")
+                        @Html.ValidationMessageFor(model => model.Languages)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Voices, new { @class = "control-label" }) <a href="#" class="fa fa-plus-circle" title="Добавить" data-ng-click="addVoice($event);"></a>
+                        @Html.Partial("_EditVoice")
+                        @Html.ValidationMessageFor(model => model.Voices)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WorkTypes, new { @class = "control-label" }) <a href="#" class="fa fa-plus-circle" title="Добавить" data-ng-click="addType($event);"></a>
+                        @Html.Partial("_EditType")
+                        @Html.ValidationMessageFor(model => model.WorkTypes)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Industries, new { @class = "control-label" }) <a href="#" class="fa fa-plus-circle" title="Добавить" data-ng-click="addIndustry($event);"></a>
+                        @Html.Partial("_EditIndustry")
+                        @Html.ValidationMessageFor(model => model.Industries)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Videos, new { @class = "control-label" }) <a href="#" class="fa fa-plus-circle" title="Добавить" data-ng-click="addVideo($event);"></a>
+                        @Html.Partial("_EditVideo")
+                        @Html.ValidationMessageFor(model => model.Videos)
+                    </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Comment, new { @class = "control-label" })
@@ -107,6 +338,11 @@
                     @Html.CheckBoxFor(model => model.IsNovelty, new { @class = "checkbox minimal" })
                     @Html.LabelFor(model => model.IsNovelty, new { @class = "control-label" })
                     @Html.ValidationMessageFor(model => model.IsNovelty)
+                </div>
+                <div class="form-group">
+                    @Html.CheckBoxFor(model => model.IsVip, new { @class = "checkbox minimal" })
+                    @Html.LabelFor(model => model.IsVip, new { @class = "control-label" })
+                    @Html.ValidationMessageFor(model => model.IsVip)
                 </div>
                 <hr />
                 <div class="row">
@@ -121,5 +357,6 @@
                 <input type="submit" class="btn btn-danger btn-lg pull-right" value="Сохранить" />
             </div>
         </form>
+        @Html.Partial("_EditItemDialog", new FileItem())
     </div>
 </div>

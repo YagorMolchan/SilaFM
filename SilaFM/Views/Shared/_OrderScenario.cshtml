@@ -1,0 +1,150 @@
+﻿@model Pras.Web.Models.Forms.ScenarioOrderFormModel
+
+<form action="order-scenario" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <p class="field-validation-error">@TempData["ErrorScenario"]</p>
+    <div class="form-group">
+        <label for="Type" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Type)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Type, new SelectList(Model.ListTypes.ToDictionary(p => p, p => p), "Key", "Value", Model.Type), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="time2" class="col-md-3 control-label">Хронометраж</label>
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.Timing, new { @class = "form-control", placeholder = "укажите хронометраж" })
+            @Html.ValidationMessageFor(model => model.Timing)
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(model => model.IsFreeTiming)
+                    <p>@Html.DisplayNameFor(model => model.IsFreeTiming)</p>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.AdvertisingSubject)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.AdvertisingSubject, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.AdvertisingSubject)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>Что мы рекламируем</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.TargetAudience)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.TargetAudience, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.TargetAudience)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>На кого рассчитана реклама (возраст, пол, доход)</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Message)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Message, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Message)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>О чем нужно рассказать потребителю</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Benefits)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Benefits, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Benefits)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>Конкурентные преимущества, на которые нужно сделать акцент</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.PreferencesVotes)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.PreferencesVotes, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.PreferencesVotes)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>Мужской, женский, детский, кол-во голосов, возраст</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.MustSound)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.MustSound, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.MustSound)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>Адрес, телефон, е-майл, сайт, лицензия</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.CorporateElements)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.CorporateElements, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.CorporateElements)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>Специальные звуки, пекшоты, распевки, сигналы и пр.</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Comments)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", rows = 3 })
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+        <div class="col-md-offset-3 col-md-9">
+            <p>Дополнительные пожелания</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <label>Прикрепите файл</label>
+            @Html.TextBoxFor(model => model.File, new { @type = "file", title = "Выберите файл" })
+            <p class="help-block">не более 3мб</p>
+            @Html.ValidationMessageFor(model => model.File)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="code1" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Code)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholder = "Код скидки" })
+            @Html.ValidationMessageFor(model => model.Code)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pochta1" class="col-md-3 control-label">Email</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "почта, куда будет отправлен заказ" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="oplata1" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Payment)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Payment, new SelectList(Model.ListPayments.ToDictionary(p => p, p => p), "Key", "Value", Model.Payment), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Payment)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            @*<form action="http://www.SnapHost.com/captcha/send.aspx" method="post" id="myform">
+                    <input type="hidden" id="skip_WhereToSend" name="skip_WhereToSend" value="info@sila.fm" />
+                    <input type="hidden" id="skip_Subject" name="skip_Subject" value="Test inline zakaz" />
+                    <input type="hidden" id="skip_WhereToReturn" name="skip_WhereToReturn" value="www.yourdomain.com/thankyou.htm" />
+                    <input type="hidden" id="skip_SnapHostID" name="skip_SnapHostID" value="LZR9DPCMJMGW" />
+                    гуглкапча
+                </form>*@
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg">Сделать заказ</button>
+        </div>
+    </div>
+</form>

@@ -24,7 +24,7 @@ namespace Pras.Web.Areas.Administration.Controllers
         
         [HttpGet]
         [Route("edit/{type}")]
-        public ActionResult Edit(InformationTypes type = InformationTypes.Main)
+        public ActionResult Edit(InformationTypes type = InformationTypes.Audio)
         {
             var model = Mapper.Map<InformationViewModel>(_informationService.Find(type));
             return View("Edit", model);

@@ -1,0 +1,14 @@
+﻿@model dynamic
+
+<div>
+    <span data-ng-repeat="item in model.VoiceWorkTypes track by $index">
+        @Html.Hidden("VoiceWorkTypes[{{$index}}].Name", "{{item.Name}}")
+        @Html.Hidden("VoiceWorkTypes[{{$index}}].Path", "{{item.Path}}")
+        <a class="btn btn-app bg-teal" data-ng-click="editItem($event, item, types, model.VoiceWorkTypes)">
+            <span class="badge bg-red" data-ng-click="deleteItem($event, item, model.VoiceWorkTypes)">×</span>
+            <div class="btn-body" title="{{item.Name}}" data-toggle="tooltip" data-placement="bottom">
+                <i class="fa fa-briefcase"></i>{{item.Name}}
+            </div>
+        </a>
+    </span>
+</div>

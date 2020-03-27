@@ -1,0 +1,22 @@
+﻿@model InformationViewModel
+
+@{
+    ViewBag.Title = Model != null ? Model.MetaTitle ?? Model.Title : "Создание видеороликов";
+    ViewBag.MetaDescription = Model?.MetaDescription;
+    Layout = "_Layout";
+}
+
+<div class="fillcontainer">
+    <div class="row">
+        <div class="col-md-3">
+            <br>
+            <p>Реклама</p> <img src="http://placehold.it/250x400" alt="">
+        </div>
+        <div class="col-md-9">
+            <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"> </a>
+            <h2>@Model.Title</h2>
+            <hr>
+            @Html.Raw(Model.Text)
+        </div>
+    </div>
+</div>

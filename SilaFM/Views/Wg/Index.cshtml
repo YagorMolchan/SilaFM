@@ -1,0 +1,130 @@
+﻿@using Pras.Shared.Enums
+@using Pras.Shared.Enums.Extensions
+@model WGViewModel
+
+@{
+    Layout = "_WgLayout";
+}
+
+<div class="fillcontainer">
+    <div class="topcontainer">
+        <h2 class="lightbig">@ViewBag.Title</h2>
+    </div>
+    <div class="textzone">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Новые голоса</h3>
+                <ul>
+                    @foreach (var item in Model.NewSpeakers)
+                    {
+                        <li><a href="@Url.Action("Inner", "Wg", new { url = item.Url })" class="linkvoice">@item.Name</a></li>
+                    }
+                </ul>
+                <br>
+            </div>
+            <div class="col-sm-8">
+                <h3>Заказ диктора</h3>
+                <p> Детальную информацию о стоимости и доступности дикторов уточняйте у нашего менеджера. Мы предоставляем готовую озвучку в формате Wave с обработкой и без обработки, а также, если имеется видео, синхронизированную с видеорядом. Обратите внимание, что для качественного синхрона, перевод должен быть адаптирован под исходный текст, т.е. совпадало колличевство слов обоих вариантов, с учетом специфики произошения в необходимом языке (например в немецком как правило слова длинее, больше гласных)</p>
+                <br>
+            </div>
+        </div>
+        <h1>Мужские голоса</h1>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table" id="fedtab1">
+                    <thead>
+                        <tr>
+                            <th class="headtab">Имя, фамилия </th>
+                            <th class="headtab">Статус</th>
+                            <th class="headtab">Стоимость</th>
+                            <th class="headtab">Прослушать</th>
+                            <th class="headtab">Рейтинг</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Speakers.Where(p => p.Gender == Gender.Male))
+                        {
+                            <tr>
+                                <td><a class="linkvoice" href="@Url.Action("Inner", "Wg", new { url = item.Url })" target="_blank">@item.Name</a></td>
+                                <td>@item.Status.GetLocalizedDescription()</td>
+                                <td>
+                                    @item.Price30 @item.GetCurrency / до 30 слов <br />
+                                    @item.Price90 @item.GetCurrency / до 90 слов <br />
+                                    @item.PricePage @item.GetCurrency / 1 стр.
+                                </td>
+                                <td>
+                                    <audio controls>
+                                        <source src="@item.Demo" type="audio/mpeg">
+                                        <a href="@item.Demo">Скачайте музыку</a>
+                                    </audio>
+                                </td>
+                                <td>
+                                    <div class="star-ratings-sprite"><span style="width: @(100/5*item.Rating)%" class="star-ratings-sprite-rating"></span></div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h1>Женские голоса</h1>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table" id="fedtab2">
+                    <thead>
+                        <tr>
+                            <th class="headtab">Имя, фамилия </th>
+                            <th class="headtab">Статус</th>
+                            <th class="headtab">Стоимость</th>
+                            <th class="headtab">Прослушать</th>
+                            <th class="headtab">Рейтинг</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Speakers.Where(p => p.Gender == Gender.Female))
+                        {
+                            <tr>
+                                <td><a class="linkvoice" href="@Url.Action("Inner", "Wg", new { url = item.Url })" target="_blank">@item.Name</a></td>
+                                <td>@item.Status.GetLocalizedDescription()</td>
+                                <td>
+                                    @item.Price30 @item.GetCurrency / до 30 слов <br />
+                                    @item.Price90 @item.GetCurrency / до 90 слов <br />
+                                    @item.PricePage @item.GetCurrency / 1 стр.
+                                </td>
+                                <td>
+                                    <audio controls>
+                                        <source src="@item.Demo" type="audio/mpeg">
+                                        <a href="@item.Demo">Скачайте музыку</a>
+                                    </audio>
+                                </td>
+                                <td>
+                                    <div class="star-ratings-sprite"><span style="width: @(100/5*item.Rating)%" class="star-ratings-sprite-rating"></span></div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#fedtab1, #fedtab2').DataTable({
+                "language": {
+                    "search": "Поиск:",
+                    "zeroRecords": "Ничего не найдено, измените запрос"
+                },
+                "order": [
+                    [0, 'asc'],
+                    [1, 'asc']
+                ],
+                "info": false,
+                "paging": false,
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿@using Pras.Shared.Enums.Extensions
+@using Pras.Web.Areas.Administration.Models.HelperModels
+@model IEnumerable<Pras.Web.Areas.Administration.Models.NewsViewModel>
+@{
+    ViewBag.Title = "Новости";
+    Layout = "_Layout";
+
+    ViewBag.Breadcrumb = new List<UIBreadcrumbs>
+{
+new UIBreadcrumbs{ Link = Url.Action("Index", "Admin"), Title = "Главная"},
+new UIBreadcrumbs{ Link = string.Empty, Title = ViewBag.Title}
+};
+
+    @section styles
+        {
+        <link rel="stylesheet" href="~/plugins/datatables/media/css/dataTables.bootstrap.css" type="text/css">
+    }
+    @section scripts
+        {
+        <!--DataTables-->
+        <script src="~/plugins/datatables/media/js/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="~/plugins/datatables/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    }
+    Html.RenderPartial("_ResultMessages");
+}
+
+<div class="col-sm-12 col-md-7 col-lg-9">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">
+                <a href="@Url.Action("Edit", "News")" class="btn btn-danger btn-lg"><i class="fa fa-plus-circle"></i> Добавить</a>
+            </h3>
+        </div><!-- /.box-header -->
+        <div class="box-body table-responsive">
+            <table class="table table-bordered table-hover table-actions" data-order='[[ 0, "desc" ]]'>
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Created)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th style="width: 55px !important;" data-orderable="false">
+                            Управление
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td data-order="@item.Created.Ticks">
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td data-search="">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-danger"><i class="fa fa-edit"></i></a>
+                                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal_@item.Id">
+                                        <i class="fa fa-remove"></i>
+                                    </a>
+                                </div>
+                                @Html.Partial("_DeleteDialog", item)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+</div>

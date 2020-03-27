@@ -1,0 +1,174 @@
+﻿@using Pras.Shared.Enums.Extensions
+@model FullSpeakerViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_WgLayout";
+}
+@section  Styles{ 
+    
+    <link rel="stylesheet" href="~/site/css/progress-wizard.min.css" />
+    <link rel="stylesheet" href="~/site/libs/BipolarChart/cssBipolarChart.css" />
+}
+<div class="fillcontainer">
+    <div class="topcontainer">
+        <p class="anketa"> Анкета</p>
+    </div>
+    <div class="row textzone">
+        <div class="col-sm-offset-1 col-sm-7">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Имя, фамилия</td>
+                        <td class="cursivtext">@Model.Name </td>
+                    </tr>
+                    <tr>
+                        <td>Пол</td>
+                        <td class="cursivtext">@Model.Gender.GetLocalizedDescription()</td>
+                    </tr>
+                    <tr>
+                        <td>Возраст</td>
+                        <td class="cursivtext">@Model.VoiceAge.GetLocalizedDescription()</td>
+                    </tr>
+                    <tr>
+                        <td>Национальность</td>
+                        <td class="cursivtext">@Model.Nationality</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость до 30 слов</td>
+                        <td class="cursivtext">@Model.Price30 @Model.GetCurrency</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость до 90 слов</td>
+                        <td class="cursivtext">@Model.Price90 @Model.GetCurrency</td>
+                    </tr>
+                    <tr>
+                        <td>Стоимость за 1 стр</td>
+                        <td class="cursivtext">@Model.PricePage @Model.GetCurrency</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3">
+            <div class="row">
+                <img src="@Model.Image" class="img-circle center-block" height="220" widht="220" alt="" />
+            </div>
+        </div>
+    </div>
+    <div class="row anketa">
+        <div style="text-align: center">
+            <button class="btn btn-success" onclick="wavesurfer.playPause()">
+                <i class="glyphicon glyphicon-play"></i>Прослушать
+            </button>
+        </div>
+        <div id="waveform"></div>
+    </div>
+    <div class="row anketa">
+        <p>Характер голоса</p>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br>
+            <div id="voice">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            </div>
+        </div>
+        <div class="textzone">
+            <div class="row anketa">
+                <p>График доступности диктора</p>
+                <hr>
+            </div>
+            <div class="grafwork">
+                <ul class="progress-indicator">
+                    <li class="@(Model.ListHours.Contains(0)?"completed":"")"> <span class="bubble"></span> 00:00 </li>
+                    <li class="@(Model.ListHours.Contains(2)?"completed":"")"> <span class="bubble"></span> 02:00 </li>
+                    <li class="@(Model.ListHours.Contains(4)?"completed":"")"> <span class="bubble"></span> 04:00 </li>
+                    <li class="@(Model.ListHours.Contains(6)?"completed":"")"> <span class="bubble"></span> 06:00 </li>
+                    <li class="@(Model.ListHours.Contains(8)?"completed":"")"> <span class="bubble"></span> 08:00 </li>
+                    <li class="@(Model.ListHours.Contains(10)?"completed":"")"> <span class="bubble"></span> 10:00 </li>
+                    <li class="@(Model.ListHours.Contains(12)?"completed":"")"> <span class="bubble"></span> 12:00 </li>
+                    <li class="@(Model.ListHours.Contains(14)?"completed":"")"> <span class="bubble"></span> 14:00 </li>
+                    <li class="@(Model.ListHours.Contains(16)?"completed":"")"> <span class="bubble"></span> 16:00 </li>
+                    <li class="@(Model.ListHours.Contains(18)?"completed":"")"> <span class="bubble"></span> 18:00 </li>
+                    <li class="@(Model.ListHours.Contains(20)?"completed":"")"> <span class="bubble"></span> 20:00 </li>
+                    <li class="@(Model.ListHours.Contains(22)?"completed":"")"> <span class="bubble"></span> 22:00 </li>
+                    <li class="@(Model.ListHours.Contains(23)?"completed":"")"> <span class="bubble"></span> 24:00 </li>
+                </ul>
+                <br>
+            </div>
+            @if (Model.ListVideos.Any())
+            {
+                int i = 0;
+                <div class="row anketa">
+                    <p>Примеры</p>
+                    <hr>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model.ListVideos)
+                    {
+                        if (i % 2 == 0)
+                        {
+                            <div class="col-md-1"></div>
+                        }
+                        <div class="col-md-5">
+                            <p class="smalltext">@item.Name</p>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="@item.Path"></iframe>
+                            </div>
+                        </div>
+                        if (i % 2 > 0)
+                        {
+                            <div class="col-md-1"></div>
+                        }
+                        i++;
+                    }
+                </div>
+            }
+            <br>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/site/libs/BipolarChart/cssBipolarChart.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.3.2/wavesurfer.min.js"></script>
+    <script>
+        var wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: '#BDAA89',
+            progressColor: '#9C8A6B',
+            scrollParent: true
+        });
+
+        wavesurfer.load('@Model.Demo');
+
+    </script>
+    <script>
+        var sampleData1 = [
+            ["Низкий темб", "Высокий тембр", @Model.VoiceParams.LowHighTone*0.01],
+            ["Мягкий", "Уверенный", @Model.VoiceParams.ConfidentVoice*0.01],
+            ["Сухой", "Богатый", @Model.VoiceParams.RichVoice*0.01],
+            ["Хладнокровный", "Энергический", @Model.VoiceParams.EnergeticVoice*0.01],
+            ["Живой", "Деловой", @Model.VoiceParams.BusinessVoice*0.01],
+        ];
+
+        var sampleData2 = [
+            ["Psychology", 0.4022950506000479],
+            ["IT", 0.98803218276815504],
+        ];
+
+        $(document).ready(function() {
+            $("#voice").drawCSSBipolarChart({
+                data: sampleData1,
+                bipolar: true
+            });
+
+        });
+
+    </script>
+}

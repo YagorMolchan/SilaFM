@@ -1,0 +1,48 @@
+﻿<div id="carousel" class="carousel slide" data-ride="carousel">
+    <!--- Индикаторы слайдов--->
+    <ol class="carousel-indicators">
+        <li class="active" data-target="#carousel" data-slide-to="0"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+    </ol>
+    <!--- Слайди--->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="~/site/img/img1.jpg" alt="">
+            <div class="carousel-caption">
+                <h3>АУДИОРОЛИКИ</h3>
+                <div class="center_btn">
+                    @if (ViewBag.OrderPage != true)
+                    {
+                        <a href="@Url.Action("Order", "Home")" class="zakaz_btn">СДЕЛАТЬ ЗАКАЗ</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/site/img/img2.jpg" alt="">
+            <div class="carousel-caption">
+                <h3>ОЗВУЧАНИЕ ВИДЕРОЛИКОВ</h3>
+                <div class="center_btn">
+                    @if (ViewBag.OrderPage != true)
+                    {
+                        <a href="@Url.Action("Order", "Home")#pane3" class="zakaz_btn">СДЕЛАТЬ ЗАКАЗ</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/site/img/img3.jpg" alt="">
+            <div class="carousel-caption">
+                <div class="center_btn">
+                    @if (ViewBag.OrderPage != true)
+                    {
+                        <a href="@Url.Action("Order", "Home")#pane1" class="zakaz_btn">СДЕЛАТЬ ЗАКАЗ</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- Стрелики переключения слайдами--->
+    <a href="#carousel" class="left carousel-control" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> <a href="#carousel" class="right carousel-control" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
+</div>

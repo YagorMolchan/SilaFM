@@ -25,7 +25,7 @@ namespace Pras.BLL.Services
 
         public VideoDTO Find(Guid id)
         {
-            return Mapper.Map<VideoDTO>(_unitOfWork.VideosRepository.FindById(id).Result);
+            return Mapper.Map<VideoDTO>(_unitOfWork.VideosRepository.FindById(id));
         }
 
         public VideoDTO Save(VideoDTO model)
@@ -38,7 +38,7 @@ namespace Pras.BLL.Services
             }
             else
             {
-                entity = _unitOfWork.VideosRepository.FindById(model.Id).Result;
+                entity = _unitOfWork.VideosRepository.FindById(model.Id);
                 Mapper.Map(model, entity);
                 _unitOfWork.VideosRepository.InsertOrUpdate(entity);
             }
@@ -49,7 +49,7 @@ namespace Pras.BLL.Services
 
         public void Delete(Guid id)
         {
-            var toDelete = _unitOfWork.VideosRepository.FindById(id).Result;
+            var toDelete = _unitOfWork.VideosRepository.FindById(id);
             if (toDelete != null)
             {
                 _unitOfWork.VideosRepository.Delete(toDelete);

@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-SilaFM-0BCEAA74-3B15-4D15-AEED-83BA87CDE8A9</UserSecretsId>
+    <Configurations>Debug;Release;Staging;Production</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,13 +13,28 @@
     <None Remove="wwwroot\Files\123\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\site\js\bundle.min.js" />
+  </ItemGroup>
+
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
     <PackageReference Include="jQuery.UI.Combined" Version="1.12.1" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" PrivateAssets="All" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +45,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ElFinder.NetCore\ElFinder.NetCore.csproj" />
+    <ProjectReference Include="..\Pras.BLL\Pras.BLL.csproj" />
     <ProjectReference Include="..\Pras.Infrastructure\Pras.Infrastructure.csproj" />
+    <ProjectReference Include="..\Pras.Shared\Pras.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,21 +57,101 @@
     <Reference Include="System.Web">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Windows.Forms.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\angular\i18n\ngLocale\" />
     <Folder Include="wwwroot\Files\" />
     <Folder Include="wwwroot\plugins\ckeditor\plugins\templates\icons\" />
     <Folder Include="wwwroot\plugins\ckeditor\plugins\templates\lang\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\angular\controllers\admin\adminApp.js" />
+    <None Include="wwwroot\angular\controllers\admin\settingsController.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_be-by.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_be.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_en-us.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_en.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_ru-by.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_ru-ru.js" />
+    <None Include="wwwroot\angular\i18n\angular-locale_ru.js" />
+    <None Include="wwwroot\plugins\ckeditor\plugins\pras_hideRu\plugin.js" />
     <None Include="wwwroot\plugins\elfinder\js\extras\editors.default.js" />
     <None Include="wwwroot\plugins\elfinder\js\extras\editors.default.min.js" />
     <None Include="wwwroot\plugins\elfinder\js\extras\encoding-japanese.min.js" />
     <None Include="wwwroot\plugins\elfinder\js\extras\quicklook.googledocs.js" />
     <None Include="wwwroot\plugins\elfinder\js\extras\quicklook.googledocs.min.js" />
     <None Include="wwwroot\plugins\elfinder\js\proxy\elFinderSupportVer1.js" />
+    <None Include="wwwroot\site\fonts\bpicons\bpicons.svg" />
+    <None Include="wwwroot\site\fonts\bpmenu\bpmenu.dev.svg" />
+    <None Include="wwwroot\site\fonts\bpmenu\bpmenu.svg" />
+    <None Include="wwwroot\site\img\hronomer.svg" />
+    <None Include="wwwroot\site\js-bundles\bundle.min.js" />
+    <None Include="wwwroot\site\js\canvas.js" />
+    <None Include="wwwroot\site\js\cbpHorizontalSlideOutMenu.js" />
+    <None Include="wwwroot\site\js\common.js" />
+    <None Include="wwwroot\site\js\hidden_table.js" />
+    <None Include="wwwroot\site\js\imagesloaded.pkgd.min.js" />
+    <None Include="wwwroot\site\js\jquery-1.11.3.min.js" />
+    <None Include="wwwroot\site\js\jquery.placeholder.min.js" />
+    <None Include="wwwroot\site\js\masonry.pkgd.min.js" />
+    <None Include="wwwroot\site\js\masonry_int.js" />
+    <None Include="wwwroot\site\js\modernizr.custom.js" />
+    <None Include="wwwroot\site\js\salvattore.min.js" />
+    <None Include="wwwroot\site\libs\BipolarChart\cssBipolarChart VIP.js" />
+    <None Include="wwwroot\site\libs\BipolarChart\cssBipolarChart.js" />
+    <None Include="wwwroot\site\libs\bootstrap\bootstrap-datetimepicker.min.js" />
+    <None Include="wwwroot\site\libs\bootstrap\bootstrap.min.js" />
+    <None Include="wwwroot\site\libs\bootstrap\moment-with-locales.js" />
+    <None Include="wwwroot\site\libs\dataTables\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\site\libs\dataTables\images\Sorting icons.psd" />
+    <None Include="wwwroot\site\libs\dataTables\jquery.dataTables.min.js" />
+    <None Include="wwwroot\site\libs\fancybox\helpers\jquery.fancybox-buttons.js" />
+    <None Include="wwwroot\site\libs\fancybox\helpers\jquery.fancybox-media.js" />
+    <None Include="wwwroot\site\libs\fancybox\helpers\jquery.fancybox-thumbs.js" />
+    <None Include="wwwroot\site\libs\fancybox\jquery.fancybox.pack.js" />
+    <None Include="wwwroot\site\libs\fontawesome\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\site\libs\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\site\libs\fontawesome\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\site\libs\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\site\libs\fontawesome\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\site\libs\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\site\libs\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\site\libs\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\site\libs\html5shiv\es5-shim.min.js" />
+    <None Include="wwwroot\site\libs\html5shiv\html5shiv-printshiv.min.js" />
+    <None Include="wwwroot\site\libs\html5shiv\html5shiv.min.js" />
+    <None Include="wwwroot\site\libs\html5shiv\respond.min.js" />
+    <None Include="wwwroot\site\libs\jquery-mousewheel\jquery.mousewheel.min.js" />
+    <None Include="wwwroot\site\libs\jquery\jquery-3.1.1.min.js" />
+    <None Include="wwwroot\site\libs\landing-nav\navigation.js" />
+    <None Include="wwwroot\site\libs\respond\respond.min.js" />
+    <None Include="wwwroot\site\libs\scrollto\jquery.scrollTo.min.js" />
+    <None Include="wwwroot\site\libs\spincrement\jquery.spincrement.min.js" />
+    <None Include="wwwroot\site\libs\waypoints\waypoints-1.6.2.min.js" />
+    <None Include="wwwroot\site\swf\soundmanager2.swf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Reviews\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Home\_SpeakersFor.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Ksenija\.nuget\packages\nlog.config\4.5.5\contentFiles\any\any\NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

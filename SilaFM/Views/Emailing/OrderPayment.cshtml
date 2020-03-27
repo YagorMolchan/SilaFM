@@ -1,0 +1,15 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Распечатать реквизиты";
+    Layout = null;
+}
+
+<div id="print">
+    @Html.Raw(Model)
+</div>
+
+
+<script>
+    window.print();
+</script>

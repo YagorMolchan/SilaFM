@@ -1,0 +1,27 @@
+﻿<h2>Доступные голоса</h2><br>
+<nav id="choose">
+    <ul>
+        <li><a href="@Url.Action("SpeakersRu", "Home")#ex1">Мужские голоса. Дикторы России</a></li>
+        <li><a href="@Url.Action("SpeakersRu", "Home")#ex2">Женские голоса. Дикторы России</a></li>
+        <li><a href="@Url.Action("SpeakersRu", "Home")#ex3">Федеральные дикторы России. Мужские голоса</a></li>
+        <li><a href="@Url.Action("SpeakersRu", "Home")#ex4">Федеральные дикторы России. Женские голоса</a></li>
+        <li><a href="@Url.Action("SpeakersFor", "Home")#ex1">Иностранные мужские голоса</a></li>
+        <li><a href="@Url.Action("SpeakersFor", "Home")#ex2">Иностранные женские голоса</a></li>
+        <li><a href="@Url.Action("SpeakersUk", "Home")#ex1">Мужские голоса. Дикторы Украины</a></li>
+        <li><a href="@Url.Action("SpeakersUk", "Home")#ex2">Женские голоса. Дикторы Украины</a></li>
+        <li><a href="@Url.Action("SpeakersChild", "Home")">Детские голоса от 5-ти до 14 лет</a></li>
+        <li><a href="@Url.Action("SpeakersParodists", "Home")">Пародисты и актеры</a></li>
+        <li><a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a></li>
+        <li><a href="@Url.Action("SpeakersVip", "Home")">VIP-голоса</a></li>
+    </ul>
+</nav>
+<br />
+<h4>Оформить заказ</h4>
+<p>
+    Чтобы заказать начитку диктора, достаточно воспользоваться формой <a href="@Url.Action("Order", "Home")" target="_blank"> онлайн-заказа</a>, либо выслать текст на электронный адрес: <a href="mailto: info@sila.fm?subject=Заказ голоса">info@sila.fm </a>
+</p>
+<div class="btn-group btn-group-justified">
+    <a href="@Url.Action("Order", "Home")" target="_blank" class="btn btn-success" role="button">Онлайн-заказ</a>
+    <a href="@Url.Action("ChoiceSpeaker", "Home")" target="_blank" class="btn btn-success" role="button">Подбор диктора</a>
+    <a href="@Url.Action("IdentifyVoice", "Home")" target="_blank" class="btn btn-success" role="button">Опознать диктора</a>
+</div>

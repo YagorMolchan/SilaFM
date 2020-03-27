@@ -1,0 +1,14 @@
+﻿@model dynamic
+
+<div>
+    <span data-ng-repeat="item in model.ListVideos track by $index">
+        @Html.Hidden("ListVideos[{{$index}}].Name", "{{item.Name}}")
+        @Html.Hidden("ListVideos[{{$index}}].Path", "{{item.Path}}")
+        <a class="btn btn-app bg-purple" data-ng-click="editItem($event, item, null, model.ListVideos)">
+            <span class="badge bg-red" data-ng-click="deleteItem($event, item, model.ListVideos)">×</span>
+            <div class="btn-body" title="{{item.Name}}" data-toggle="tooltip" data-placement="bottom">
+                <i class="fa fa-youtube-play"></i>{{item.Name}}
+            </div>
+        </a>
+    </span>
+</div>

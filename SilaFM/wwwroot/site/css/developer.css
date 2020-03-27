@@ -1,0 +1,104 @@
+﻿.reviews {
+    margin-bottom: 40px;
+}
+
+    .reviews .row:not(:first-child) {
+        margin-top: 40px;
+    }
+
+.round {
+    width: 150px;
+}
+
+.moveone .h1block {
+    max-width: 70% !important;
+    margin: 0 auto !important;
+}
+
+.coment p {
+    font-family: "RobotoLightItalic", sans-serif !important;
+    font-size: 14px;
+}
+
+.font_sm p {
+    font-family: "RobotoLight", sans-serif;
+    font-size: 14px;
+}
+
+
+.insideblock h2 {
+    border-bottom: 1px solid #b7b7b7;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+    height: 35px;
+    background: url(../images/palit.png) no-repeat;
+    background-position: right;
+}
+
+.insideblock p {
+    color: #404040;
+    font-family: "RobotoLight", sans-serif;
+    font-size: 12pt;
+    padding: 20px 10px;
+    width: 100%;
+    text-align: justify;
+}
+
+    .insideblock p:not(.field-validation-error):first-letter {
+        margin-left: 40px;
+    }
+
+#katetext.err, .field-validation-error {
+    color: red!important;
+}
+
+.field-validation-error, .insideblock p.field-validation-error {
+    font-size: 12px;
+    top: -5px;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    display: inline-block;
+    padding-left: 0;
+}
+
+#katetext.green {
+    color: green;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.tabs-left.langs > .nav-tabs > li > a:first-letter {
+    text-transform: uppercase;
+}
+
+.tabs-left.langs > .nav-tabs > li > a:after {
+    content: " язык";
+}
+
+.tabs-left.langs > .nav-tabs {
+    max-width: 150px;
+}
+
+.country-RU .hideRu {
+    display: none !important;
+}
+.country-UA .hideUA {
+    display: none !important;
+}
+
+.zakaz_btn {
+    cursor: pointer;
+}
+    .zakaz_btn:hover, .zakaz_btn:focus, .zakaz_btn:active {
+        color: #fff;
+        background: #599931;
+        text-decoration: none;
+        -webkit-transition: background-color .6s ease;
+        transition: background-color .6s ease;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+    }

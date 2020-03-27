@@ -12,6 +12,9 @@ namespace Pras.DAL.Repositories
         private IRepository<Person> _peopleRepository;
         private IRepository<Speaker> _speakersRepository;
         private IRepository<Video> _videosRepository;
+        private IRepository<News> _newsRepository;
+        private IRepository<Review> _reviewsRepository;
+        private IRepository<Settings> _settingsRepository;
 
         public UnitOfWork(PrasDbContext context)
         {
@@ -75,6 +78,39 @@ namespace Pras.DAL.Repositories
                     _videosRepository = new Repository<Video>(_context);
                 }
                 return _videosRepository;
+            }
+        }
+
+        public IRepository<News> NewsRepository {
+            get
+            {
+                if (_newsRepository == null)
+                {
+                    _newsRepository = new Repository<News>(_context);
+                }
+                return _newsRepository;
+            }
+        }
+
+        public IRepository<Review> ReviewsRepository {
+            get
+            {
+                if (_reviewsRepository == null)
+                {
+                    _reviewsRepository = new Repository<Review>(_context);
+                }
+                return _reviewsRepository;
+            }
+        }
+
+        public IRepository<Settings> SettingsRepository {
+            get
+            {
+                if (_settingsRepository == null)
+                {
+                    _settingsRepository = new Repository<Settings>(_context);
+                }
+                return _settingsRepository;
             }
         }
 

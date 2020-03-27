@@ -1,0 +1,65 @@
+﻿@using Pras.Shared.Enums
+@using Pras.Shared.Enums.Extensions
+@using Pras.Web.Areas.Administration.Models.HelperModels
+@model Pras.Web.Areas.Administration.Models.ReviewViewModel
+
+@{
+    ViewBag.Title = "Отзывы";
+    Layout = "_Layout";
+    ViewBag.Breadcrumb = new List<UIBreadcrumbs>
+    {
+        new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
+        new UIBreadcrumbs {Link = Url.Action("Index", "Reviews"), Title = ViewBag.Title},
+        new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
+    };
+
+    Html.RenderPartial("_ResultMessages");
+}
+@section Styles{
+    <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" />
+}
+@section Scripts{
+    <script src="~/lib/moment/moment.min.js"></script>
+    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    @Html.Partial("_ValidationScriptsPartial")
+}
+<div class="col-sm-12 col-md-7 col-lg-9">
+    <div class="box box-danger">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="box-header with-border">
+                <h3 class="box-title">@(Model.IsNew ? "Создание" : "Редактирование")</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image, new { @class = "control-label" })
+                    <div class="input-group">
+                        @Html.TextBoxFor(model => model.Image, new { @class = "form-control", @readonly = "readonly" })
+                        <span class="input-group-btn">
+                            <a onclick=" loadElfinder('Image'); " class="btn btn-danger btn-flat">Выбрать файл</a>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Image)
+                    <span class="help-block">Ширина: 150px. Высота: 150px.</span>
+                    <img class="preview" id="view-Image" style="width: 160px; height: auto;" src="@Model.Image" />
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Text, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Text, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Text)
+                </div>
+            </div>
+            <div class="box-footer">
+                <input type="submit" class="btn btn-danger btn-lg pull-right" value="Сохранить" />
+            </div>
+        </form>
+    </div>
+</div>

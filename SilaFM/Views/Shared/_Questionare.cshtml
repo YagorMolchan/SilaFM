@@ -1,0 +1,120 @@
+﻿@model Pras.Web.Models.Forms.QuestionareFormModel
+<div class="modal fade" id="modal-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal">&times;</button>
+                <h2>Агентство Sila.FM. Online анкета</h2>
+                <p>Заполните, пожалуйста, все поля формы:</p>
+                @if (!String.IsNullOrEmpty((string) TempData["Error"]))
+                {
+                    <p class="field-validation-error">@TempData["Error"]</p>
+                }
+            </div>
+            <form action="questionare" enctype="multipart/form-data" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Имя Фамилия", aria_describedby = "basic-addon1" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon2"><i class="fa fa-phone"></i></span>
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "Мобильный телефон", aria_describedby = "basic-addon2" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon3"><i class="fa fa-envelope"></i></span>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "e-mail", aria_describedby = "basic-addon3" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon4"><i class="fa fa-book"></i></span>
+                            @Html.TextBoxFor(model => model.Age, new { @class = "form-control", placeholder = "Возраст", type = "number", aria_describedby = "basic-addon4" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Age)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon5"><i class="fa fa-home"></i></span>
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Место проживания (страна, город)...", aria_describedby = "basic-addon5" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon6"><i class="fa fa-language"></i></span>
+                            @Html.TextBoxFor(model => model.Languages, new { @class = "form-control", placeholder = "Какими языками владеете?", aria_describedby = "basic-addon6" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Languages)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon7"><i class="fa fa-briefcase"></i></span>
+                            @Html.TextBoxFor(model => model.Company, new { @class = "form-control", placeholder = "Место работы", aria_describedby = "basic-addon7" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Company)
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            @Html.TextBoxFor(model => model.Experience, new { @class = "form-control", placeholder = "Опыт работы" })
+                            <p style="margin-top: 5px;">@Html.ValidationMessageFor(model => model.Experience)</p>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            @Html.TextBoxFor(model => model.Shedule, new { @class = "form-control", placeholder = "График работы" })
+                            <p style="margin-top: 5px;">@Html.ValidationMessageFor(model => model.Shedule)</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                    Обзор&hellip; <input name="Files" type="file" multiple>
+                                </span>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Прикрепить порфолио..." readonly>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Files)
+                    </div>
+                    <h3>Возможность записи начиток:</h3>
+                    <label class="checkbox-inline">
+                        @Html.CheckBoxFor(model => model.RecordingAtWork)
+                        <p>На работе</p>
+                    </label>
+                    <label class="checkbox-inline">
+                        @Html.CheckBoxFor(model => model.RecordingAtHome)
+                        <p>Дома</p>
+                    </label>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon9"><i class="fa fa-money"></i></span>
+                            @*<input type="text" class="form-control" id="rolik30" placeholder="Стоимость начитки рекламного текста до 30 сек..." aria-describedby="basic-addon9">*@
+                            @Html.TextBoxFor(model => model.Price30, new { @class = "form-control", placeholder = "Стоимость начитки рекламного текста до 30 сек...", aria_describedby = "basic-addon9" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Price30)
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon8"><i class="fa fa-money"></i></span>
+                            @*<input type="text" class="form-control" id="stranica" placeholder="Стоимость начитки 1 страницы печатного текста..." aria-describedby="basic-addon8">*@
+                            @Html.TextBoxFor(model => model.PricePage, new { @class = "form-control", placeholder = "Стоимость начитки 1 страницы печатного текста...", aria_describedby = "basic-addon8" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PricePage)
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="anketa_btn" type="submit">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

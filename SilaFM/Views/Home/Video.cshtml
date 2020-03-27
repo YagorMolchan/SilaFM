@@ -1,0 +1,57 @@
+﻿@using Pras.Shared.Enums
+@using Pras.Shared.Enums.Extensions
+@model System.Collections.Generic.List<Pras.Web.Models.VideoViewModel>
+
+@{
+    ViewBag.Title = "Видеоролики";
+    Layout = "_Layout";
+    int i = 0;
+    var types = Enum.GetValues(typeof(VideoTypes));
+}
+
+<div class="fillcontainer mascont">
+    <div role="tabpanel">
+        <ul class="nav nav-pills nav-justified" role="tablist">
+            @foreach (var type in types)
+            {
+                <li class="@(i==0?"active":"")"><a data-toggle="tab" href="#@type">@EnumExtensions.GetDescription((VideoTypes)type)</a></li>
+                i++;
+            }
+            @*<li> <a role="tab" data-toggle="tab" href="#tab2" aria-controls="tab2">Дубляж</a> </li>
+                <li> <a role="tab" data-toggle="tab" href="#tab3" aria-controls="tab3">Видеопрезентации</a></li>
+                <li> <a role="tab" data-toggle="tab" href="#tab4" aria-controls="tab4">Мультипликации</a></li>
+                <li> <a role="tab" data-toggle="tab" href="#tab5" aria-controls="tab5">Док. фильмы</a></li>
+                <li> <a role="tab" data-toggle="tab" href="#tab6" aria-controls="tab6">Копроративные</a></li>*@
+        </ul>
+        <div class="tab-content">
+            @{
+                i = 0;
+                foreach (var type in types)
+                {
+                    <div id="@type" class="tab-pane fade @(i==0 ? "in active" : "")" role="tabpanel">
+                        <div class="row masonry-container">
+                            @foreach (var item in Model.Where(p => p.Type == (VideoTypes)type))
+                            {
+                                <div class="grid-item col-xs-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            @*<video controls="" name="media"><source src="@item.Path"></video>*@
+                                            <iframe class="embed-responsive-item" src="@item.Path"></iframe>
+                                        </div>
+                                        <div class="caption">
+                                            <h4>@item.Title</h4>
+                                            <p>
+                                                @item.Summary
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    i++;
+                }
+            }
+        </div>
+    </div>
+</div>

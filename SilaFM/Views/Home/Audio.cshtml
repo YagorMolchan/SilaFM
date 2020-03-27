@@ -1,0 +1,74 @@
+﻿@using Pras.Shared.Enums.Extensions
+@model AudioPageViewModel
+
+@{
+    ViewBag.Title = Model.Information != null ? Model.Information.MetaTitle ?? Model.Information.Title : "Аудиоролики";
+    ViewBag.MetaDescription = Model.Information?.MetaDescription;
+    Layout = "_Layout";
+    int i = 0;
+}
+
+<div class="miniblock">
+    <div class="inside">
+        <figure class="left_img"><img src="images/page1_img3.jpg" alt=""></figure>
+        <h2>@Model.Information?.Title</h2>
+        @Html.Raw(Model.Information?.Text)
+        <h4>Выберите интересующий формат аудиоролика:</h4>
+        <div id="accordion" class="panel-group">
+            @foreach (var group in Model.Audio.GroupBy(p => p.Type).OrderBy(p=>p.Key))
+            {
+                i++;
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapse-@i" data-parent="#accordion" data-toggle="collapse">
+                                <span class="glyphicon glyphicon-chevron-right"></span> @EnumExtensions.GetDescription(group.Key)
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse-@i" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="features-table">
+                                <thead>
+                                    <tr style="height: 70px;">
+                                        <td class="grey">Слушать</td>
+                                        <td width="420px">Название ролика</td>
+                                        <td class="grey">Скачать</td>
+                                        <td class="grey">Голоса</td>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach (var item in group)
+                                    {
+                                        <tr>
+                                            <td class="grey" align="center">
+                                                <audio controls><source src="@item.Path" type="audio/mpeg"></audio>
+                                            </td>
+                                            <td>
+                                                @item.Title
+                                                @if (item.IsNovelty)
+                                                {
+                                                    <img class="new_img" src="~/site/img/new.gif" alt="new">
+                                                }
+                                            </td>
+                                            <td class="grey" align="center"><a href="@item.Path" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a></td>
+                                            <td class="grey">@item.Summary</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

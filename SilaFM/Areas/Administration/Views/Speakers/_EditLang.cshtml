@@ -1,0 +1,14 @@
+﻿@model dynamic
+
+<div>
+    <span data-ng-repeat="item in model.VoiceLanguages track by $index">
+        @Html.Hidden("VoiceLanguages[{{$index}}].Name", "{{item.Name}}")
+        @Html.Hidden("VoiceLanguages[{{$index}}].Path", "{{item.Path}}")
+        <a class="btn btn-app bg-aqua" data-ng-click="editItem($event, item, languages, model.VoiceLanguages)">
+            <span class="badge bg-red" data-ng-click="deleteItem($event, item, model.VoiceLanguages)">×</span>
+            <div class="btn-body" title="{{item.Name}}" data-toggle="tooltip" data-placement="bottom">
+                <i class="fa fa-language"></i>{{item.Name}}
+            </div>
+        </a>
+    </span>
+</div>

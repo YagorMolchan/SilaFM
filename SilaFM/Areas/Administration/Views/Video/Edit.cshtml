@@ -42,7 +42,7 @@ new UIBreadcrumbs{ Link = string.Empty, Title = Model.IsNew ? "Создание"
                     </div>
                     <div class="form-group col-lg-6">
                         @Html.LabelFor(model => model.Type, new { @class = "control-label" })
-                        @Html.DropDownListFor(model => model.Type, VideoTypes.Animation.ToSelectList(), new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.Type, VideoTypes.Animation.ToSelectList(), null, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Type)
                     </div>
                 </div>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using elFinder.NetCore;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Pras.Shared.Config;
 
 namespace Pras.Web.Areas.Administration.Controllers
 {
@@ -13,6 +15,13 @@ namespace Pras.Web.Areas.Administration.Controllers
     [Route("file")]
     public partial class FileController : Controller
     {
+        private readonly AppSettings _appSettings;
+
+        public FileController(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
+
         [Route("connector")]
         public virtual async Task<IActionResult> Index()
         {
@@ -36,8 +45,8 @@ namespace Pras.Web.Areas.Administration.Controllers
 
             var root = new Root(
                 new DirectoryInfo(Startup.MapPath("~/Files")),
-                string.Format("http://{0}/Files/", uri.Authority),
-                string.Format("http://{0}/file/thumb/", uri.Authority))
+                string.Format("{0}Files/", _appSettings.CDN),
+                string.Format("{0}file/thumb/", _appSettings.CDN))
             {
                 // Sample using ASP.NET built in Membership functionality...
                 // Only the super user can READ (download files) & WRITE (create folders/files/upload files).

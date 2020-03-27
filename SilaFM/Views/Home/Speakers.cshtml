@@ -1,0 +1,168 @@
+﻿@using Pras.Shared.Enums
+@model SpeakersPageViewModel
+
+@{
+    ViewBag.Title = Model.Information.MetaTitle ?? Model.Information.Title;
+    Layout = "_Layout";
+}
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="~/site/libs/dataTables/jquery.dataTables.min.css">
+}
+
+<div class="miniblock">
+    <div class="serij">
+        <h1>@Model.Information.Title</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+            <div class="leftbar">
+                @Html.Partial("_SpeakersLeftbar")
+            </div>
+        </div>
+        <div class="col-md-7 hidden-sm hidden-xs">
+            <div class="rightbar">
+                @Html.Raw(Model.Information.Text)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section AfterContent {
+    @if (Model.Information.Type == InformationTypes.SpeakersRu)
+    {
+        <div class="container">
+            <div class="fillcontainer">
+                <section id="ex1">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Мужские голоса. Дикторы России</h2>
+                    </div>
+                    <hr />
+                    <div>
+                        @Html.Partial("_Speakers", Model.Speakers.Where(p => p.Gender == Gender.Male && p.Type != SpeakerTypes.Federal).ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                    </div>
+                </section>
+            </div>
+            <div class="fillcontainer">
+                <section id="ex2">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Женские голоса. Дикторы России</h2>
+                    </div>
+                    <hr />
+                    <div>
+                        @Html.Partial("_Speakers", Model.Speakers.Where(p => p.Gender == Gender.Female && p.Type != SpeakerTypes.Federal).ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                    </div>
+                </section>
+            </div>
+            <div class="fillcontainer">
+                <section id="ex3">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Мужские голоса. Федеральные дикторы России</h2>
+                    </div>
+                    <div>
+                        @Html.Partial("_Speakers", Model.Speakers.Where(p => p.Gender == Gender.Male && p.Type == SpeakerTypes.Federal).ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                    </div>
+                </section>
+            </div>
+            <div class="fillcontainer">
+                <section id="ex4">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Женские голоса. Федеральные дикторы России</h2>
+                    </div>
+                    <div>
+                        @Html.Partial("_Speakers", Model.Speakers.Where(p => p.Gender == Gender.Female && p.Type == SpeakerTypes.Federal).ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                    </div>
+                </section>
+            </div>
+        </div>
+    }
+    else if (Model.Information.Type == InformationTypes.SpeakersUk)
+    {
+        <div class="container">
+            <div class="fillcontainer">
+                <section id="ex1">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Мужские голоса. Дикторы Украины</h2>
+                    </div>
+                    <hr />
+                    <div>
+                        @Html.Partial("_Speakers", Model.Speakers.Where(p => p.Gender == Gender.Male).ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                    </div>
+                </section>
+            </div>
+            <div class="fillcontainer">
+                <section id="ex2">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Женские голоса. Дикторы Украины</h2>
+                    </div>
+                    <hr />
+                    <div>
+                        @Html.Partial("_Speakers", Model.Speakers.Where(p => p.Gender == Gender.Female).ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                    </div>
+                </section>
+            </div>
+        </div>
+    }
+    else if (Model.Information.Type == InformationTypes.SpeakersFor)
+    {
+        <div class="container">
+            <div class="fillcontainer">
+                <section id="ex1">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Иностранные мужские голоса</h2>
+                    </div>
+                    <hr />
+                    <div>
+                        @Html.Partial("_SpeakersFor", Model.Speakers.Where(p => p.Gender == Gender.Male).ToList(), new ViewDataDictionary(ViewData) { { "price", "у.е." }, { "isLang", true } })
+                    </div>
+                </section>
+            </div>
+            <div class="fillcontainer">
+                <section id="ex2">
+                    <div class="title">
+                        <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                        <h2>Иностранные женские голоса</h2>
+                    </div>
+                    <hr />
+                    <div>
+                        @Html.Partial("_SpeakersFor", Model.Speakers.Where(p => p.Gender == Gender.Female).ToList(), new ViewDataDictionary(ViewData) { { "price", "у.е." }, { "isLang", true } })
+                    </div>
+                </section>
+            </div>
+        </div>
+    }
+    else
+    {
+        var speakers = Model.Speakers.GroupBy(p => p.GroupTitle);
+        int i = 1;
+
+        foreach (var group in speakers)
+        {
+            <div class="container">
+                <div class="fillcontainer">
+                    <section id="ex@(i)">
+                        <div class="title">
+                            <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"></a>
+                            <h2>@group.Key</h2>
+                        </div>
+                        <div>
+                            @Html.Partial("_Speakers", group.ToList(), new ViewDataDictionary(ViewData) { { "price", "руб" }, { "isLang", false } })
+                        </div>
+                    </section>
+                </div>
+            </div>
+            i++;
+        }
+    }
+}
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="~/site/libs/dataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="~/site/libs/dataTables/dataTables.bootstrap.min.js"></script>
+}

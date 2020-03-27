@@ -1,12 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Pras.DAL.Entities;
+using Pras.Shared.Config;
 
-namespace Pras.Infrastructure
+namespace Pras.InfrastructureSt
 {
     public class DatabaseInitializer
     {
-        public static async Task InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task InitializeAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, AppSettings appSettings)
         {
             string adminName = "Admin";
             string adminEmail = "admin@gmail.com";
@@ -22,6 +24,19 @@ namespace Pras.Infrastructure
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "Admin");
+                }
+            }
+
+            if (Boolean.Parse(appSettings.IsClient))
+            {
+                if (await userManager.FindByNameAsync("test@pras.by") == null)
+                {
+                    ApplicationUser test = new ApplicationUser { Email = "test@pras.by", UserName = "TestAdmin", EmailConfirmed = true };
+                    IdentityResult result = await userManager.CreateAsync(test, "TestAdmin");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(test, "Admin");
+                    }
                 }
             }
         }

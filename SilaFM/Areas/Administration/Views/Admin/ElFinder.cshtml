@@ -1,0 +1,109 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Файловый менеджер</title>
+    @if (Boolean.Parse(Configuration.GetSection("AppSettings:IsClient").Value))
+    {
+        <base href="/silafm/">
+    }
+    else
+    {
+        <base href="/">
+    }
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="~/plugins/elfinder/css/elfinder.full.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/css/theme.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/themes/windows-10/css/theme.css" />
+        <link rel="stylesheet" href="~/admin/css/dev.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/jquery-ui/jquery-ui.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="~/plugins/elfinder/css/elfinder.full.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/css/theme.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/themes/windows-10/css/theme.css" />
+        <link rel="stylesheet" href="~/admin/css/admin.min.css" />
+    </environment>
+</head>
+<body>
+    <div id="elfinder"></div>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+        <script src="~/lib/jquery-migrate/jquery-migrate-3.0.0.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/admin/js/app.js"></script>
+        <script src="~/plugins/elfinder/js/elfinder.full.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/lib/jquery-migrate/jquery-migrate-3.0.0.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/plugins/elfinder/js/elfinder.full.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(function ()
+        {
+            function getUrlParam(paramName) {
+                var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i');
+                var match = window.location.search.match(reParam);
+
+                return (match && match.length > 1) ? match[1] : '';
+            }
+            var funcNum = getUrlParam('CKEditorFuncNum');
+            var myCommands = elFinder.prototype._options.commands;
+
+            var disabled = ['extract', 'archive', 'resize', 'help', 'select']; // Not yet implemented commands in ElFinder.Net
+
+            $.each(disabled, function (i, cmd)
+            {
+                (idx = $.inArray(cmd, myCommands)) !== -1 && myCommands.splice(idx, 1);
+            });
+
+            //var selectedFile = null;
+
+            var options = {
+                url: 'file/connector',
+                @*//customData: { folder: '@Model.Folder', subFolder: '@Model.SubFolder' }, // customData passed in every request to the connector as query strings. These values are used in FileController's Index method.*@
+                rememberLastDir: false, // Prevent elFinder saving in the Browser LocalStorage the last visited directory
+                commands: myCommands,
+                lang: 'ru', // elFinder supports UI and messages localization. Check the folder Content\elfinder\js\i18n for all available languages. Be sure to include the corresponding .js file(s) in the JavaScript bundle.
+                uiOptions: { // UI buttons available to the user
+                    toolbar: [
+                        ['back', 'forward'],
+                        ['reload'],
+                        ['home', 'up'],
+                        ['mkdir', 'mkfile', 'upload'],
+                        ['open', 'download'],
+                        ['info'],
+                        ['quicklook'],
+                        ['copy', 'cut', 'paste'],
+                        ['rm'],
+                        ['duplicate', 'rename', 'edit'],
+                        ['view', 'sort']
+                    ]
+                },
+                getFileCallback: function (file) {
+                    var url = file.path.replace("Главная/", file.baseUrl);
+                    window.opener.CKEDITOR.tools.callFunction(funcNum, url);
+                    window.close();
+                }
+            };
+            $('#elfinder').elfinder(options).elfinder('instance');
+        });
+    </script>
+</body>
+</html>

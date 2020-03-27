@@ -1,0 +1,24 @@
+﻿@model InformationViewModel
+
+@{
+    ViewBag.Title = Model != null ? Model.MetaTitle ?? Model.Title : "Игры";
+    ViewBag.MetaDescription = Model?.MetaDescription;
+    Layout = "_Layout";
+}
+
+<div class="fillcontainer">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Игры</h2>
+            <hr>
+            <p class="basictext">Озвучание персонажей, видеообзоров, трейлеров.</p>
+            <img src="~/site/img/ninja.png" alt="">
+        </div>
+        <div class="col-md-9">
+            <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"> </a>
+            <h2>@Model?.Title</h2>
+            <hr>
+            @Html.Raw(Model?.Text)
+        </div>
+    </div>
+</div>

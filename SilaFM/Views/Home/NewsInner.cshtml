@@ -1,0 +1,16 @@
+﻿@model NewsViewModel
+
+@{
+    ViewBag.Title = Model.MetaTitle ?? Model.Title;
+    ViewBag.Description = Model.MetaDescription;
+    Layout = "_Layout";
+}
+
+<div class="miniblock">
+    <div class="serij">
+        <h1>@Model.Title</h1>
+    </div>
+    <div class="insideblock">
+        @Html.Raw(Model.Text)
+    </div>
+</div>

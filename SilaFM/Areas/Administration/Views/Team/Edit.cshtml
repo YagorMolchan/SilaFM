@@ -52,7 +52,7 @@ new UIBreadcrumbs{ Link = string.Empty, Title = Model.IsNew ? "Создание"
                         <div class="input-group">
                             @Html.TextBoxFor(model => model.Image, new { @class = "form-control", @readonly = "readonly" })
                             <span class="input-group-btn">
-                                <a onclick=" loadElfinder('Image'); " class="btn btn-danger btn-flat">Выбрать файл</a>
+                                <a onclick=" loadElfinder('Image'); " class="btn btn-danger">Выбрать файл</a>
                             </span>
                         </div>
                         @Html.ValidationMessageFor(model => model.Image)

@@ -1,0 +1,118 @@
+﻿@model Pras.Web.Models.Forms.VideoOrderFormModel
+
+<form action="order-video" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <p class="field-validation-error">@TempData["ErrorVideo"]</p>
+    <div class="form-group">
+        <label for="Type" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Type)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Type, new SelectList(Model.ListTypes.ToDictionary(p => p, p => p), "Key", "Value", Model.Type), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Count" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Count)</label>
+        <div class="col-md-5">
+            @Html.TextBoxFor(model => model.Count, new { @class = "form-control", placeholder = "количество" })
+            @Html.ValidationMessageFor(model => model.Count)
+        </div>
+        <div class="col-md-4">
+            @Html.DropDownListFor(model => model.Points, new SelectList(Model.ListPoints.ToDictionary(p => p, p => p), "Key", "Value", Model.Points), null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Points)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Works" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Works)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Works, new SelectList(Model.ListWorks.ToDictionary(p => p, p => p), "Key", "Value", Model.Works), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Works)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="SpeakerName" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.SpeakerName)</label>
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.SpeakerName, new { @class = "form-control", placeholder = "Имя Фамилия" })
+            @Html.ValidationMessageFor(model => model.SpeakerName)
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(model => model.StudioChoice)
+                    <p>@Html.DisplayNameFor(model => model.StudioChoice)</p>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Text)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Text, new { @class = "form-control", rows = 8 })
+            @Html.ValidationMessageFor(model => model.Text)
+            <a href="@Url.Action("Chronomer", "Home")" target="_blank" class="small">хрономер <span class="glyphicon glyphicon-time"></span></a>
+            <a href="@Url.Action("Pages", "Home")" target="_blank" class="small">страницемер <span class="glyphicon glyphicon-time"></span></a>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Comments)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", rows = 3 })
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="format" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Parameters)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Parameters, new SelectList(Model.ListParameters.ToDictionary(p => p, p => p), "Key", "Value", Model.Parameters), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Parameters)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <label>Прикрепите файл</label>
+            @Html.TextBoxFor(model => model.File, new { @type = "file", title = "Выберите файл" })
+            <p class="help-block">не более 3мб</p>
+            @Html.ValidationMessageFor(model => model.File)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="VideoLink1" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.VideoLink1)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.VideoLink1, new { @class = "form-control", placeholder = "вставьте вашу ссылку" })
+            @Html.TextBoxFor(model => model.VideoLink2, new { @class = "form-control", placeholder = "вставьте вашу ссылку" })
+            @Html.ValidationMessageFor(model => model.VideoLink1)
+            @Html.ValidationMessageFor(model => model.VideoLink2)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Code" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Code)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholder = "Код скидки" })
+            @Html.ValidationMessageFor(model => model.Code)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Email" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Email)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "почта, куда будет отправлен заказ" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Payment" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Payment)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Payment, new SelectList(Model.ListPayments.ToDictionary(p => p, p => p), "Key", "Value", Model.Payment), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Payment)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            @*<form action="http://www.SnapHost.com/captcha/send.aspx" method="post" id="myform">
+                <input type="hidden" id="skip_WhereToSend" name="skip_WhereToSend" value="info@sila.fm" />
+                <input type="hidden" id="skip_Subject" name="skip_Subject" value="Test inline zakaz" />
+                <input type="hidden" id="skip_WhereToReturn" name="skip_WhereToReturn" value="www.yourdomain.com/thankyou.htm" />
+                <input type="hidden" id="skip_SnapHostID" name="skip_SnapHostID" value="LZR9DPCMJMGW" />
+                гуглкапча
+            </form>*@
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg">Сделать заказ</button>
+        </div>
+    </div>
+</form>

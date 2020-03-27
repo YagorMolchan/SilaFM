@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NLog;
 using Pras.Web.Areas.Administration.Models.HelperModels;
 
 namespace Pras.Web.Areas.Administration.Controllers
@@ -8,6 +10,8 @@ namespace Pras.Web.Areas.Administration.Controllers
     [Route("admin")]
     public class BaseController : Controller
     {
+        protected Logger Logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Insert class ResultMessages for the TempData["Result"] and view message for the client.
         /// </summary>

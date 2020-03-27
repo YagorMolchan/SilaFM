@@ -4,11 +4,16 @@
     {
         Audio,
         Games,
-        Main,
         Music,
         Payment,
         Scenario,
-        Speakers,
+        SpeakersChild,
+        SpeakersRu,
+        SpeakersUk,
+        SpeakersFor,
+        SpeakersParodist,
+        SpeakersVocalist,
+        SpeakersVip,
         Video,
     }
 }

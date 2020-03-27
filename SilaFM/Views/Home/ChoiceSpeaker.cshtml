@@ -1,0 +1,71 @@
+﻿@model Pras.Web.Models.Forms.ChoiceSpeakerViewModel
+
+@{
+    ViewBag.Title = "Подбор диктора";
+    Layout = "_Layout";
+}
+
+<div class="miniblock">
+    <div class="serij">
+        <h1>Услуга подбора диктора под ваш бюджет</h1>
+    </div>
+    <div class="insideblock">
+        <p class="basictext">
+            Мы можем предложить Вам оптимальный вариант голоса, исходя из вашего задания, сроков и бюджета. Обратите вниимание, что на стоимость заказа влияет место трансляции ролика (интренет, телевидение, радио), характер рекламы (политический ролик, реклама и т.п.), объем задания (колличество букв, страниц), а также ценновая политика самого диктора (федеральные дикторы, голоса известных брендов и т.д.). С примерами голосов вы можете ознакомится по <a href="@Url.Action("SpeakersRu", "Home")">данной ссылке</a>
+        </p>
+        <h2 class="headliner">Форма обращения по подбору диктора</h2>
+        <br>
+        <form action="choice-speaker" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            @if (TempData["ErrorChoice"] != null)
+            {
+                <p class="field-validation-error">@TempData["ErrorChoice"]</p>
+            }
+            <div class="input-group">
+                <span class="input-group-addon" id="choice1"><i class="fa fa-envelope"></i></span>
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Введите Ваш e-mail", aria_describedby = "basic-addon3" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Email)
+            <div class="input-group">
+                <span class="input-group-addon" id="choice2"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
+                @Html.TextBoxFor(model => model.Budget, new { @class = "form-control", placeholder = "Ваш бюджет на данный момент" })
+            </div>
+            @Html.ValidationMessageFor(model => model.Budget)
+            <p>
+                Голос:
+                <label class="radio-inline"><input type="radio" name="Voice" checked value="мужской">мужской</label>
+                <label class="radio-inline"><input type="radio" name="Voice" value="женский">женский</label>
+            </p>
+            <div class="input-group">
+                <span class="input-group-addon" id="choice3"><i class="fa fa-university"></i></span>
+                @Html.TextBoxFor(model => model.Placement, new { @class = "form-control", placeholder = "Место размещения: ТВ, радио, интернет, игровое приложение, торговый центр, выставка, или укажите другое " })
+            </div>
+            @Html.ValidationMessageFor(model => model.Placement)
+            <br>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Обзор&hellip; @Html.TextBoxFor(model => model.File, new { @type = "file", title = "Выберите файл" })
+                    </span>
+                </span>
+                <input type="text" class="form-control" placeholder="Прикрепите задание" readonly>
+            </div>
+            @Html.ValidationMessageFor(model => model.File)
+            <div class="form-group">
+                <label for="comment">
+                    <h5>Либо скопируйте сюда задание:</h5>
+                </label>
+                @Html.TextAreaFor(model => model.Task, new { @class = "form-control", rows = 5 })
+                @Html.ValidationMessageFor(model => model.Task)
+            </div>
+            <div class="form-group">
+                <label for="comment">
+                    <h5>Оставьте ваши пожелания по диктору:</h5>
+                </label>
+                @Html.TextAreaFor(model => model.Comment, new { @class = "form-control", rows = 5 })
+                @Html.ValidationMessageFor(model => model.Comment)
+            </div>
+            <button class="anketa_btn" type="submit">Отправить</button>
+        </form>
+    </div>
+</div>

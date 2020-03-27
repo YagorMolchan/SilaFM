@@ -1,0 +1,25 @@
+﻿@model InformationViewModel
+
+@{
+    ViewBag.Title = Model != null ? Model.MetaTitle ?? Model.Title : "Музыкальные подложки";
+    ViewBag.MetaDescription = Model?.MetaDescription;
+    Layout = "_Layout";
+}
+
+<div class="fillcontainer">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Заказ</h2>
+            <hr>
+            <p class="basictext">Заказать музыку вы можете связавшись с нами по телефону или отправив запрос на наш электронный адрес info@sila.fm. Мы свяжемся с вами в ближайшее время для более детального обсуждения вашего запроса.</p>
+            <p>Реклама</p>
+            <img src="http://placehold.it/250x400" alt="">
+        </div>
+        <div class="col-md-9">
+            <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"> </a>
+            <h2>@Model.Title</h2>
+            <hr>
+            @Html.Raw(Model.Text)
+        </div>
+    </div>
+</div>

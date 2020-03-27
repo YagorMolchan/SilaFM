@@ -36,7 +36,7 @@ namespace Pras.BLL.Services
             }
             else
             {
-                entity = _unitOfWork.InformationRepository.FindById(model.Id).Result;
+                entity = _unitOfWork.InformationRepository.FindById(model.Id);
                 Mapper.Map(model, entity);
                 _unitOfWork.InformationRepository.InsertOrUpdate(entity);
             }

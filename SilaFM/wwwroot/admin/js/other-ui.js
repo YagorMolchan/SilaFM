@@ -120,19 +120,18 @@
             '<i id="loop" class="fa fa-search"></i>' +
             '</div>');
     }
-
-    $('.ckeditor.links').each(function (index, value) {
+    
+    $('.ck-basic').each(function (index, value) {
         CKEDITOR.replace(value.id,
             {
-                toolbar: 'Links',
-                height: 80,
-                width: 500
+                toolbar: 'Basic',
+                height:$(value).data('height')||150
             });
     });
 
     $.ajax({
         type: "GET",
-        url: "http://pras.by/api/getnews/be",
+        url: "https://pras.by/api/getnews/be",
         xhrFields: {
             withCredentials: true
         },

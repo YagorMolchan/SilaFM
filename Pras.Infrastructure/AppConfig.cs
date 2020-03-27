@@ -4,23 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Pras.BLL.Services;
-using Pras.BLL.Services.Interfaces;
 using Pras.DAL.Context;
 using Pras.DAL.Entities;
 using Pras.DAL.Interfaces;
 using Pras.DAL.Repositories;
+using Pras.InfrastructureSt;
+using Pras.Shared.Config;
 
 namespace Pras.Infrastructure
 {
     public static class AppConfig
     {
-        public static void RegisterApplicationServices(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterApplicationServices(this IServiceCollection services, IConfiguration configuration, AppSettings appSettings)
         {
             // DbContext
             services.AddDbContext<PrasDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("PrasDB")));
-
+            
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<PrasDbContext>()
                 .AddDefaultTokenProviders();
@@ -68,7 +68,13 @@ namespace Pras.Infrastructure
             {
                 var userManager = provider.GetRequiredService<UserManager<ApplicationUser>>();
                 var rolesManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
-                DatabaseInitializer.InitializeAsync(userManager, rolesManager).Wait();
+
+                userManager.Options.Password.RequireDigit = false;
+                userManager.Options.Password.RequireLowercase = false;
+                userManager.Options.Password.RequireNonAlphanumeric = false;
+                userManager.Options.Password.RequireUppercase = false;
+
+                DatabaseInitializer.InitializeAsync(userManager, rolesManager, appSettings).Wait();
             }
             catch (Exception ex)
             {

@@ -4,17 +4,17 @@ namespace Pras.Shared.Enums
 {
     public enum VideoTypes
     {
-        [Description("Мультипликации")]
-        Animation,
-        [Description("Копроративные")]
-        Corporate,
-        [Description("Док. фильмы")]
-        Documentary,
+        [Description("Озвучка видео")]
+        VoiceOver,
         [Description("Дубляж")]
         Dubbing,
         [Description("Видеопрезентации")]
         Presentation,
-        [Description("Озвучка видео")]
-        VoiceOver,
+        [Description("Мультипликации")]
+        Animation,
+        [Description("Док. фильмы")]
+        Documentary,
+        [Description("Копроративные")]
+        Corporate,
     }
 }

@@ -1,0 +1,125 @@
+﻿@model Pras.Web.Models.Forms.MusicOrderFormModel
+
+<form action="order-music" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <p class="field-validation-error">@TempData["ErrorMusic"]</p>
+    <div class="form-group">
+        <label for="Purpose" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Purpose)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Purpose, new SelectList(Model.ListPurposes.ToDictionary(p => p, p => p), "Key", "Value", Model.Purpose), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Purpose)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Style" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Style)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Style, new SelectList(Model.ListStyles.ToDictionary(p => p, p => p), "Key", "Value", Model.Style), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Style)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Timing" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Timing)</label>
+        <div class="col-sm-9">
+            @Html.TextBoxFor(model => model.Timing, new { @class = "form-control", placeholder = "(если нужны фрагменты разной продолжительности, укажите)" })
+            @Html.ValidationMessageFor(model => model.Timing)
+            <div class="checkbox">
+                <label>
+                    @Html.CheckBoxFor(model => model.IsFreeTiming)
+                    <p>@Html.DisplayNameFor(model => model.IsFreeTiming)</p>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.SimilarSongs)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.SimilarSongs, new { @class = "form-control", rows = 4 })
+            @Html.ValidationMessageFor(model => model.SimilarSongs)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Voice" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Voice)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Voice, new SelectList(Model.ListVoices.ToDictionary(p => p, p => p), "Key", "Value", Model.Voice), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Voice)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Tempo" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Tempo)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Tempo, new SelectList(Model.ListTempos.ToDictionary(p => p, p => p), "Key", "Value", Model.Tempo), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Tempo)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Instruments" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Instruments)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Instruments, new SelectList(Model.ListInstruments.ToDictionary(p => p, p => p), "Key", "Value", Model.Instruments), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Instruments)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Vocal)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Vocal, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Vocal)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Info)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Vocal, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Vocal)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <label>Прикрепите файл</label>
+            @Html.TextBoxFor(model => model.File, new { @type = "file", title = "Выберите файл" })
+            <p class="help-block">не более 3мб</p>
+            @Html.ValidationMessageFor(model => model.File)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Comments)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Code" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Code)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholder = "Код скидки" })
+            @Html.ValidationMessageFor(model => model.Code)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Email" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Email)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "почта, куда будет отправлен заказ" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Payment" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Payment)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Payment, new SelectList(Model.ListPayments.ToDictionary(p => p, p => p), "Key", "Value", Model.Payment), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Payment)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            @*<form action="http://www.SnapHost.com/captcha/send.aspx" method="post" id="myform">
+                <input type="hidden" id="skip_WhereToSend" name="skip_WhereToSend" value="info@sila.fm" />
+                <input type="hidden" id="skip_Subject" name="skip_Subject" value="Test inline zakaz" />
+                <input type="hidden" id="skip_WhereToReturn" name="skip_WhereToReturn" value="www.yourdomain.com/thankyou.htm" />
+                <input type="hidden" id="skip_SnapHostID" name="skip_SnapHostID" value="LZR9DPCMJMGW" />
+                гугл капча
+            </form>*@
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg">Сделать заказ</button>
+        </div>
+    </div>
+</form>

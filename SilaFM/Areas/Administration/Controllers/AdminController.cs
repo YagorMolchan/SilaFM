@@ -17,5 +17,11 @@ namespace Pras.Web.Areas.Administration.Controllers
         {
             return View();
         }
+        
+        [Route("elfinder")]
+        public IActionResult ElFinder()
+        {
+            return View();
+        }
     }
 }

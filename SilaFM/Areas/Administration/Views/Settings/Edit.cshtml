@@ -1,0 +1,315 @@
+﻿@using Newtonsoft.Json
+@using Pras.Web.Areas.Administration.Models.HelperModels
+@model Pras.Web.Areas.Administration.Models.SettingsViewModel
+
+@{
+    ViewBag.Title = "Общее";
+    Layout = "_Layout";
+    ViewBag.ngController="data-ng-controller=settingsController";
+    ViewBag.Breadcrumb = new List<UIBreadcrumbs>
+    {
+        new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
+        new UIBreadcrumbs {Link = Url.Action("Index", "Team"), Title = ViewBag.Title},
+        new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
+    };
+
+    @Html.Partial("_ResultMessagesAngular")
+}
+@section Styles{
+    <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" />
+}
+@section Scripts{
+    <script src="~/lib/moment/moment.min.js"></script>
+    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    @Html.Partial("_ValidationScriptsPartial")
+    <script src="~/angular/angular.min.js"></script>
+    <script src="~/angular/controllers/admin/adminApp.js"></script>
+    <script>var model = @Html.Raw(JsonConvert.SerializeObject(Model));</script>
+    <script src="~/angular/controllers/admin/settingsController.js"></script>
+}
+<div class="col-sm-12 col-md-7 col-lg-9">
+    <div class="box box-danger">
+        <form method="post" id="EditSettings">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="box-header with-border">
+                <h3 class="box-title">@(Model.IsNew ? "Создание" : "Редактирование")</h3>
+            </div>
+            <div class="box-body">
+                <h3>Шапка сайта</h3>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.Logo, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Logo, new { @class = "form-control", @readonly = "readonly", data_ng_model = "model.Logo" })
+                            <span class="input-group-btn">
+                                <a onclick=" loadElfinder('Logo'); " class="btn btn-danger">Выбрать файл</a>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Logo)
+                        <span class="help-block">Ширина: 220px. Высота: 79px.</span>
+                        <img class="preview" id="view-Image" style="width: 220px; height: auto;" data-ng-src="{{model.Logo}}" />
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LogoSubtitle, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.LogoSubtitle, new { @class = "form-control", data_ng_model = "model.LogoSubtitle" })
+                            @Html.ValidationMessageFor(model => model.LogoSubtitle)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Phones, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Phones, new { @class = "form-control", data_ng_model = "model.Phones" })
+                            @Html.ValidationMessageFor(model => model.Phones)
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <h3>Контент</h3>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.About, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.About, new { ck_editor = "", data_ng_model = "model.About" })
+                    @Html.ValidationMessageFor(model => model.About)
+                </div>
+                <div class="box box-info collapsed-box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" data-widget="collapse" style="cursor: pointer;">Информационные блоки</h3>
+                        <div class="box-tools pull-left">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="well">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    @Html.LabelFor(model => model.Block1Title, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Block1Title, new { @class = "form-control", data_ng_model = "model.Block1Title" })
+                                    @Html.ValidationMessageFor(model => model.Block1Title)
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    @Html.LabelFor(model => model.Block1Link, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Block1Link, new { @class = "form-control", data_ng_model = "model.Block1Link" })
+                                    @Html.ValidationMessageFor(model => model.Block1Link)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Block1Subtitle, new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.Block1Subtitle, new { @class = "form-control", data_ng_model = "model.Block1Subtitle" })
+                                @Html.ValidationMessageFor(model => model.Block1Subtitle)
+                            </div>
+                        </div>
+                        <div class="well">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    @Html.LabelFor(model => model.Block2Title, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Block2Title, new { @class = "form-control", data_ng_model = "model.Block2Title" })
+                                    @Html.ValidationMessageFor(model => model.Block2Title)
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    @Html.LabelFor(model => model.Block2Link, new { @class = "control-label" })
+                                    @Html.TextBoxFor(model => model.Block2Link, new { @class = "form-control", data_ng_model = "model.Block2Link" })
+                                    @Html.ValidationMessageFor(model => model.Block2Link)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Block2Subtitle, new { @class = "control-label" })
+                                @Html.TextAreaFor(model => model.Block2Subtitle, new { @class = "form-control", data_ng_model = "model.Block2Subtitle" })
+                                @Html.ValidationMessageFor(model => model.Block2Subtitle)
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block3Title, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block3Title, new { @class = "form-control", data_ng_model = "model.Block3Title" })
+                                            @Html.ValidationMessageFor(model => model.Block3Title)
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block3Link, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block3Link, new { @class = "form-control", data_ng_model = "model.Block3Link" })
+                                            @Html.ValidationMessageFor(model => model.Block3Link)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Block3Subtitle, new { @class = "control-label" })
+                                        @Html.TextAreaFor(model => model.Block3Subtitle, new { @class = "form-control", data_ng_model = "model.Block3Subtitle" })
+                                        @Html.ValidationMessageFor(model => model.Block3Subtitle)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block4Title, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block4Title, new { @class = "form-control", data_ng_model = "model.Block4Title" })
+                                            @Html.ValidationMessageFor(model => model.Block4Title)
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block4Link, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block4Link, new { @class = "form-control", data_ng_model = "model.Block4Link" })
+                                            @Html.ValidationMessageFor(model => model.Block4Link)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Block4Subtitle, new { @class = "control-label" })
+                                        @Html.TextAreaFor(model => model.Block4Subtitle, new { @class = "form-control", data_ng_model = "model.Block4Subtitle" })
+                                        @Html.ValidationMessageFor(model => model.Block4Subtitle)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block5Title, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block5Title, new { @class = "form-control", data_ng_model = "model.Block5Title" })
+                                            @Html.ValidationMessageFor(model => model.Block5Title)
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block5Link, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block5Link, new { @class = "form-control", data_ng_model = "model.Block5Link" })
+                                            @Html.ValidationMessageFor(model => model.Block5Link)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Block5Subtitle, new { @class = "control-label" })
+                                        @Html.TextAreaFor(model => model.Block5Subtitle, new { @class = "form-control", data_ng_model = "model.Block5Subtitle" })
+                                        @Html.ValidationMessageFor(model => model.Block5Subtitle)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block6Title, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block6Title, new { @class = "form-control", data_ng_model = "model.Block6Title" })
+                                            @Html.ValidationMessageFor(model => model.Block6Title)
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            @Html.LabelFor(model => model.Block6Link, new { @class = "control-label" })
+                                            @Html.TextBoxFor(model => model.Block6Link, new { @class = "form-control", data_ng_model = "model.Block6Link" })
+                                            @Html.ValidationMessageFor(model => model.Block6Link)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Block6Subtitle, new { @class = "control-label" })
+                                        @Html.TextAreaFor(model => model.Block6Subtitle, new { @class = "form-control", data_ng_model = "model.Block6Subtitle" })
+                                        @Html.ValidationMessageFor(model => model.Block6Subtitle)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <div class="box box-success collapsed-box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" data-widget="collapse" style="cursor: pointer;">Сайдбар на странице контактов</h3>
+                        <div class="box-tools pull-left">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <h4>Наши контакты <a href="#" data-ng-click="addGroup($event)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                        @Html.Partial("_ItemGroupEditRow", new ItemGroup())
+                        <hr />
+                        <h4>Наши проекты <a href="#" data-ng-click="addProject($event)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                        @Html.Partial("_ProjectEditRow", new Item())
+                        <hr />
+                        <h4>Наши партнеры <a href="#" data-ng-click="addPartner($event)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                        @Html.Partial("_PartnerEditRow", new Item())
+                        <hr />
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <hr />
+                <h3>Подвал</h3>
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.Principles, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.Principles, new { ck_editor = " ", data_height = "405px", data_ng_model = "model.Principles" })
+                        @Html.ValidationMessageFor(model => model.Principles)
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Shedule, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Shedule, new { ck_editor = " ", data_ng_model = "model.Shedule" })
+                            @Html.ValidationMessageFor(model => model.Shedule)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Contacts, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Contacts, new { ck_editor = " ", data_ng_model = "model.Contacts" })
+                            @Html.ValidationMessageFor(model => model.Contacts)
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Address, new { ck_editor = " ", data_ng_model = "model.Address" })
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Partnership, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Partnership, new { ck_editor = " ", data_ng_model = "model.Partnership" })
+                            @Html.ValidationMessageFor(model => model.Partnership)
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Created, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Created, new { @class = "form-control datetimepicker", data_ng_model = "model.Created" })
+                        @Html.ValidationMessageFor(model => model.Created)
+                    </div>
+                </div>
+                <hr />
+                <h3>Поисковая оптимизация</h3>
+                <div class="well">
+                    <div class="form-group">
+                        <div class="callout callout-info">
+                            <h4>Заголовок.</h4>
+                            <p>Заголовок страницы сайта в выдаче поисковиков. Должен содержать ключевые слова, быть информативным и привлекательным. Как правило, 50-80 символов.</p>
+                            <p class="help-block">Пример: Сила.ФМ - креативное агентство звука</p>
+                        </div>
+                        @Html.LabelFor(m => m.MetaTitle, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", data_ng_model = "model.MetaTitle" })
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="callout callout-info">
+                            <h4>Описание.</h4>
+                            <p>Краткое описание страницы сайта в выдаче поисковиков, используется поисковыми системами для индексации страницы. Отображается после ссылки при поиске страниц в поисковике.</p>
+                            <p class="help-block">Пример: Агентство Звука Сила.ФМ оказывает услуги по изготовлению аудио- и радиороликов, озвучке фильмов, анимации, корпоративного видео, записи аудиорекламы и радиорекламы.</p>
+                        </div>
+                        @Html.LabelFor(m => m.MetaDescription, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.MetaDescription, new { @class = "form-control", data_ng_model = "model.MetaDescription" })
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <input type="button" class="btn btn-danger btn-lg pull-right" value="Сохранить" data-ng-click="saveSettings($event, model)" />
+            </div>
+        </form>
+        <div class="overlay" data-ng-if="loading">
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
+    </div>
+</div>

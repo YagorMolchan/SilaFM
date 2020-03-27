@@ -1,0 +1,22 @@
+﻿@model Pras.Web.Areas.Administration.Models.HelperModels.Item
+
+<div class="well" data-ng-repeat="item in model.ProjectsList track by $index">
+    <div class="row">
+        @*<div class="form-group col-lg-3">
+            @Html.LabelFor(model => model.Label, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Label, new { @class = "form-control", data_ng_model = "item.Label" })
+            @Html.ValidationMessageFor(model => model.Label)
+        </div>*@
+        <div class="form-group col-lg-4">
+            @Html.LabelFor(model => model.Value, "Проект", new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Value, new { @class = "form-control", data_ng_model = "item.Value" })
+            @Html.ValidationMessageFor(model => model.Value)
+        </div>
+        <div class="form-group col-lg-4">
+            @Html.LabelFor(model => model.Link, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Link, new { @class = "form-control", data_ng_model = "item.Link" })
+            @Html.ValidationMessageFor(model => model.Link)
+        </div>
+        <div class="col-lg-1"><a href="#" data-ng-click="deleteProject($event, item)" title="" class=""><i class="fa fa-remove" data-original-title="" title=""></i></a></div>
+    </div>
+</div>

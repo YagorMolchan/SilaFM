@@ -1,0 +1,18 @@
+﻿@using Pras.Web.Areas.Administration.Models.HelperModels
+@model ItemGroup
+    
+<div class="well" data-ng-repeat="group in model.FullContactsGroups track by $index">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group col-lg-6">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label" }) <a href="#" data-ng-click="deleteGroup($event, group)" class="pull-right"><i class="fa fa-remove"></i></a>
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", data_ng_model = "group.Title" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+            <div class="col-lg-12">
+                @Html.LabelFor(model => model.Items, new { @class = "control-label" }) <a href="#" data-ng-click="addContact($event, group)"><i class="fa fa-plus-circle"></i></a>
+                @Html.Partial("_ItemEditRow", new Item())
+            </div>
+        </div>
+    </div>
+</div>

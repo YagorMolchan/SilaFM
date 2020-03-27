@@ -11,6 +11,9 @@ namespace Pras.DAL.Interfaces
         IRepository<Person> PeopleRepository { get; }
         IRepository<Speaker> SpeakersRepository { get; }
         IRepository<Video> VideosRepository { get; }
+        IRepository<News> NewsRepository { get; }
+        IRepository<Review> ReviewsRepository { get; }
+        IRepository<Settings> SettingsRepository { get; }
         PrasDbContext Context { get; }
         bool Commit();
     }

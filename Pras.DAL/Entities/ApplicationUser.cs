@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity;
 
 namespace Pras.DAL.Entities

@@ -1,90 +1,15 @@
 ﻿@using Microsoft.Extensions.Configuration
-@using Pras.Shared.Helpers
 @using Pras.Web.Areas.Administration.Models.HelperModels
 @inject IConfiguration Configuration
 @{
     ViewBag.BodyClass = User.Identity.IsAuthenticated ? "" : "sidebar-collapse";
 }
-@*<!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - SilaFM</title>
-
-        <environment include="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
-        </environment>
-        <environment exclude="Development">
-            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        </environment>
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">SilaFM</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
-            </div>
-        </nav>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2018 - SilaFM</p>
-            </footer>
-        </div>
-
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-            </script>
-            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-            </script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
-        </environment>
-
-        @RenderSection("Scripts", required: false)
-    </body>
-    </html>*@
-
-
 <!DOCTYPE html>
 <html style="min-height: 100%">
 <head>
     @if (Boolean.Parse(Configuration.GetSection("AppSettings:IsClient").Value))
     {
-        <base href="/lang-admin/">
+        <base href="/silafm/">
     }
     else
     {
@@ -117,7 +42,9 @@
         <link rel="stylesheet" href="~/plugins/select2/css/select2.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="~/plugins/elfinder/css/elfinder.combine.min.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/css/elfinder.full.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/css/theme.css" />
+        <link rel="stylesheet" href="~/plugins/elfinder/themes/windows-10/css/theme.css" />
         <link rel="stylesheet" href="~/admin/css/admin.min.css" />
     </environment>
 
@@ -133,7 +60,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     @RenderSection("styles", false)
 </head>
-<body class="skin-black @ViewBag.BodyClass" data-ng-app="adminApp">
+<body class="skin-black @ViewBag.BodyClass" data-ng-app="adminApp" @ViewBag.ngController>
     <!-- topbar starts -->
     <div class="wrapper" @ViewBag.ngController>
         <header class="main-header">
@@ -231,7 +158,7 @@
                             }
                             <div id="pras-tape" class="box box-default box-solid box-pr">
                                 <div class="box-header">
-                                    <h3 class="box-title">ЛЕНТА АРТ-СТУДИИ PRAS</h3>
+                                    <h3 class="box-title">ЛЕНТА КОМПАНИИ PRAS</h3>
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" id="tool-collapse" data-widget="collapse">
                                             <i class="fa fa-minus"></i>
@@ -249,9 +176,9 @@
         </div><!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <p>Разработка сайта - <a href="http://pras.by">Арт-студия PRAS</a>.</p>
+                <p>Разработка сайта - <a href="https://pras.by" target="_blank">компания PRAS</a>.</p>
             </div>
-            &copy; @DateTime.Today.Year <a href="http://pras.by">Арт-студия PRAS</a>. Все права защищены.
+            &copy; @DateTime.Today.Year <a href="https://pras.by" target="_blank">Компания PRAS</a>. Все права защищены.
         </footer>
     </div><!-- ./wrapper -->
     @*<!-- jQuery -->

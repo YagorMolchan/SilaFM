@@ -1,0 +1,197 @@
+﻿@using Pras.Web.Models.Forms
+@model InformationViewModel
+
+@{
+    ViewBag.Title = Model != null ? Model.MetaTitle ?? Model.Title : "Создание видеороликов";
+    ViewBag.MetaDescription = Model?.MetaDescription;
+    Layout = "_Layout";
+}
+
+@section Slider {
+    @Html.Partial("_Slider")
+}
+
+@section Modals {
+    @Html.Partial("_Docorder")
+    @Html.Partial("_BeznalRu", new PopupPaymentFormModel { Type = 0 })
+    @Html.Partial("_BeznalUa", new PopupPaymentFormModel { Type = 1 })
+}
+@section Scripts {
+    <script src="~/site/libs/bootstrap/moment-with-locales.js"></script>
+    <script src="~/site/libs/bootstrap/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/site/js/masonry.pkgd.min.js"></script>
+    <script src="~/site/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/site/js/masonry_int.js"></script>
+    @if (!String.IsNullOrEmpty((string)TempData["Error0"]))
+    {
+        <script>
+            $(document).ready(function () {
+                $('#beznalRU').modal("show");
+            });
+        </script>
+    }
+    @if (!String.IsNullOrEmpty((string)TempData["Error1"]))
+    {
+        <script>
+            $(document).ready(function () {
+                $('#beznalUA').modal("show");
+            });
+        </script>
+    }
+
+    @if (!String.IsNullOrEmpty((string)TempData["Print"]))
+    {
+        <script>
+            var w = window.open();
+            w.document.write(document.getElementById('print').innerHTML);
+            w.document.title = "Печать";
+            w.print();
+            w.close();
+        </script>
+    }
+}
+
+<div class="fillcontainer">
+    @if (!String.IsNullOrEmpty((string)TempData["Print"]))
+    {
+        <div id="print" style="display: none">
+            @Html.Raw((string)TempData["Print"])
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ban01">
+                <h3 class="ban_on">Устали ждать оригиналы документов?</h3>
+                <p class="field-validation-error text-center">@TempData["ErrorDocs"]</p>
+                <a class="tortila" href="#" data-toggle="modal" data-target="#Docorder"> </a>
+                <h4 class="ban_off">Закажите документацию по электронной почте </h4>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="about">
+            <div class="col-md-4">
+                <img src="~/site/img/doc2.png" class="img-responsive lenivec center-block " alt="Responsive image">
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <div>
+                    <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"> </a>
+                </div>
+                <div class="righttext">
+                    @Html.Raw(Model.Text)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 hidden-sm hidden-xs">
+            <div class="oprosnik">
+                <h2>Опрос</h2>
+                <br>
+                <h4>Как вы нас нашли?</h4>
+                <hr>
+                <form action="interview" method="post">
+                    @Html.AntiForgeryToken()
+                    <p class="field-validation-error">@TempData["Error"]</p>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="source" id="gridRadios1" value="рекомендация коллег" checked>
+                            <p>рекомендация коллег</p>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="source" id="gridRadios2" value="ссылки с других сайтов">
+                            <p>ссылки с других сайтов</p>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="source" id="gridRadios3" value="поиск в Google">
+                            <p>поиск в Google</p>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="source" id="gridRadios4" value="поиск в Яндекс">
+                            <p>поиск в Яндекс</p>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="source" id="gridRadios5" value="узнали  из соц. сетей">
+                            <p> узнали из соц. сетей</p>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="source" id="gridRadios6" value="услышали работы">
+                            <p> услышали работы</p>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Ответить</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Для заказчиков из России и стран СНГ</h4>
+            <div class="masonry-container">
+                <div class="costimg grid-item">
+                    <a data-toggle="modal" data-target="#beznalRU" class="btn_img"><img alt="" src="~/site/images/payment/br.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/yandex.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/qiwi.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/alfabank.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/cards.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/paypal.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/webmoney.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/sberbank.png"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Для заказчиков из Украины</h4>
+            <div class="masonry-container">
+                <div class="costimg grid-item">
+                    <a data-toggle="modal" data-target="#beznalUA"><img alt="" src="~/site/images/payment/br.png" class="btn_img"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/qiwi.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/privat24.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/cards.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/paypal.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/webmoney.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/exchenge.png"></a>
+                </div>
+                <div class="costimg grid-item">
+                    <a onclick="#"><img alt="" src="~/site/images/payment/yandex.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+﻿@model SettingsViewModel
+
+<div class="row">
+    <div class="col-md-5">
+        <h4>НАШИ ПРИНЦИПЫ:</h4>
+        <hr>
+        <div class="coment">@Html.Raw(Model.Principles)</div>
+        <hr>
+        <div class="footer_mn">
+            <ul>
+                <li> <a href="@Url.Action("Index", "Home")">Главная</a> </li>
+                <li> <a href="@Url.Action("SpeakersRu", "Home")">Дикторы</a> </li>
+                <li> <a href="@Url.Action("Payment", "Home")">Оплата</a> </li>
+                <li> <a href="@Url.Action("Contact", "Home")">Контакты</a> </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-3  col-md-offset-1">
+        <h4>ГРАФИК РАБОТЫ:</h4>
+        <hr>
+        <div class="font_sm">@Html.Raw(Model.Shedule)</div>
+        <br>
+        <h4>КОНТАКТЫ:</h4>
+        <hr>
+        <div class="font_sm">
+            @Html.Raw(Model.Contacts)
+        </div>
+    </div>
+    <div class="col-md-3">
+        <h4>ПОЧТОВЫЙ АДРЕС:</h4>
+        <hr>
+        <div class="font_sm">@Html.Raw(Model.Address)</div><br>
+        <h4>СОТРУДНИЧЕСТВО:</h4>
+        <hr>
+        <div class="font_sm">@Html.Raw(Model.Partnership)</div>
+    </div>
+</div>

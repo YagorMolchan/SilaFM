@@ -13,6 +13,8 @@ namespace Pras.BLL.Mappers
             CreateMap<Person, PersonDTO>();
             CreateMap<Speaker, SpeakerDTO>();
             CreateMap<Video, VideoDTO>();
+            CreateMap<Review, ReviewDTO>();
+            CreateMap<Settings, SettingsDTO>();
         }
         public override string ProfileName
         {

@@ -1,17 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Contact";
+﻿@model List<PersonViewModel>
+@{
+    ViewBag.Title = "Контакты";
+    Layout = "_Layout";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+@section Slider
+    {
+    @Html.Partial("_Slider")
+}
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="fillcontainer">
+    <div class="row">
+        <div class="about">
+            <div class="col-md-3 col-sm-4">
+                @await Component.InvokeAsync("SidebarContent")
+                <br><br>
+            </div>
+            <div class="col-md-9 col-sm-8">
+                @foreach (var item in Model)
+                {
+                    <div class="row">
+                        <div class="col-md-3">
+                            <figure><img src="@item.Image" alt="@item.Name"></figure>
+                        </div>
+                        <div class="col-md-9">
+                            <h4 class="nospace">@item.Name</h4>
+                            <p class="cursive">@item.Position</p>
+                            @if (!String.IsNullOrEmpty(item.Summary))
+                            {
+                                <p class="littext">@item.Summary</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+</div>

@@ -16,6 +16,9 @@ namespace Pras.DAL.Context
         public DbSet<Person> People { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

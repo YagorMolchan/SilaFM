@@ -10,5 +10,7 @@ namespace Pras.BLL.Services.Interfaces
         AudioDTO Find(Guid id);
         AudioDTO Save(AudioDTO model);
         void Delete(Guid id);
+
+        List<string> GetLastAudio(int count);
     }
 }

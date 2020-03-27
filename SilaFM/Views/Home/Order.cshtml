@@ -1,0 +1,83 @@
+﻿@using Pras.Web.Models.Forms
+@model OrderViewModel
+
+@{
+    ViewBag.Title = "Онлайн-заказ";
+    ViewBag.OrderPage = true;
+    Layout = "_Layout";
+    var tab = TempData["Tab"] as string ?? "speakers";
+}
+@section Slider {
+    @Html.Partial("_Slider")
+}
+<div class="miniblock">
+    <div class="serij">
+        <h3>Онлайн заказ</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div role="tabpanel" style="padding: 0 20px;">
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li role="presentation" class="@(tab=="speakers"?"active":"")"><a href="#home1" data-toggle="tab" role="tab" aria-controls="tab1">Дикторский голос</a></li>
+                    <li role="presentation" class="@(tab=="scenario"?"active":"")"><a href="#pane1" data-toggle="tab" role="tab" aria-controls="tab2">Сценарий</a></li>
+                    <li role="presentation" class="@(tab=="audio"?"active":"")"><a href="#pane2" data-toggle="tab" role="tab" aria-controls="tab3">Аудиоролики</a></li>
+                    <li role="presentation" class="@(tab=="video"?"active":"")"><a href="#pane3" data-toggle="tab" role="tab" aria-controls="tab4">Озвучка видео</a></li>
+                    <li role="presentation" class="@(tab=="music"?"active":"")"><a href="#pane4" data-toggle="tab" role="tab" aria-controls="tab4">Музыка в рекламе</a></li>
+                </ul>
+                <div id="tabContent1" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade @(tab=="speakers"?"in active":"")" id="home1">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="col-md-8 col-sm-10 col-xs-12">
+                                <br><br>
+                                @Html.Partial("_OrderSpeaker", Model.SpeakerFormModel)
+                            </div>
+                            <div class="col-md-2 col-sm-1"></div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade @(tab=="scenario"?"in active":"")" id="pane1">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="col-md-8 col-sm-10 col-xs-12">
+                                <br><br>
+                                @Html.Partial("_OrderScenario", Model.ScenarioFormModel)
+
+                            </div>
+                            <div class="col-md-2 col-sm-1"></div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade @(tab=="audio"?"in active":"")" id="pane2">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="col-md-8 col-sm-10 col-xs-12">
+                                <br><br>
+                                @Html.Partial("_OrderAudio", Model.AudioFormModel)
+                            </div>
+                            <div class="col-md-2 col-sm-1"></div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade @(tab=="video"?"in active":"")" id="pane3">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="col-md-8 col-sm-10 col-xs-12">
+                                <br><br>
+                                @Html.Partial("_OrderVideo", Model.VideoFormModel)
+                            </div>
+                            <div class="col-md-2 col-sm-1"></div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade @(tab=="music"?"in active":"")" id="pane4">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="col-md-8 col-sm-10 col-xs-12">
+                                <br><br>
+                                @Html.Partial("_OrderMusic", Model.MusicFormModel)
+                            </div>
+                            <div class="col-md-2 col-sm-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

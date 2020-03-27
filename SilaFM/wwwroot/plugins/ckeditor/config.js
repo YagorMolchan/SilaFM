@@ -22,7 +22,7 @@ CKEDITOR.editorConfig = function( config ) {
 		//{ name: 'colors' },
 		{ name: 'about' }
     ];
-    config.filebrowserBrowseUrl = 'Administration/Admin/elfinder';
+    config.filebrowserBrowseUrl = 'admin/elfinder';
     config.baseHref = document.getElementsByTagName('base')[0].href;
     config.allowedContent = true;
     config.skin = "pras";
@@ -31,10 +31,10 @@ CKEDITOR.editorConfig = function( config ) {
     //config.uiColor = '#3c8dbc';
     config.extraPlugins = 'htmlbuttons';
     config.forcePasteAsPlainText = true;
-    config.extraPlugins = '';//'pras_image,pras_gallery,pras_document,pras_author,pras_quote,pras_step,pras_simple_table,pras_complex_table,pras_furniture_sizes';
+    config.extraPlugins = 'pras_hideRu,pras_hideUa';//'pras_image,pras_gallery,pras_document,pras_author,pras_quote,pras_step,pras_simple_table,pras_complex_table,pras_furniture_sizes';
     config.filebrowserWindowHeight = '505px';
 
-    config.toolbar_Basic = [["Bold", "Italic", "Underline", "-", "Link", "Unlink", "-", "Maximize", "About", '-']];
+    config.toolbar_Basic = [["Bold", "Italic", "Underline", "pras_hideRu", "pras_hideUa", "-", "Link", "Unlink", "-", "Maximize", "About", '-']];
     //config.toolbar = "Basic";
 
     // Remove some buttons, provided by the standard plugins, which we don't

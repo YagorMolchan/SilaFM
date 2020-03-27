@@ -224,6 +224,28 @@ namespace Pras.DAL.Migrations
                     b.ToTable("Informations");
                 });
 
+            modelBuilder.Entity("Pras.DAL.Entities.News", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("MetaDescription");
+
+                    b.Property<string>("MetaTitle");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("Pras.DAL.Entities.Person", b =>
                 {
                     b.Property<Guid>("Id")
@@ -244,10 +266,109 @@ namespace Pras.DAL.Migrations
                     b.ToTable("People");
                 });
 
+            modelBuilder.Entity("Pras.DAL.Entities.Review", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created")
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("Pras.DAL.Entities.Settings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("About");
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("Block1Link");
+
+                    b.Property<string>("Block1Subtitle");
+
+                    b.Property<string>("Block1Title");
+
+                    b.Property<string>("Block2Link");
+
+                    b.Property<string>("Block2Subtitle");
+
+                    b.Property<string>("Block2Title");
+
+                    b.Property<string>("Block3Link");
+
+                    b.Property<string>("Block3Subtitle");
+
+                    b.Property<string>("Block3Title");
+
+                    b.Property<string>("Block4Link");
+
+                    b.Property<string>("Block4Subtitle");
+
+                    b.Property<string>("Block4Title");
+
+                    b.Property<string>("Block5Link");
+
+                    b.Property<string>("Block5Subtitle");
+
+                    b.Property<string>("Block5Title");
+
+                    b.Property<string>("Block6Link");
+
+                    b.Property<string>("Block6Subtitle");
+
+                    b.Property<string>("Block6Title");
+
+                    b.Property<string>("Contacts");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("FullContacts");
+
+                    b.Property<string>("Logo");
+
+                    b.Property<string>("LogoSubtitle");
+
+                    b.Property<string>("MetaDescription");
+
+                    b.Property<string>("MetaTitle");
+
+                    b.Property<string>("Partners");
+
+                    b.Property<string>("Partnership");
+
+                    b.Property<string>("Phones");
+
+                    b.Property<string>("Principles");
+
+                    b.Property<string>("Projects");
+
+                    b.Property<string>("Shedule");
+
+                    b.Property<string>("Socials");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("Pras.DAL.Entities.Speaker", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("CanDirect");
 
                     b.Property<string>("Comment");
 
@@ -255,23 +376,71 @@ namespace Pras.DAL.Migrations
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<int>("Currency");
+
+                    b.Property<string>("Demo");
+
+                    b.Property<string>("DemoAdvertising");
+
+                    b.Property<string>("DemoVoiceOver");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Industries");
+
                     b.Property<bool>("IsNovelty");
 
-                    b.Property<string>("Language");
+                    b.Property<bool>("IsVip");
+
+                    b.Property<string>("Languages");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("Nationality");
+
+                    b.Property<string>("Params");
+
+                    b.Property<string>("Portfolio");
 
                     b.Property<string>("Price30");
 
                     b.Property<string>("Price90");
 
+                    b.Property<int>("PriceCategory");
+
+                    b.Property<string>("PricePage");
+
+                    b.Property<int>("Rating");
+
                     b.Property<int>("Status");
 
-                    b.Property<string>("Terms");
+                    b.Property<string>("Summary");
 
-                    b.Property<string>("Track");
+                    b.Property<float>("Terms");
 
                     b.Property<int>("Type");
+
+                    b.Property<string>("Url");
+
+                    b.Property<DateTime>("VacationEndDate");
+
+                    b.Property<DateTime>("VacationStartDate");
+
+                    b.Property<string>("Videos");
+
+                    b.Property<int>("VoiceAge");
+
+                    b.Property<string>("VoiceDescription");
+
+                    b.Property<string>("Voices");
+
+                    b.Property<string>("WorkTypes");
+
+                    b.Property<string>("WorkingDays");
+
+                    b.Property<string>("WorkingHours");
 
                     b.HasKey("Id");
 

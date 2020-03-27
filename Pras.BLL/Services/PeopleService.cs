@@ -25,7 +25,7 @@ namespace Pras.BLL.Services
 
         public PersonDTO Find(Guid id)
         {
-            return Mapper.Map<PersonDTO>(_unitOfWork.PeopleRepository.FindById(id).Result);
+            return Mapper.Map<PersonDTO>(_unitOfWork.PeopleRepository.FindById(id));
         }
 
         public PersonDTO Save(PersonDTO model)
@@ -38,7 +38,7 @@ namespace Pras.BLL.Services
             }
             else
             {
-                entity = _unitOfWork.PeopleRepository.FindById(model.Id).Result;
+                entity = _unitOfWork.PeopleRepository.FindById(model.Id);
                 Mapper.Map(model, entity);
                 _unitOfWork.PeopleRepository.InsertOrUpdate(entity);
             }
@@ -49,7 +49,7 @@ namespace Pras.BLL.Services
 
         public void Delete(Guid id)
         {
-            var toDelete = _unitOfWork.PeopleRepository.FindById(id).Result;
+            var toDelete = _unitOfWork.PeopleRepository.FindById(id);
             if (toDelete != null)
             {
                 _unitOfWork.PeopleRepository.Delete(toDelete);

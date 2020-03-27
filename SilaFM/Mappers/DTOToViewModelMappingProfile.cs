@@ -13,6 +13,12 @@ namespace Pras.Web.Mappers
             CreateMap<PersonDTO, PersonViewModel>();
             CreateMap<SpeakerDTO, SpeakerViewModel>();
             CreateMap<VideoDTO, VideoViewModel>();
+            CreateMap<ReviewDTO, ReviewViewModel>();
+            CreateMap<SettingsDTO, SettingsViewModel>();
+
+            CreateMap<SettingsDTO, Models.SettingsViewModel>();
+            CreateMap<SpeakerDTO, Models.SpeakerViewModel>();
+            CreateMap<SpeakerDTO, Models.FullSpeakerViewModel>();
         }
         public override string ProfileName
         {

@@ -1,0 +1,124 @@
+﻿@model Pras.Web.Models.Forms.SpeakerOrderFormModel
+<form action="order-speaker" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <p class="field-validation-error">@TempData["ErrorSpeaker"]</p>
+    <div class="form-group">
+        <label for="SpeakerName" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.SpeakerName)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.SpeakerName, new {@class = "form-control", placeholder = "Имя Фамилия"})
+            @Html.ValidationMessageFor(model => model.SpeakerName)
+        </div>
+        <div class="checkbox col-md-offset-3 col-md-9">
+            <label>
+                @Html.CheckBoxFor(model => model.StudioChoice)
+                <p>@Html.DisplayNameFor(model => model.StudioChoice)</p>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            @Html.DropDownListFor(model=>model.Voice, new SelectList(Model.ListVoices.ToDictionary(p=>p, p=>p), "Key", "Value", Model.Voice), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Voice)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Text)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Text, new {@class = "form-control", rows = 6})
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="time" class="col-md-3 text-right control-label">@Html.DisplayNameFor(model => model.Timing)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Timing, new {@class = "form-control", placeholder = "укажите хронометраж или темп начитки (быстро, медленно)"})
+            @Html.ValidationMessageFor(model => model.Timing)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.File)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.File, new {@type = "file", title = "Выберите файл"})
+            <p class="help-block">не более 3мб</p>
+            @Html.ValidationMessageFor(model => model.File)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Comments)</label>
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Comments, new {@class = "form-control", rows = 3})
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="format" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Parameters)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model => model.Parameters, new SelectList(Model.ListParameters.ToDictionary(p => p, p => p), "Key", "Value", Model.Parameters), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Parameters)
+        </div>
+    </div>
+    <div class="form-group mrg50">
+        <label for="code" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Code)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Code, new {@class = "form-control", placeholder = "Код скидки"})
+            @Html.ValidationMessageFor(model => model.Code)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="pochta" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Email)</label>
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.Email, new {@class = "form-control", placeholder = "почта, куда будет отправлен заказ"})
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="oplata" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Payment)</label>
+        <div class="col-md-9">
+            @Html.DropDownListFor(model=>model.Payment, new SelectList(Model.ListPayments.ToDictionary(p=>p, p=>p), "Key", "Value", Model.Payment), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Payment)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            @*<form action="http://www.SnapHost.com/captcha/send.aspx" method="post" id="myform">
+                <input type="hidden" id="skip_WhereToSend" name="skip_WhereToSend" value="info@sila.fm" />
+                <input type="hidden" id="skip_Subject" name="skip_Subject" value="Test inline zakaz" />
+                <input type="hidden" id="skip_WhereToReturn" name="skip_WhereToReturn" value="www.yourdomain.com/thankyou.htm" />
+                <input type="hidden" id="skip_SnapHostID" name="skip_SnapHostID" value="LZR9DPCMJMGW" />
+                <table cellspacing="0" border="0" cellpadding="8">
+                    <tr valign="bottom">
+                        <td>
+                            <a href="#" onclick="return ReloadCaptchaImage('CaptchaImage');"><span style="font-size:12px;">обновить картинку</span></a><br />
+                            <a href="http://www.snaphost.com/captcha/captchaguestbook.aspx">
+                                <img id="CaptchaImage"
+                                     alt="guestbook ideas" style="border-width:0px;"
+                                     title="guestbook ideas"
+                                     src="http://www.SnapHost.com/captcha/CaptchaImage.aspx?id=LZR9DPCMJMGW" />
+                            </a>
+                        </td>
+                        <td>
+                            <br /><i>Введите код</i><br />
+                            <input id="skip_CaptchaCode" name="skip_CaptchaCode" type="text" style="width:130px; height:48px; font-size:38px;" maxlength="6" /><br />
+                        </td>
+                    </tr>
+                </table>
+                <script type="text/javascript">
+                                                                function ReloadCaptchaImage(captchaImageId) {
+                                                                    var obj = document.getElementById(captchaImageId);
+                                                                    var src = obj.src;
+                                                                    var date = new Date();
+                                                                    var pos = src.indexOf('&rad=');
+                                                                    if (pos >= 0) {
+                                                                        src = src.substr(0, pos);
+                                                                    }
+                                                                    obj.src = src + '&rad=' + date.getTime();
+                                                                    return false;
+                                                                }
+
+                </script>
+            </form>*@
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg">Сделать заказ</button>
+        </div>
+    </div>
+</form>

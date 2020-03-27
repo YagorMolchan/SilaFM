@@ -29,20 +29,56 @@
             </a>
         </li>
         <li class="header text-upper">Информация</li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Settings", className)">
+            <a href="@Url.Action("Edit", "Settings")">
+                <i class="fa fa-gears"></i> <span>Общее</span>
+            </a>
+        </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "News", className)">
+            <a href="@Url.Action("Index", "News")">
+                <i class="fa fa-newspaper-o"></i> <span>Новости</span>
+            </a>
+        </li>
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-file-text"></i>
-                <span>Тексты</span>
+                <span>Внутренние страницы</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-right pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Main})">
-                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Main})"><i class="fa fa-angle-double-right"></i>Главная страница</a>
-                </li>
-                <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Speakers})">
-                    <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Speakers})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы"</a>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-angle-double-right"></i>
+                        <span>Дикторы</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersChild})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersChild})"><i class="fa fa-angle-double-right"></i>Текст "Детские голоса"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersRu})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersRu})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы России"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersUk})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersUk})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы Украины"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersFor})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersFor})"><i class="fa fa-angle-double-right"></i>Текст "Иностранные д-ры"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersParodist})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersParodist})"><i class="fa fa-angle-double-right"></i>Текст "Пародисты"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersVocalist})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersVocalist})"><i class="fa fa-angle-double-right"></i>Текст "Вокалисты"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersVip})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersVip})"><i class="fa fa-angle-double-right"></i>Текст "VIP-голоса"</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Audio})">
                     <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Audio})"><i class="fa fa-angle-double-right"></i>Текст "Аудиоролики"</a>
@@ -67,6 +103,11 @@
         <li class="@Html.CurrentMenu(ViewContext.RouteData, "Team", className)">
             <a href="@Url.Action("Index", "Team")">
                 <i class="fa fa-users"></i> <span>Команда</span>
+            </a>
+        </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Reviews", className)">
+            <a href="@Url.Action("Index", "Reviews")">
+                <i class="fa fa-comments"></i> <span>Отзывы</span>
             </a>
         </li>
     </ul>

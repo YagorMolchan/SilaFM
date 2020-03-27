@@ -1,0 +1,36 @@
+﻿@model Pras.Web.Models.Forms.OrderCallFormModel
+<!--Помощник правый-->
+<div id="panelr" data-ng-controller="callController">
+    ...
+    <div id="helpform">
+        <div class="kate">
+            <video autoplay loop width="200" height="200">
+                <source src="~/site/video/helper_female.mp4" type="video/mp4" />
+                <img src="~/site/video/helper_1.gif" width="200" height="200" />
+            </video>
+        </div>
+        <div class="kateoff">
+            <video autoplay loop width="200" height="200">
+                <source src="~/site/video/helper_female2.mp4" type="video/mp4" />
+                <img src="~/site/video/helper_2.gif" width="200" height="200" />
+            </video>
+        </div>
+        <form id="callForm">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="namecallback">
+                    <p id="katetext" data-ng-class="{'err':status=='error', 'green':status=='success'}" data-ng-bind="message"></p>
+                </label>
+                @*<input type="text" class="form-control" id="namecallback" placeholder="Ваше имя">*@
+                @Html.TextBoxFor(model => model.Name, new {@class = "form-control", id = "namecallback", placeholder = Html.DisplayNameFor(model => model.Name), data_ng_model = "model.Name"})
+                @Html.ValidationMessageFor(model => model.Name)
+                <br>
+                @*<input type="tel" class="form-control" id="telcallback" placeholder="Ваш номер телефона">*@
+                @Html.TextBoxFor(model => model.Phone, new {type = "tel", @class = "form-control", id = "telcallback", placeholder = Html.DisplayNameFor(model => model.Phone), data_ng_model = "model.Phone"})
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+            <button type="button" data-ng-click="sendOrder($event)" class="btn btn-default" id="telback">Заказать звонок</button>
+        </form>
+    </div>
+</div>
+<!--Помощник правый end-->

@@ -30,5 +30,81 @@
       "wwwroot/plugins/elfinder/css/elfinder.full.css",
       "wwwroot/plugins/elfinder/css/theme.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/site/libs/bootstrap/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/site/libs/bootstrap/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/css/fonts.min.css",
+    "inputFiles": [
+      "wwwroot/site/css/fonts.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/js/bundle.js",
+    "inputFiles": [
+      "wwwroot/site/libs/jquery/jquery-3.1.1.min.js",
+      "wwwroot/site/libs/spincrement/jquery.spincrement.min.js",
+      "wwwroot/site/libs/bootstrap/bootstrap.min.js",
+      "wwwroot/site/libs/jquery-mousewheel/jquery.mousewheel.min.js",
+      "wwwroot/site/libs/waypoints/waypoints-1.6.2.min.js",
+      "wwwroot/site/libs/scrollto/jquery.scrollTo.min.js",
+      "wwwroot/site/libs/fancybox/jquery.fancybox.pack.js",
+      "wwwroot/site/js/common.js",
+      "wwwroot/site/js/cbpHorizontalSlideOutMenu.js",
+      "wwwroot/site/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/libs/fancybox/jquery.fancybox.min.css",
+    "inputFiles": [
+      "wwwroot/site/libs/fancybox/jquery.fancybox.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/js/hronomer.min.js",
+    "inputFiles": [
+      "wwwroot/site/js/hronomer.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/css/wg.bundle.css",
+    "inputFiles": [
+      "wwwroot/site/css/fonts.css",
+      "wwwroot/site/css/style.css",
+      "wwwroot/site/css/media.css",
+      "wwwroot/site/css/developer.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/js-bundles/wg.bundle.js",
+    "inputFiles": [
+      "wwwroot/site/libs/jquery/jquery-3.1.1.min.js",
+      "wwwroot/site/libs/bootstrap/bootstrap.min.js",
+      "wwwroot/site/libs/jquery-mousewheel/jquery.mousewheel.min.js",
+      "wwwroot/site/libs/dataTables/datatables.js",
+      "wwwroot/site/libs/waypoints/waypoints-1.6.2.min.js",
+      "wwwroot/site/libs/scrollto/jquery.scrollTo.min.js",
+      "wwwroot/site/libs/fancybox/jquery.fancybox.pack.js",
+      "wwwroot/site/libs/landing-nav/navigation.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/site/css/bundle.css",
+    "inputFiles": [
+      "wwwroot/site/css/fonts.css",
+      "wwwroot/site/css/main.css",
+      "wwwroot/site/css/media.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/plugins/elfinder/css/elfinder.combine.css",
+    "inputFiles": [
+      "wwwroot/plugins/elfinder/css/elfinder.full.css",
+      "wwwroot/plugins/elfinder/css/theme.css"
+    ]
   }
 ]

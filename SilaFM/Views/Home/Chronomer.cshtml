@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Хрономер. Определить хронометраж аудиоролика";
+    Layout = "_Layout";
+}
+
+@section Scripts {
+    <script src="~/site/js/hronomer.min.js"></script>
+}
+
+<div class="miniblock">
+    <div class="serij">
+        <h3>Хрономер</h3>
+    </div>
+    <div class="row hronodiv">
+        <div class="col-md-4"> <img src="~/site/img/hronomer.png" class="img-responsive" alt=""> </div>
+        <div class="col-md-8">
+            <div class="row">
+                <h3>Определение хронометража рекламного ролика</h3>
+                <hr>
+            </div>
+            <div class="row">
+                <form class="form-inline">
+                    <div class="checkbox">
+                        <label class="control-label">
+                            <input type="checkbox" id="wanted_time" onchange="disable_time()">
+                            Требуемый хронометраж
+                        </label>
+                    </div>
+                    <fieldset id="">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span></div>
+                                <input type="number" min="0" max="60" size="5" id="menu_time_min" onblur="max_value('60', 'menu_time_min'), calc_sec()">
+                                <div class="input-group-addon">мин</div>
+                                <input type="number" min="0" max="60" size="5" id="menu_time_sec" onblur="max_value('60', 'menu_time_sec'), calc_sec()">
+                                <div class="input-group-addon">сек</div>
+                                <input type="hidden" name="time_limit" id="time_limit" disabled="disabled">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- активировать/деактивировать форму заполнения -->
+                </form>
+                <button type="button" class="btn btn-success btn-lg" onclick="calc();">Определить хронометраж <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></button>
+            </div>
+        </div>
+    </div>
+    <div class="row hronodiv">
+        <div class="col-md-12">
+            <form action="" method="post">
+                <div class="btn-group pull-right form-group">
+                    <button type="button" class="btn btn-primary" onclick="preview();"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                    <button type="button" class="btn btn-primary" onclick="next();"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                </div>
+                <textarea class="form-control" rows="10" id="edit"></textarea>
+                <input type="hidden" id="user_time" style="display: none;"/>
+            </form>
+            @*<div class="chronometry_line" id="line_div" style="display: none;">
+                
+                <table>
+                    <tr>
+                        <td class="line_activ" id="line_activ"></td>
+                        <td class="line_pasiv" id="line_pasiv"></td>
+                    </tr>
+                </table>
+                <h6 style="margin: 0px 0 0 6px;">0</h6>
+            </div>*@
+        </div>
+    </div>
+    <div class="row hronodiv">
+        <div class="col-md-8">
+            <button class="btn btn-primary btn-sm" id="clear_btn"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Очистить</button>
+        </div>
+        <div class="col-md-4">
+            <p>Проверить правописание: <a href="http://www.gramota.ru/" target="_blank" class="btn btn-primary btn-sm active" role="button">RU</a> <a href="http://lcorp.ulif.org.ua/dictua/" target="_blank" class="btn btn-primary btn-sm active" role="button">UA</a> <a href="http://dictionary.cambridge.org/" target="_blank" class="btn btn-primary btn-sm active" role="button">EN</a> </p>
+        </div>
+    </div>
+    <div class="row hronodiv">
+        <p><span id="min_hro">Минимальный хронометраж:</span> <input id="total" type="text"></p>
+        <p><span id="comf">Оптимальный хронометраж:</span> <input id="total2" type="text"></p>
+        <hr>
+        <h4 id="hrono_normal">  </h4>
+        <h4>Всего слов: <input id="count_words" type="text"></h4>
+        <h4 id="free_words_div" style="display:none;">Можно добавить: <b id="free"></b></h4>
+        <h4 id="sp_words_div" style="display:none;">Необходимо убрать: <b id="spare"></b></h4>
+
+    </div>
+    <div> </div>
+</div>

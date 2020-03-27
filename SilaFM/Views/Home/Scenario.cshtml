@@ -1,0 +1,34 @@
+﻿@model Pras.Web.Models.InformationViewModel
+
+@{
+    ViewBag.Title = Model != null ? Model.MetaTitle ?? Model.Title : "Сценарии";
+    ViewBag.MetaDescription = Model?.MetaDescription;
+    Layout = "_Layout";
+}
+@section Slider {
+    @Html.Partial("_Slider")
+}
+
+
+<div class="fillcontainer">
+    <div class="row">
+        <div class="about">
+            <div class="col-md-5">
+                <div class="oprosnik">
+                    <h4>АВТОМОБИЛЬ «ХАММЕР»</h4>
+                    <p class="littext">(мужской голос)<br> Для кого-то, он дикий и необузданный хищник (рык) <br>Кому-то, послушный и ласковый зверь (мур) <br>Каждый найдет в нем что-то свое!<br> Неудержимый характер и сильное сердце под капотом!<br> „Хаммер” – эталон среди внедорожников!<br> Инфо-часть: Дай волю Хаммеру! (звукоэффект)<br> Особый внедорожник от официального дистрибьютера „Дженерал Моторз”. Подробности на сайте ...(пэкшот)<br> Хаммер... укроти его силу!</p>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div>
+                    <a class="palitra"><img src="~/site/images/palit.png" alt="silafm"> </a>
+                </div>
+                <div class="righttext">
+                    <h2>@Model.Title</h2>
+                    <hr>
+                    @Html.Raw(Model.Text)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

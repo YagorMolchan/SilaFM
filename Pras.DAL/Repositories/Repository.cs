@@ -24,9 +24,9 @@ namespace Pras.DAL.Repositories
             return DbSet;
         }
 
-        public Task<TEntity> FindById(Guid id)
+        public TEntity FindById(Guid id)
         {
-            return DbSet.FindAsync(id);
+            return DbSet.Find(id);
         }
 
         public virtual void InsertOrUpdate(TEntity entity)

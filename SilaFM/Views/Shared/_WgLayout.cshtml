@@ -1,0 +1,144 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title | Sila.FM</title>
+    <meta name="description" content="@ViewBag.MetaDescription" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="~/site/img/favicon.png" />
+    <environment include="Development">
+        <link rel="stylesheet" href="~/site/libs/bootstrap/bootstrap.css" />
+        <link rel="stylesheet" href="~/site/libs/fontawesome/css/fontawesome-all.min.css" />
+        <link rel="stylesheet" href="~/site/css/fonts.css" />
+        <link rel="stylesheet" href="~/site/css/style.css" />
+        <link rel="stylesheet" href="~/site/css/media.css" />
+        <link rel="stylesheet" href="~/site/css/developer.css" />
+        <link rel="stylesheet" href="~/site/libs/fancybox/jquery.fancybox.css" />
+        <link rel="stylesheet" href="~/site/libs/DataTables/datatables.css">
+        @RenderSection("Styles", false)
+        <script src="~/site/js/modernizr.custom.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/site/libs/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/site/libs/fontawesome/css/fontawesome-all.min.css" />
+        <link rel="stylesheet" href="~/site/css/wg.bundle.css" />
+        <link rel="stylesheet" href="~/site/libs/fancybox/jquery.fancybox.min.css" />
+        <link rel="stylesheet" href="~/site/libs/DataTables/datatables.css">
+        @RenderSection("Styles", false)
+        <script src="~/site/js/modernizr.custom.js"></script>
+    </environment>
+</head>
+<body>
+    <header>
+        <div> <img class="img-responsive" src="~/site/img/wargaming.jpg" alt=""> </div>
+        <img src="~/site/img/wg_logo.png" class="wglogo"> <a href="http://www.sila.fm"><img src="~/site/img/logo.png" alt="Sila.FM" class="silalogo"></a>
+        <nav class="navigation">
+            <ul class="menu">
+                <li class="menu__item">
+                    <a href="@Url.Action("Federal", "Wg")" class="menu__link">
+                        <span class="menu__title">
+                            <span class="menu__first-word" data-hover="&nbsp &nbsp &nbsp Дикторы">
+                                Федеральные
+                            </span>
+                            <span class="menu__second-word" data-hover="России">
+                                Дикторы
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a href="@Url.Action("Index", "Wg")" class="menu__link">
+                        <span class="menu__title">
+                            <span class="menu__first-word" data-hover="&nbsp &nbsp Дикторы">
+                                Бюджетные
+                            </span>
+                            <span class="menu__second-word" data-hover="России">
+                                Дикторы
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a href="@Url.Action("Foreign", "Wg")" class="menu__link">
+                        <span class="menu__title">
+                            <span class="menu__first-word" data-hover="&nbsp &nbsp &nbsp &nbsp Foreign">
+                                Иностранные
+                            </span>
+                            <span class="menu__second-word" data-hover="Speakers">
+                                Дикторы
+                            </span>
+                        </span>
+                    </a>
+                </li>
+                <li class="menu__item">
+                    <a href="@Url.Action("Ukraine", "Wg")" class="menu__link">
+                        <span class="menu__title">
+                            <span class="menu__first-word" data-hover="Диктори">
+                                Дикторы
+                            </span>
+                            <span class="menu__second-word" data-hover="України">
+                                Украины
+                            </span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+    <footer>
+        @await Component.InvokeAsync("WgFooterContent")
+    </footer>
+    @*<!--[if lt IE 9]>
+        <script src="libs/html5shiv/es5-shim.min.js"></script>
+        <script src="libs/html5shiv/html5shiv.min.js"></script>
+        <script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
+        <script src="libs/respond/respond.min.js"></script>
+        <![endif]-->
+        <script src="../libs/jquery/jquery-3.1.1.min.js"></script>
+        <script src="../libs/bootstrap/bootstrap.min.js"></script>
+        <script src="../libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="../libs/DataTables/datatables.js"></script>
+        <!--Waypoints is the easiest way to trigger a function when you scroll to an element. -->
+        <script src="../libs/waypoints/waypoints-1.6.2.min.js"></script>
+        <script src="../libs/scrollto/jquery.scrollTo.min.js"></script>
+        <script src="../libs/fancybox/jquery.fancybox.pack.js"></script>
+        <!--<script src="libs/landing-nav/navigation.js"></script>-->
+        <!-- Add fancyBox -->
+        <script src="../js/common.js"></script>*@
+    <environment include="Development">
+        <!--[if lt IE 9]>
+            <script src="~/site/libs/html5shiv/es5-shim.min.js"></script>
+            <script src="~/site/libs/html5shiv/html5shiv.min.js"></script>
+            <script src="~/site/libs/html5shiv/html5shiv-printshiv.min.js"></script>
+            <script src="~/site/libs/respond/respond.min.js"></script>
+        <![endif]-->
+        <script src="~/site/libs/jquery/jquery-3.1.1.min.js"></script>
+        <script src="~/site/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="~/site/libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+        <script src="~/site/libs/DataTables/datatables.js"></script>
+        <script src="~/site/libs/waypoints/waypoints-1.6.2.min.js"></script>
+        <script src="~/site/libs/scrollto/jquery.scrollTo.min.js"></script>
+        <script src="~/site/libs/fancybox/jquery.fancybox.pack.js"></script>
+        <script src="~/site/libs/landing-nav/navigation.js"></script>
+        <!-- Add fancyBox -->
+        <script src="~/site/js/common.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <!--[if lt IE 9]>
+            <script src="~/site/libs/html5shiv/es5-shim.min.js"></script>
+            <script src="~/site/libs/html5shiv/html5shiv.min.js"></script>
+            <script src="~/site/libs/html5shiv/html5shiv-printshiv.min.js"></script>
+            <script src="~/site/libs/respond/respond.min.js"></script>
+        <![endif]-->
+        <script src="~/site/js-bundles/wg.bundle.min.js"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

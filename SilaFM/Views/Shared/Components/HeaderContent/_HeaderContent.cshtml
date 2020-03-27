@@ -1,0 +1,21 @@
+﻿@model SettingsViewModel
+
+<div class="row">
+    <div class="col-md-2 col-sm-3 col-xs-4">
+        <div class="logo_wrap"> <a href="@Url.Action("Index", "Home")"><img src="@Model.Logo" alt="Sila.FM"></a> @Model.LogoSubtitle </div>
+    </div>
+    <div class="col-md-8 hidden-sm hidden-xs">
+        <div class="top_contact">
+            <p class="tel"> @Model.Phones</p>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-9 col-xs-8">
+        <div class="soc_buttons">
+            @*<a title="vkontakte" href="http://vkontakte.ru/share.php?url=http://sila.fm/&title=%D0%90%D1%83%D0%B4%D0%B8%D0%BE%D1%80%D0%BE%D0%BB%D0%B8%D0%BA%D0%B8%20|%20%D0%A0%D0%B0%D0%B4%D0%B8%D0%BE%D1%80%D0%BE%D0%BB%D0%B8%D0%BA%D0%B8%20|%20%D0%90%D1%83%D0%B4%D0%B8%D0%BE%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0%20|%20%D0%A0%D0%B0%D0%B4%D0%B8%D0%BE%D1%80%D0%B5%D0%BA%D0%BB%D0%B0%D0%BC%D0%B0%20|%20%D0%9E%D0%B7%D0%B2%D1%83%D1%87%D0%BA%D0%B0%20%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE%20|%20Sila.FM"><i class="fab fa-vk"></i></a>*@
+            <a title="facebook" href="http://www.facebook.com/share.php?u=http://sila.fm/"><i class="fab fa-facebook-square"></i></a>
+            <a title="Skype" href="skype:sila.fm"><i class="fab fa-skype"></i></a>
+            <a title="Viber" href="viber://add?number=+79653161080"><i class="fab fa-viber"></i></a>
+            <a title="WhatsApp" href="whatsapp://send?phone=+79653161080"> <i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+</div>
