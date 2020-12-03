@@ -19,7 +19,7 @@ namespace Pras.InfrastructureSt
             }
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminName, EmailConfirmed = true};
+                ApplicationUser admin = new ApplicationUser { Email = adminEmail, UserName = adminName, EmailConfirmed = true };
                 IdentityResult result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
@@ -33,6 +33,16 @@ namespace Pras.InfrastructureSt
                 {
                     ApplicationUser test = new ApplicationUser { Email = "test@pras.by", UserName = "TestAdmin", EmailConfirmed = true };
                     IdentityResult result = await userManager.CreateAsync(test, "TestAdmin");
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(test, "Admin");
+                    }
+                }
+
+                if (await userManager.FindByNameAsync("sila.fm") == null)
+                {
+                    ApplicationUser test = new ApplicationUser { Email = "info@sila.fm", UserName = "sila.fm", EmailConfirmed = true };
+                    IdentityResult result = await userManager.CreateAsync(test, "Mikalaj2020");
                     if (result.Succeeded)
                     {
                         await userManager.AddToRoleAsync(test, "Admin");

@@ -34,6 +34,11 @@
                 <i class="fa fa-gears"></i> <span>Общее</span>
             </a>
         </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Contacts", className)">
+            <a href="@Url.Action("Edit", "Contacts")">
+                <i class="fa fa-phone"></i> <span>Контакты</span>
+            </a>
+        </li>
         <li class="@Html.CurrentMenu(ViewContext.RouteData, "News", className)">
             <a href="@Url.Action("Index", "News")">
                 <i class="fa fa-newspaper-o"></i> <span>Новости</span>
@@ -57,11 +62,17 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.Speakers})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.Speakers})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы"</a>
+                        </li>
                         <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersChild})">
                             <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersChild})"><i class="fa fa-angle-double-right"></i>Текст "Детские голоса"</a>
                         </li>
                         <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersRu})">
                             <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersRu})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы России"</a>
+                        </li>
+                        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersFederal})">
+                            <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersFederal})"><i class="fa fa-angle-double-right"></i>Текст "Федеральные д-ры"</a>
                         </li>
                         <li class="@Html.CurrentMenu(ViewContext.RouteData, "Information", "Edit", className, new ObjectValue{Type = typeof(InformationTypes), Value = InformationTypes.SpeakersUk})">
                             <a href="@Url.Action("Edit", "Information", new {type = InformationTypes.SpeakersUk})"><i class="fa fa-angle-double-right"></i>Текст "Дикторы Украины"</a>

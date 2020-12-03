@@ -92,12 +92,7 @@ namespace Pras.Web.Areas.Administration.Models
             {
                 if (_fullContacts == null)
                 {
-                    if (string.IsNullOrEmpty(FullContacts))
-                        _fullContacts = new List<ItemGroup>();
-                    else
-                    {
-                        _fullContacts = JsonConvert.DeserializeObject<List<ItemGroup>>(FullContacts);
-                    }
+                    _fullContacts = string.IsNullOrEmpty(FullContacts) ? new List<ItemGroup>() : JsonConvert.DeserializeObject<List<ItemGroup>>(FullContacts);
                 }
                 else
                 {
@@ -119,12 +114,7 @@ namespace Pras.Web.Areas.Administration.Models
             {
                 if (_projects == null)
                 {
-                    if (string.IsNullOrEmpty(Projects))
-                        _projects = new List<Item>();
-                    else
-                    {
-                        _projects = JsonConvert.DeserializeObject<List<Item>>(Projects);
-                    }
+                    _projects = string.IsNullOrEmpty(Projects) ? new List<Item>() : JsonConvert.DeserializeObject<List<Item>>(Projects);
                 }
                 else
                 {

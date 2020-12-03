@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Newtonsoft.Json;
 using Pras.Shared.Enums;
 using Pras.Web.Areas.Administration.Models.HelperModels;
@@ -22,8 +23,8 @@ namespace Pras.Web.Areas.Administration.Models
         public SpeakerViewModel()
         {
             Rating = 5;
-            VacationStartDate = DateTime.Today;
-            VacationEndDate = DateTime.Today.AddDays(14);
+            //VacationStartDate = DateTime.Today;
+            //VacationEndDate = DateTime.Today.AddDays(14);
         }
 
         [Display(Name = "Имя")]
@@ -37,7 +38,7 @@ namespace Pras.Web.Areas.Administration.Models
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Summary { get; set; }
         [Display(Name = "Фото")]
-        [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
+        //[Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Image { get; set; }
         [Display(Name = "Рейтинг")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
@@ -87,7 +88,15 @@ namespace Pras.Web.Areas.Administration.Models
 
         [Display(Name = "Возраст")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
-        public VoiceAge VoiceAge { get; set; }
+        public string VoiceAge { get; set; }
+
+        public List<VoiceAge> ListVoiceAge
+        {
+            get => (VoiceAge ?? "").Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).Select(Enum.Parse<VoiceAge>)
+                .ToList();
+            set => VoiceAge = string.Join(',', value);
+        }
+
         [Display(Name = "Пол голоса")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public Gender Gender { get; set; }
@@ -95,7 +104,7 @@ namespace Pras.Web.Areas.Administration.Models
         [Display(Name = "Цена до 30 слов")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Price30 { get; set; }
-        [Display(Name = "Цена до 90 слов")]
+        [Display(Name = "Цена до 70 слов")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Price90 { get; set; }
         [Display(Name = "Цена за страницу текста")]
@@ -157,11 +166,11 @@ namespace Pras.Web.Areas.Administration.Models
             }
         }
         [Display(Name = "Отпуск (начало)")]
-        [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
-        public DateTime VacationStartDate { get; set; }
+        //[Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
+        public DateTime? VacationStartDate { get; set; }
         [Display(Name = "Отпуск (конец)")]
-        [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
-        public DateTime VacationEndDate { get; set; }
+        //[Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
+        public DateTime? VacationEndDate { get; set; }
         [Display(Name = "Сроки выполнения")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Terms { get; set; }
@@ -314,9 +323,9 @@ namespace Pras.Web.Areas.Administration.Models
 
         public Dictionary<string, string> TermsList = new Dictionary<string, string>()
         {
-            {"0,5", "30 минут" },
-            {"1", "1 час" },
-            {"2", "2 часа" },
+            {"0,5", "от 30 минут" },
+            {"1", "от 1 часа" },
+            {"2", "от 2 часов" },
             {"3", "3 часа" },
             {"6", "6 часов" },
             {"24", "1 день" },

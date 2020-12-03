@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
@@ -72,7 +73,7 @@ namespace Pras.Web
             // Add application services.
             services.RegisterApplicationServices(Configuration, settings);
 
-            services.AddTransient<BLL.Services.Interfaces.IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IAppUserManager, AppUserManager>();
             services.AddTransient<IAudioService, AudioService>();
             services.AddTransient<IVideoService, VideoService>();
@@ -101,16 +102,16 @@ namespace Pras.Web
                 options.IdleTimeout = TimeSpan.FromHours(10);
             });
             services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/login";
-                options.Cookie.Expiration = TimeSpan.FromHours(10);
-            });
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
                 {
+                    options.LoginPath = "/login";
                     options.Cookie.Expiration = TimeSpan.FromHours(10);
-                });
+                }).AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => { options.Cookie.Expiration = TimeSpan.FromHours(10); });
+            
+            services.AddDataProtection()
+                .SetApplicationName("SilaFM")
+                .PersistKeysToFileSystem(new DirectoryInfo("\\machinekeys"))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }

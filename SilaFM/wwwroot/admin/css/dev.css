@@ -770,3 +770,7 @@ table tr.dt-rowReorder-moving {
             font-size: 20px;
             display: block;
         }
+
+.borderless {
+    border: none;
+}

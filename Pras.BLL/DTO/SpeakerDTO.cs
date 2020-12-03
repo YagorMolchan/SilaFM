@@ -17,7 +17,7 @@ namespace Pras.BLL.DTO
         public SpeakerTypes Type { get; set; }
         public string VoiceDescription { get; set; }
         public string Params { get; set; }
-        public VoiceAge VoiceAge { get; set; }
+        public string VoiceAge { get; set; }
 
         public string Price30 { get; set; }
         public string Price90 { get; set; }
@@ -27,8 +27,8 @@ namespace Pras.BLL.DTO
         public int Rating { get; set; }
         public string WorkingHours { get; set; }
         public string WorkingDays { get; set; }
-        public DateTime VacationStartDate { get; set; }
-        public DateTime VacationEndDate { get; set; }
+        public DateTime? VacationStartDate { get; set; }
+        public DateTime? VacationEndDate { get; set; }
 
         public string Languages { get; set; }
         public string Voices { get; set; }

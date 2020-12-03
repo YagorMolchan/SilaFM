@@ -2,7 +2,7 @@
 @{
     var startDate = new DateTime(2019,08,25);
 }
-<section id="counts">
+@*<section id="counts">
     <div class="container">
         <div class="layer1">
             <div class="row">
@@ -33,4 +33,27 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
+
+<div class="flex-circle">
+    <div class="circle-items">
+        @{ var years = DateTime.Today.Year - 1999;}
+        <p class="counter">@years</p>
+        <p class="year-text">@(GrammarHelper.GetDeclension(years, "год", "года", "лет")) на рынке медиауслуг</p>
+    </div>
+    <div class="circle-items">
+        @{ var orders = (int)(231246 + (DateTime.Today - startDate).TotalDays * 11);}
+        <p class="counter">@orders</p>
+        <p class="year-text">@(GrammarHelper.GetDeclension(orders, "выполненный заказ", "выполненных заказа", "выполненных заказов"))</p>
+    </div>
+    <div class="circle-items">
+        @{ var clients = (int)(6570 + (DateTime.Today - startDate).TotalDays * 3);}
+        <p class="counter">@clients</p>
+        <p class="year-text">@(GrammarHelper.GetDeclension(clients, "довольный клиент", "довольных клиента", "довольных клиентов"))</p>
+    </div>
+    <div class="circle-items">
+        @{ var voices = (int)(785 + (DateTime.Today - startDate).TotalDays / 30 * 3);}
+        <p class="counter">@voices</p>
+        <p class="year-text">@(GrammarHelper.GetDeclension(voices, "дикторский голос", "дикторских голоса", "дикторских голосов"))</p>
+    </div>
+</div>

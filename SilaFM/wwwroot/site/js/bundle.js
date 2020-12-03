@@ -206,88 +206,105 @@ e=f(this),c=this.selector||"",k=function(g){var h=f(this).blur(),j=d,k,l;!g.ctrl
 ":not('.fancybox-item, .fancybox-nav')","click.fb-start",k);this.filter("[data-fancybox-start=1]").trigger("click");return this};p.ready(function(){var a,d;f.scrollbarWidth===v&&(f.scrollbarWidth=function(){var a=f('<div style="width:50px;height:50px;overflow:auto"><div/></div>').appendTo("body"),b=a.children(),b=b.innerWidth()-b.height(99).innerWidth();a.remove();return b});if(f.support.fixedPosition===v){a=f.support;d=f('<div style="position:fixed;top:20px;"></div>').appendTo("body");var e=20===
 d[0].offsetTop||15===d[0].offsetTop;d.remove();a.fixedPosition=e}f.extend(b.defaults,{scrollbarWidth:f.scrollbarWidth(),fixed:f.support.fixedPosition,parent:f("body")});a=f(r).width();J.addClass("fancybox-lock-test");d=f(r).width();J.removeClass("fancybox-lock-test");f("<style type='text/css'>.fancybox-margin{margin-right:"+(d-a)+"px;}</style>").appendTo("head")})})(window,document,jQuery);
 
-	//Кнопка "Наверх"
-	//Документация:
-	jQuery(document).ready(function () {
-	    'use strict';
+//Кнопка "Наверх"
+//Документация:
+jQuery(document).ready(function () {
+    'use strict';
 
-	    jQuery(window).scroll(function () {
-	        if (jQuery(document).scrollTop() > 0) {
-	            jQuery('#scrollup').fadeIn('slow');
-	        } else {
-	            jQuery('#scrollup').fadeOut('slow');
-	        }
-	    });
-	    $('#scrollup').click(function () {
-	        $('body,html').animate({
-	            scrollTop: 0
-	        }, 700);
-	    });
-	});
+    $('body,html').scrollTop(0);
 
+    jQuery(window).scroll(function () {
+        if (jQuery(document).scrollTop() > 0) {
+            jQuery('#scrollup').fadeIn('slow');
+        } else {
+            jQuery('#scrollup').fadeOut('slow');
+        }
+    });
+    $('#scrollup').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 700);
+    });
 
-	//плавное листание до  шапки дикторов
-	$(document).ready(function () {
-	    'use strict';
-	    $("#choose").on("click", "a", function (event) {
-	        //отменяем стандартную обработку нажатия по ссылке
-	        event.preventDefault();
+    if (location.hash) {
+        //узнаем высоту от начала страницы до блока на который ссылается якорь
+        var top = $(location.hash).offset().top;
 
-	        //забираем идентификатор бока с атрибута href
-	        var id = $(this).attr('href'),
-
-	            //узнаем высоту от начала страницы до блока на который ссылается якорь
-	            top = $(id).offset().top;
-
-	        //анимируем переход на расстояние - top за 1500 мс
-	        $('body,html').animate({
-	            scrollTop: top
-	        }, 1500);
-	    });
-	});
-
-	// прикрепить файл
-	$(document).on('change', '.btn-file :file', function () {
-	    'use strict';
-	    var input = $(this),
-	        numFiles = input.get(0).files ? input.get(0).files.length : 1,
-	        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-	    input.trigger('fileselect', [numFiles, label]);
-	});
-
-	$(document).ready(function () {
-	    'use strict';
-	    $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
-	        var input = $(this).parents('.input-group').find(':text'),
-	            log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-	        if (input.length) {
-	            input.val(log);
-	        } else {
-	            if (log) alert(log);
-	        }
-
-	    });
-	});
+        //анимируем переход на расстояние - top за 1500 мс
+        $('body,html').animate({
+            scrollTop: top
+        }, 1500);
+    }
+});
 
 
+//плавное листание до  шапки дикторов
+$(document).ready(function () {
+    'use strict';
+    $("#choose").on("click", "a", function (event) {
 
-	// переход к табам с другой страницы
-	(function ($) {
-	    'use strict';
-	    $(function () {
-	        var hash = window.location.hash;
-	        $('.nav-tabs a[href="' + hash + '"]').tab('show');
-	    });
-	})(jQuery);
+        //забираем идентификатор бока с атрибута href
+        var href = $(this).attr('href');
+        var parts = href.split('#');
+        if (parts.length > 1 && (window.location.href == parts[0] || window.location.pathname == parts[0])) {
+            var id = parts.pop();
 
-	// боковой обратный звонок
-	$(document).ready(function () {
-	    $("#telback").click(function () {
-	        $('.kateoff').toggle();
-	        $('.kate').toggle();
-	    })
-	})
+            //отменяем стандартную обработку нажатия по ссылке
+            event.preventDefault();
+
+            //узнаем высоту от начала страницы до блока на который ссылается якорь
+            var top = $('#'+id).offset().top;
+
+            //анимируем переход на расстояние - top за 1500 мс
+            $('body,html').animate({
+                scrollTop: top
+            }, 1500);
+        }
+    });
+});
+
+// прикрепить файл
+$(document).on('change', '.btn-file :file', function () {
+    'use strict';
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready(function () {
+    'use strict';
+    $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+        if (input.length) {
+            input.val(log);
+        } else {
+            if (log) alert(log);
+        }
+
+    });
+});
+
+
+
+// переход к табам с другой страницы
+(function ($) {
+    'use strict';
+    $(function () {
+        var hash = window.location.hash;
+        $('.nav-tabs a[href="' + hash + '"]').tab('show');
+    });
+})(jQuery);
+
+// боковой обратный звонок
+$(document).ready(function () {
+    $("#telback").click(function () {
+        $('.kateoff').toggle();
+        $('.kate').toggle();
+    })
+})
 
 /**
  * cbpHorizontalSlideOutMenu.js v1.0.0

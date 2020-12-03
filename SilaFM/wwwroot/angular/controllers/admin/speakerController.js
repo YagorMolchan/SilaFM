@@ -82,7 +82,7 @@
         "молдавский",
         "монгольский",
         "мяо",
-        "немецкий германия",
+        "немецкий",
         "немецкий австрия",
         "немецкий швейцария",
         "нидерландский",
@@ -340,7 +340,12 @@
 
     $scope.addLang = function (e) {
         e.preventDefault();
-        $scope.toEdit = { Obj: { IsNew: true }, List: $scope.languages, Array: $scope.model.VoiceLanguages };
+        $scope.toEdit = {
+            Obj: { IsNew: true },
+            List: $scope.languages,
+            Array: $scope.model.VoiceLanguages,
+            HidePath: true
+        };
         $scope.listItems = $scope.languages;
         $('#modalItem').modal('show');
     }
@@ -375,6 +380,13 @@
     $scope.editItem = function (e, item, list, array) {
         e.preventDefault();
         $scope.toEdit = { Obj: item, List: list, Array: array };
+        $scope.listItems = list;
+        $('#modalItem').modal('show');
+    }
+
+    $scope.editLang = function (e, item, list, array) {
+        e.preventDefault();
+        $scope.toEdit = { Obj: item, List: list, Array: array, HidePath: true };
         $scope.listItems = list;
         $('#modalItem').modal('show');
     }

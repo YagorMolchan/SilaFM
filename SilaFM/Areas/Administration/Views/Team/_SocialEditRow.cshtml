@@ -1,0 +1,21 @@
+﻿@using Pras.Shared.Enums.Extensions
+@model Pras.Web.Areas.Administration.Models.HelperModels.SocialContact
+<div class="form-group" data-ng-init="model.SocialsList=model.SocialsList||[]" data-ng-repeat="item in model.SocialsList track by $index">
+    <div class="input-group">
+        <div class="input-group-addon borderless" style="padding: 0;width: 20%;">
+            @Html.DropDownList("SocialsList[{{$index}}].Type", Model.Type.ToSelectList(),
+                new
+                {
+                    @class = "form-control",
+                    data_ng_model = "model.SocialsList[$index].Type",
+                    data_ng_init = $"model.SocialsList[$index].Type = model.SocialsList[$index].Type||'{Model.Type}'",
+                    data_ng_change = "getMask(model.SocialsList[$index])"
+                })
+        </div>
+        @Html.TextBox("SocialsList[{{$index}}].Link", null, new { @class = "form-control", data_ng_model = "model.SocialsList[$index].Link", data_ng_init = $"model.SocialsList[$index].Link = model.SocialsList[$index].Link||'{Model.Link}'" })
+        <div class="input-group-addon borderless">
+            <a href="#" data-ng-click="removeSocials($event, item)"><i class="fa fa-remove"></i></a>
+        </div>
+    </div>
+    @Html.ValidationMessage("SocialsList[{{$index}}].Link")
+</div>

@@ -63,6 +63,7 @@ namespace Pras.Web.Areas.Administration.Controllers
             }
             catch (Exception e)
             {
+                Logger.Error(e);
                 BuildMessage(false, e.Message, MessagesType.Save);
             }
             return View("Edit", model);
@@ -79,6 +80,7 @@ namespace Pras.Web.Areas.Administration.Controllers
             }
             catch (Exception e)
             {
+                Logger.Error(e);
                 BuildMessage(false, e.Message, MessagesType.Delete);
             }
 

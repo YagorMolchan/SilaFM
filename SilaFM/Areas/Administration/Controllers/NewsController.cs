@@ -76,6 +76,7 @@ namespace Pras.Web.Areas.Administration.Controllers
             }
             catch (Exception e)
             {
+                Logger.Error(e);
                 BuildMessage(false, e.Message, MessagesType.Delete);
             }
 

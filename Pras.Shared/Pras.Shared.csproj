@@ -352,6 +352,7 @@
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\InformationTypes.cs" />
     <Compile Include="Enums\PriceCategory.cs" />
+    <Compile Include="Enums\SocialsType.cs" />
     <Compile Include="Enums\SpeakerStatuses.cs" />
     <Compile Include="Enums\SpeakerCountries.cs" />
     <Compile Include="Enums\SpeakerTypes.cs" />

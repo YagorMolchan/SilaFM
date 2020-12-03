@@ -4,16 +4,16 @@ namespace Pras.Shared.Enums
 {
     public enum VoiceAge
     {
-        [Description("до 16")]
+        [Description("детский, до 16 лет")]
         Less16,
-        [Description("до 20")]
-        Less20,
-        [Description("до 30")]
-        Less30,
-        [Description("до 40")]
+        [Description("молодежный, 18-25 лет")]
+        Less25,
+        [Description("молодой, 30-40 лет")]
         Less40,
-        [Description("до 55")]
+        [Description("взрослый, 40-55 лет")]
         Less55,
+        [Description("возрастной, 55-65 лет")]
+        Less65,
         [Description("пожилой")]
         OldAged
     }

@@ -8,7 +8,7 @@ namespace Pras.Web.Areas.Administration.Models.HelperModels
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Name { get; set; }
         [Display(Name = "Файл")]
-        [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
+        //[Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string Path { get; set; }
     }
 }

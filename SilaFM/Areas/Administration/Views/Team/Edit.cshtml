@@ -1,4 +1,5 @@
-﻿@using Pras.Shared.Enums
+﻿@using Newtonsoft.Json
+@using Pras.Shared.Enums
 @using Pras.Shared.Enums.Extensions
 @using Pras.Web.Areas.Administration.Models.HelperModels
 @model Pras.Web.Areas.Administration.Models.PersonViewModel
@@ -6,12 +7,13 @@
 @{
     ViewBag.Title = "Команда";
     Layout = "_Layout";
+    ViewBag.ngController = "data-ng-controller=teamController";
     ViewBag.Breadcrumb = new List<UIBreadcrumbs>
-{
-new UIBreadcrumbs{ Link = Url.Action("Index", "Admin"), Title = "Главная"},
-new UIBreadcrumbs{ Link = Url.Action("Index", "Team"), Title = ViewBag.Title},
-new UIBreadcrumbs{ Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
-};
+    {
+        new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
+        new UIBreadcrumbs {Link = Url.Action("Index", "Team"), Title = ViewBag.Title},
+        new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
+    };
 
     Html.RenderPartial("_ResultMessages");
 }
@@ -23,10 +25,15 @@ new UIBreadcrumbs{ Link = string.Empty, Title = Model.IsNew ? "Создание"
     <script src="~/lib/moment/moment-with-locales.min.js"></script>
     <script src="~/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     @Html.Partial("_ValidationScriptsPartial")
+
+    <script src="~/angular/angular.min.js"></script>
+    <script src="~/angular/controllers/admin/adminApp.js"></script>
+    <script>var model = @Html.Raw(JsonConvert.SerializeObject(Model));</script>
+    <script src="~/angular/controllers/admin/teamController.js"></script>
 }
 <div class="col-sm-12 col-md-7 col-lg-9">
     <div class="box box-danger">
-        <form method="post">
+        <form action="@Url.Action("Edit", "Team")" method="post">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
@@ -35,18 +42,41 @@ new UIBreadcrumbs{ Link = string.Empty, Title = Model.IsNew ? "Создание"
             </div>
             <div class="box-body">
                 <div class="row">
-                    <div class="form-group col-lg-6">
-                        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Name)
-                    </div>
-                    <div class="form-group col-lg-6">
-                        @Html.LabelFor(model => model.Position, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Position, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Position)
+                    <div class="col-lg-6">
+                        <div class="form-group ">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Position, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Position, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Position)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Summary, new { @class = "control-label" })
+                            @Html.TextAreaFor(model => model.Summary, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Summary)
+                        </div>
                     </div>
                 </div>
+                <hr />
+                <h4>Социальные сети <a href="#" data-ng-click="addSocial($event)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                @Html.Partial("_SocialEditRow", new SocialContact())
+                <hr />
                 <div class="row">
+                    <div class="form-group col-lg-6">
+                        @Html.LabelFor(model => model.ImageSmall, new { @class = "control-label" })
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.ImageSmall, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-btn">
+                                <a onclick=" loadElfinder('ImageSmall'); " class="btn btn-danger">Выбрать файл</a>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ImageSmall)
+                        <span class="help-block">Ширина: 160px. Высота: 200px.</span>
+                        <img class="preview" id="view-ImageSmall" style="width: 160px; height: auto;" src="@Model.ImageSmall" />
+                    </div>
                     <div class="form-group col-lg-6">
                         @Html.LabelFor(model => model.Image, new { @class = "control-label" })
                         <div class="input-group">
@@ -59,17 +89,12 @@ new UIBreadcrumbs{ Link = string.Empty, Title = Model.IsNew ? "Создание"
                         <span class="help-block">Ширина: 160px. Высота: 200px.</span>
                         <img class="preview" id="view-Image" style="width: 160px; height: auto;" src="@Model.Image" />
                     </div>
-                    <div class="form-group col-lg-6">
-                        @Html.LabelFor(model => model.Summary, new { @class = "control-label" })
-                        @Html.TextAreaFor(model => model.Summary, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.Summary)
-                    </div>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="form-group col-lg-3">
                         @Html.LabelFor(model => model.Order, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Order, new { @class = "form-control", type="number" })
+                        @Html.TextBoxFor(model => model.Order, new { @class = "form-control", type = "number" })
                         @Html.ValidationMessageFor(model => model.Order)
                     </div>
                 </div>

@@ -2,186 +2,278 @@
 @model PopupPaymentFormModel
 @{
     var documentManagementList = new List<string>
-    {
-        "Укрпочта (+20 грн.)",
-        "Курьерская доставка Новая Почта (+40 грн.)",
-        "Электронный документооборот (0 руб.)",
-        "Самовывоз (только для Киева (0 грн.))"
-    };
+{
+"Укрпочта (+20 грн.)",
+"Курьерская доставка Новая Почта (+40 грн.)",
+"Электронный документооборот (0 руб.)",
+"Самовывоз (только для Киева (0 грн.))"
+};
 }
-<div id="beznalUA" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
+
+<div class="modal-overlay-cash">
+    <div class="modal-cash">
+        <a class="close-modal-cash">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.9886 18.0008L35.5879 2.40143C36.1371 1.85222 36.1371 0.96178 35.5879 0.41264C35.0387 -0.1365 34.1482 -0.13657 33.5991 0.41264L17.9997 16.012L2.40045 0.41264C1.85124 -0.13657 0.960803 -0.13657 0.411663 0.41264C-0.137476 0.96185 -0.137547 1.85229 0.411663 2.40143L16.011 18.0007L0.411663 33.6001C-0.137547 34.1493 -0.137547 35.0397 0.411663 35.5889C0.686233 35.8634 1.04616 36.0007 1.40609 36.0007C1.76602 36.0007 2.12588 35.8634 2.40052 35.5889L17.9997 19.9896L33.599 35.5889C33.8736 35.8634 34.2335 36.0007 34.5935 36.0007C34.9534 36.0007 35.3132 35.8634 35.5879 35.5889C36.1371 35.0397 36.1371 34.1492 35.5879 33.6001L19.9886 18.0008Z" fill="url(#painct0_linear)" />
+                <defs>
+                    <linearGradient id="painct0_linear" x1="-0.000244141" y1="36.0007" x2="20.6022" y2="2.05459" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#483156" />
+                        <stop offset="1" stop-color="#39516E" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </a>
+        <div class="modal-content-cash">
             <form action="order-payment" method="post">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Оплата по безналичному расчету</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(model => model.Type)
-                    <br>
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Type)
+                <h3 class="txt-chronomer online-calculate">Безналичный расчет</h3>
+                <div class="container-cash">
                     <p class="field-validation-error">@(TempData["Error" + Model.Type])</p>
-                    <div class="row">
-                        <div class="col-md-4 col-hidden-sm col-hidden-xs">
-                            <img src="~/site/img/doc1.png" class="img-responsive" alt="Responsive image">
-                            <br><br>
-                            <p class="text-justify">Обратите, пожалуйста, внимание, что итоговая сумма счета будет зависеть от способа оплаты (через ООО или ИП), а, также, от выбранного вами вида документооборота. </p>
+                    <div class="cash-part1">
+                        <div>
+                            <label class="label-data">ДАТА</label>
+                            @*<input class="date-input" type="date" value="@DateTime.Today.ToString("d")">*@
+                            @Html.TextBoxFor(model => model.Date, new { @class = "date-input", type = "date" })
+                            @Html.ValidationMessageFor(model => model.Date)
                         </div>
-                        <div class="col-md-7 col-md-offset-1 col-sm-8">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.Date):</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="form-group">
-                                        <div class='input-group date datetimepicker'>
-                                            @Html.TextBoxFor(model => model.Date, new { @class = "form-control", type = "text" })
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.Date)
-                                    </div>
-                                </div>
+                        <div>
+                            <label class="label-data">СЧЕТ</label>
+                            @Html.TextBoxFor(model => model.Account, new { @class = "date-input" })
+                            @Html.ValidationMessageFor(model => model.Account)
+                        </div>
+                        <div class="input-position">
+                            <div class="money-input">
+                                <label class="label-data"><span class="suma-txt">@Html.DisplayNameFor(model => model.Amount)</span><br><i class="italic-suma">(Комиссия 9%)</i></label>
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "date-input", placeholder = "0.00" })
+                                <span class="ryb-txt">руб</span>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.Account):</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class='input-group'>
-                                        @Html.TextBoxFor(model => model.Account, new { @class = "form-control" })
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-list-alt"></span>
-                                        </span>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Account)
-                                </div>
+                            @Html.ValidationMessageFor(model => model.Amount)
+                        </div>
+                        <div class="name-of-pay">
+                            <div class="money-input">
+                                <label class="label-data"><span class="suma-txt">НАЗВАНИЕ</span><br><span class="italic-suma">ПЛАТЕЛЬЩИКА</span></label>
+                                @Html.TextBoxFor(model => model.Payer, new { @class = "date-input" })
                             </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.Amount) в рублях:</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class='input-group'>
-                                        @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-briefcase"></span>
-                                        </span>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Amount)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.PaymentMethod):</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class="radio">
-                                        <label class="radio-inline">
-                                            @Html.RadioButtonFor(model => model.PaymentMethod, "ООО (комиссия +10%)", new { @checked = "" })
-                                            <p>ООО (комиссия +10%)</p>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label class="radio-inline">
-                                            @Html.RadioButtonFor(model => model.PaymentMethod, "ПЛП (комиссия +5%)")
-                                            <p>ПЛП (комиссия +5%)</p>
-                                        </label>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.PaymentMethod)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.Payer):</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class='input-group'>
-                                        @Html.TextBoxFor(model => model.Payer, new { @class = "form-control" })
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-user"></span>
-                                        </span>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Payer)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5 col-sm-4">
-                                    <p>@Html.DisplayNameFor(model => model.Purpose):</p>
-                                </div>
-                                <div class="col-md-7 col-sm-8">
-                                    <div class='input-group'>
-                                        @Html.TextBoxFor(model => model.Purpose, new { @class = "form-control" })
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-send"></span>
-                                        </span>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Purpose)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.Requisites):</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class='form-group'>
-                                        @Html.TextAreaFor(model => model.Requisites, new { @class = "form-control", rows = 3 })
-                                        @Html.ValidationMessageFor(model => model.Requisites)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.Email):</p>
-                                </div>
-                                <div class="col-md-7">
-                                    <div class='input-group'>
-                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-envelope"></span>
-                                        </span>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Email)
-                                    <div class="checkbox">
-                                        <label>
-                                            @Html.CheckBoxFor(model => model.NeedAct)
-                                            <p>@Html.DisplayNameFor(model => model.NeedAct)</p>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            @Html.RadioButtonFor(model => model.Action, 0, new { @checked = "" })
-                                            <p> Отправить по e-mail</p>
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            @Html.RadioButtonFor(model => model.Action, 1)
-                                            <p>Открыть и распечатать</p>
-                                        </label>
-                                    </div>
-                                    @Html.ValidationMessageFor(model => model.Action)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <p>@Html.DisplayNameFor(model => model.DocumentManagement):</p>
-                                </div>
-                                <div class="col-sm-7">
-                                    @Html.DropDownListFor(model => model.DocumentManagement, new SelectList(documentManagementList.ToDictionary(p => p, p => p), "Key", "Value", Model.DocumentManagement), "", new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.DocumentManagement)
-                                </div>
-                            </div>
+                            @Html.ValidationMessageFor(model => model.Payer)
                         </div>
                     </div>
+                    <div>
+                        <label class="label-data"><span class="suma-txt details-txt">@Html.DisplayNameFor(model => model.Requisites)</span></label>
+                        @Html.TextAreaFor(model => model.Requisites, new { @class = "input-details" })
+                        @Html.ValidationMessageFor(model => model.Requisites)
+                    </div>
+                    <div class="input-position">
+                        <div class="money-input">
+                            <label class="label-data label-purpose"><span class="suma-txt">НАЗНАЧЕНИЕ</span><br><span class="italic-suma">ПЛАТЕЖА</span></label>
+                            @Html.TextBoxFor(model => model.Purpose, new { @class = "date-input details-input" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Purpose)
+                    </div>
+                    <div class="input-position">
+                        <div class="money-input">
+                            <label class="label-data label-email"><span class="suma-txt">@Html.DisplayNameFor(model => model.Email)</span></label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "date-input details-input" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                    <div class="chronomer-element check-elem">
+                        @Html.CheckBoxFor(model => model.NeedAct, new { @checked = "checked" })<span class="txt-required">@Html.DisplayNameFor(model => model.NeedAct)</span><br>
+
+                    </div>
+                    <div class="form_radio radio-btns">
+                        @Html.RadioButtonFor(model => model.Action, 0, new { id = "send", @checked = "" })
+                        <label for="send" class="page-txt-chrono send-email">отправить на эл.адрес</label><br>
+                        @Html.RadioButtonFor(model => model.Action, 1, new { id = "open" })
+                        <label for="open" class="page-txt-chrono">открыть и распечатать</label><br>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
-                    <button class="btn btn-success" type="submit">Отправить</button>
+                <div class="cash-btn-form">
+                    <button type="submit" class="home-btn btn-send-form">
+                        ОТПРАВИТЬ
+                        <svg class="btn-svg" width="8" height="15">
+                            <use href="#order-svg"></use>
+                        </svg>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@*<div id="beznalUA" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="order-payment" method="post">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">Оплата по безналичному расчету</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.Type)
+                        <br>
+                        <p class="field-validation-error">@(TempData["Error" + Model.Type])</p>
+                        <div class="row">
+                            <div class="col-md-4 col-hidden-sm col-hidden-xs">
+                                <img src="~/site/img/doc1.png" class="img-responsive" alt="Responsive image">
+                                <br><br>
+                                <p class="text-justify">Обратите, пожалуйста, внимание, что итоговая сумма счета будет зависеть от способа оплаты (через ООО или ИП), а, также, от выбранного вами вида документооборота. </p>
+                            </div>
+                            <div class="col-md-7 col-md-offset-1 col-sm-8">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.Date):</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="form-group">
+                                            <div class='input-group date datetimepicker'>
+                                                @Html.TextBoxFor(model => model.Date, new { @class = "form-control", type = "text" })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Date)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.Account):</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class='input-group'>
+                                            @Html.TextBoxFor(model => model.Account, new { @class = "form-control" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-list-alt"></span>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Account)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.Amount) в рублях:</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class='input-group'>
+                                            @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-briefcase"></span>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Amount)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.PaymentMethod):</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="radio">
+                                            <label class="radio-inline">
+                                                @Html.RadioButtonFor(model => model.PaymentMethod, "ООО (комиссия +10%)", new { @checked = "" })
+                                                <p>ООО (комиссия +10%)</p>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label class="radio-inline">
+                                                @Html.RadioButtonFor(model => model.PaymentMethod, "ПЛП (комиссия +5%)")
+                                                <p>ПЛП (комиссия +5%)</p>
+                                            </label>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.PaymentMethod)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.Payer):</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class='input-group'>
+                                            @Html.TextBoxFor(model => model.Payer, new { @class = "form-control" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Payer)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 col-sm-4">
+                                        <p>@Html.DisplayNameFor(model => model.Purpose):</p>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8">
+                                        <div class='input-group'>
+                                            @Html.TextBoxFor(model => model.Purpose, new { @class = "form-control" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-send"></span>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Purpose)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.Requisites):</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class='form-group'>
+                                            @Html.TextAreaFor(model => model.Requisites, new { @class = "form-control", rows = 3 })
+                                            @Html.ValidationMessageFor(model => model.Requisites)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.Email):</p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class='input-group'>
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-envelope"></span>
+                                            </span>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Email)
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(model => model.NeedAct)
+                                                <p>@Html.DisplayNameFor(model => model.NeedAct)</p>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.Action, 0, new { @checked = "" })
+                                                <p> Отправить по e-mail</p>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(model => model.Action, 1)
+                                                <p>Открыть и распечатать</p>
+                                            </label>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Action)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p>@Html.DisplayNameFor(model => model.DocumentManagement):</p>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        @Html.DropDownListFor(model => model.DocumentManagement, new SelectList(documentManagementList.ToDictionary(p => p, p => p), "Key", "Value", Model.DocumentManagement), "", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.DocumentManagement)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Закрыть</button>
+                        <button class="btn btn-success" type="submit">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>*@

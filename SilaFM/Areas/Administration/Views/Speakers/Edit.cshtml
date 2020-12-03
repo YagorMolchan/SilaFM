@@ -164,6 +164,7 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                                         </span>
                                     }
                                 </p>
+                                @Html.ValidationMessageFor(model => model.WorkingDays)
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.WorkingHours, new { @class = "control-label" })
@@ -177,6 +178,7 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                                         </span>
                                     }
                                 </p>
+                                @Html.ValidationMessageFor(model => model.WorkingHours)
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
@@ -214,9 +216,14 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                         @Html.ValidationMessageFor(model => model.VoiceDescription)
                     </div>
                     <div class="row">
-                        <div class="form-group col-lg-6">
+                        @*<div class="form-group col-lg-6">
                             @Html.LabelFor(model => model.VoiceAge, new { @class = "control-label" })
                             @Html.DropDownListFor(model => model.VoiceAge, Model.VoiceAge.ToSelectList(), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.VoiceAge)
+                        </div>*@
+                        <div class="form-group col-lg-6">
+                            @Html.LabelFor(model => model.VoiceAge, new { @class = "control-label" })
+                            @Html.ListBoxFor(model => model.ListVoiceAge, VoiceAge.Less16.ToSelectList(), new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.VoiceAge)
                         </div>
                         <div class="form-group col-lg-6">
@@ -228,33 +235,33 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                     <div class="form-group">
                         @Html.LabelFor(model => model.Params, new { @class = "control-label" })
                         <div class="input-group">
-                            <div class="input-group-addon" style="min-width: 200px">Низкий тембр</div>
-                            @Html.TextBoxFor(model => model.VoiceParams.LowHighTone, new { @class = "form-control text-center", type = "number" })
-                            <div class="input-group-addon" style="min-width: 200px">Высокий тембр</div>
+                            <div class="input-group-addon" style="min-width: 200px">Низкий</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.LowHighTone, new { @class = "form-control text-center", type = "number", max=10, min=-10 })
+                            <div class="input-group-addon" style="min-width: 200px">Высокий</div>
                         </div>
                         @Html.ValidationMessageFor(model => model.VoiceParams.LowHighTone)
                         <div class="input-group">
                             <div class="input-group-addon" style="min-width: 200px">Мягкий</div>
-                            @Html.TextBoxFor(model => model.VoiceParams.ConfidentVoice, new { @class = "form-control text-center", type = "number" })
-                            <div class="input-group-addon" style="min-width: 200px">Уверенный</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.ConfidentVoice, new { @class = "form-control text-center", type = "number", max = 10, min = -10 })
+                            <div class="input-group-addon" style="min-width: 200px">Брутальный</div>
                         </div>
                         @Html.ValidationMessageFor(model => model.VoiceParams.ConfidentVoice)
                         <div class="input-group">
-                            <div class="input-group-addon" style="min-width: 200px">Сухой</div>
-                            @Html.TextBoxFor(model => model.VoiceParams.RichVoice, new { @class = "form-control text-center", type = "number" })
-                            <div class="input-group-addon" style="min-width: 200px">Богатый</div>
+                            <div class="input-group-addon" style="min-width: 200px">Веселый</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.RichVoice, new { @class = "form-control text-center", type = "number", max = 10, min = -10 })
+                            <div class="input-group-addon" style="min-width: 200px">Серьезный</div>
                         </div>
                         @Html.ValidationMessageFor(model => model.VoiceParams.RichVoice)
                         <div class="input-group">
-                            <div class="input-group-addon" style="min-width: 200px">Хладнокровный</div>
-                            @Html.TextBoxFor(model => model.VoiceParams.EnergeticVoice, new { @class = "form-control text-center", type = "number" })
-                            <div class="input-group-addon" style="min-width: 200px">Энергический</div>
+                            <div class="input-group-addon" style="min-width: 200px">Спокойный</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.EnergeticVoice, new { @class = "form-control text-center", type = "number", max = 10, min = -10 })
+                            <div class="input-group-addon" style="min-width: 200px">Динамичный</div>
                         </div>
                         @Html.ValidationMessageFor(model => model.VoiceParams.EnergeticVoice)
                         <div class="input-group">
-                            <div class="input-group-addon" style="min-width: 200px">Живой</div>
-                            @Html.TextBoxFor(model => model.VoiceParams.BusinessVoice, new { @class = "form-control text-center", type = "number" })
-                            <div class="input-group-addon" style="min-width: 200px">Деловой</div>
+                            <div class="input-group-addon" style="min-width: 200px">Официальный</div>
+                            @Html.TextBoxFor(model => model.VoiceParams.BusinessVoice, new { @class = "form-control text-center", type = "number", max = 10, min = -10 })
+                            <div class="input-group-addon" style="min-width: 200px">Игровой</div>
                         </div>
                         @Html.ValidationMessageFor(model => model.VoiceParams.BusinessVoice)
                         @Html.ValidationMessageFor(model => model.Params)
@@ -266,7 +273,7 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                     <div class="form-group">
                         @Html.LabelFor(model => model.Demo, new { @class = "control-label" })
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.Demo, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.Demo, new { @class = "form-control" })
                             <span class="input-group-btn">
                                 <a onclick=" loadElfinder('Demo'); " class="btn btn-danger btn-flat">Выбрать файл</a>
                             </span>
@@ -276,7 +283,7 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                     <div class="form-group">
                         @Html.LabelFor(model => model.DemoAdvertising, new { @class = "control-label" })
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.DemoAdvertising, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.DemoAdvertising, new { @class = "form-control" })
                             <span class="input-group-btn">
                                 <a onclick=" loadElfinder('DemoAdvertising'); " class="btn btn-danger btn-flat">Выбрать файл</a>
                             </span>
@@ -286,7 +293,7 @@ new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание"
                     <div class="form-group">
                         @Html.LabelFor(model => model.DemoVoiceOver, new { @class = "control-label" })
                         <div class="input-group">
-                            @Html.TextBoxFor(model => model.DemoVoiceOver, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model.DemoVoiceOver, new { @class = "form-control" })
                             <span class="input-group-btn">
                                 <a onclick=" loadElfinder('DemoVoiceOver'); " class="btn btn-danger btn-flat">Выбрать файл</a>
                             </span>

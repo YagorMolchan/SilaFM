@@ -26,6 +26,23 @@ namespace Pras.Web.Controllers
             return View(model);
         }
 
+        [Route("speakers")]
+        public IActionResult Speakers([FromServices] IInformationService informationService, [FromServices] ISpeakersService speakersService)
+        {
+            var model = new SpeakersPageViewModel
+            {
+                Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.Speakers)),
+                Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find())
+            };
+
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
+
+            return View("Speakers", model);
+        }
+
         [Route("speakers/kids")]
         public IActionResult SpeakersChild([FromServices] IInformationService informationService, [FromServices] ISpeakersService speakersService)
         {
@@ -34,6 +51,10 @@ namespace Pras.Web.Controllers
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersChild)),
                 Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerTypes.Child))
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -44,8 +65,28 @@ namespace Pras.Web.Controllers
             var model = new SpeakersPageViewModel
             {
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersRu)),
-                Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerCountries.Russia, SpeakerTypes.Federal, SpeakerTypes.Speaker))
+                Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerCountries.Russia, SpeakerTypes.Speaker))
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
+
+            return View("Speakers", model);
+        }
+
+        [Route("speakers/federal")]
+        public IActionResult SpeakersFederal([FromServices] IInformationService informationService, [FromServices] ISpeakersService speakersService)
+        {
+            var model = new SpeakersPageViewModel
+            {
+                Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersFederal)),
+                Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerCountries.Russia, SpeakerTypes.Federal))
+            };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -56,8 +97,12 @@ namespace Pras.Web.Controllers
             var model = new SpeakersPageViewModel
             {
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersUk)),
-                Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerCountries.Ukraine, SpeakerTypes.Federal, SpeakerTypes.Speaker))
+                Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerCountries.Ukraine, SpeakerTypes.Speaker))
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -70,6 +115,10 @@ namespace Pras.Web.Controllers
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersFor)),
                 Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerCountries.Other))
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -82,6 +131,10 @@ namespace Pras.Web.Controllers
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersParodist)),
                 Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerTypes.Parodist))
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -94,6 +147,10 @@ namespace Pras.Web.Controllers
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersVocalist)),
                 Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.Find(SpeakerTypes.Vocalist))
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -106,6 +163,10 @@ namespace Pras.Web.Controllers
                 Information = Mapper.Map<InformationViewModel>(informationService.Find(InformationTypes.SpeakersVip)),
                 Speakers = Mapper.Map<List<SpeakerViewModel>>(speakersService.FindVip())
             };
+            if (Request.Query.ContainsKey("man"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Male).ToList();
+            else if (Request.Query.ContainsKey("woman"))
+                model.Speakers = model.Speakers.Where(p => p.Gender == Gender.Female).ToList();
 
             return View("Speakers", model);
         }
@@ -197,10 +258,11 @@ namespace Pras.Web.Controllers
         }
 
         [Route("order")]
-        public IActionResult Order()
+        public IActionResult Order(string speaker=null)
         {
-            var model = TempData["OrderModel"] != null ? JsonConvert.DeserializeObject<OrderViewModel>(TempData["OrderModel"] as string) :
-                        new OrderViewModel();
+            var model = TempData["OrderModel"] != null
+                ? JsonConvert.DeserializeObject<OrderViewModel>(TempData["OrderModel"] as string)
+                : new OrderViewModel {SpeakerFormModel = new SpeakerOrderFormModel {SpeakerName = speaker}};
             return View(model);
         }
 
@@ -234,6 +296,12 @@ namespace Pras.Web.Controllers
 
         [Route("pages")]
         public IActionResult Pages()
+        {
+            return View();
+        }
+
+        [Route("cabinet")]
+        public IActionResult Cabinet()
         {
             return View();
         }

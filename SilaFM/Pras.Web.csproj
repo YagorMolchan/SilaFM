@@ -86,6 +86,10 @@
     <None Include="wwwroot\plugins\elfinder\js\extras\quicklook.googledocs.js" />
     <None Include="wwwroot\plugins\elfinder\js\extras\quicklook.googledocs.min.js" />
     <None Include="wwwroot\plugins\elfinder\js\proxy\elFinderSupportVer1.js" />
+    <None Include="wwwroot\site2\js\index.js" />
+    <None Include="wwwroot\site2\js\revealator-master\fm.revealator.jquery.js" />
+    <None Include="wwwroot\site2\js\revealator-master\fm.revealator.jquery.min.js" />
+    <None Include="wwwroot\site2\js\revealator-master\fm.revealator.jquery.min.map" />
     <None Include="wwwroot\site\fonts\bpicons\bpicons.svg" />
     <None Include="wwwroot\site\fonts\bpmenu\bpmenu.dev.svg" />
     <None Include="wwwroot\site\fonts\bpmenu\bpmenu.svg" />

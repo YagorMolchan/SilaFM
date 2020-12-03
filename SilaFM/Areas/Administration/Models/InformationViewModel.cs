@@ -16,7 +16,7 @@ namespace Pras.Web.Areas.Administration.Models
 
         [Display(Name = "Текст")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
-        public string Text { get; set; }
+        public virtual string Text { get; set; }
 
         [Display(Name = "Добавлено")]
         [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]

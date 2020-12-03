@@ -1,0 +1,121 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Pras.Web.Models.Forms
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<!--[if lt IE 7]><html lang="ru" class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html lang="ru" class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html lang="ru" class="lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="ru">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title | Sila.FM</title>
+    <meta name="description" content="@ViewBag.MetaDescription" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="~/site/img/favicon.png" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/site/libs/bootstrap/bootstrap.css" />
+        <link rel="stylesheet" href="~/site/libs/fontawesome/css/fontawesome-all.min.css" />
+        <link rel="stylesheet" href="~/site/css/fonts.css" />
+        <link rel="stylesheet" href="~/site/css/main.css" />
+        <link rel="stylesheet" href="~/site/css/media.css" />
+        <link rel="stylesheet" href="~/site/css/developer.css" />
+        <link rel="stylesheet" href="~/site/libs/fancybox/jquery.fancybox.css" />
+        <script src="~/site/js/modernizr.custom.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/site/libs/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/site/libs/fontawesome/css/fontawesome-all.min.css" />
+        <link rel="stylesheet" href="~/site/css/bundle.min.css" />
+        <link rel="stylesheet" href="~/site/css/developer.css" />
+        <link rel="stylesheet" href="~/site/libs/fancybox/jquery.fancybox.min.css" />
+        <script src="~/site/js/modernizr.custom.js"></script>
+    </environment>
+    @RenderSection("Styles", false)
+</head>
+<body data-ng-app="clientApp" class="country-@HttpContextAccessor.HttpContext.Session.GetString("CountryCode")">
+    <header>
+        <!--left Navigators-->
+        <div class="leftnavbar">
+            <ul id="navigationMenu">
+                <li><a class="cabinet" href="@Url.Action("Order", "Home")"><span>ONLINE ЗАКАЗ</span></a></li>
+                <li><a class="hronomer" href="@Url.Action("Chronomer", "Home")"><span>ХРОНОМЕР</span></a></li>
+                <li><a class="pagemeter" href="@Url.Action("Pages", "Home")"><span>СТРАНИЦЕМЕР</span></a></li>
+                <li><a class="contact" href="@Url.Action("Contact", "Home")"><span>КОНТАКТЫ</span></a></li>
+                <li><a class="online_zakaz" href="@Url.Action("Cabinet", "Home")"><span>ЛИЧНЫЙ КАБИНЕТ</span></a></li>
+            </ul>
+        </div>
+        <!--Шапка-->
+        <div class="top_header">
+            <div class="header_topline">
+                <div class="container">
+                    @await Component.InvokeAsync("HeaderContent")
+                </div>
+            </div>
+            <div class="menu">
+                @Html.Partial("_Menu")
+            </div>
+        </div>
+    </header>
+    <section>
+        @Html.Partial("_Helper", new OrderCallFormModel())
+        <div class="container-fluid">
+            @RenderSection("Slider", false)
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+        @RenderSection("AfterContent", false)
+    </section>
+    @RenderSection("Counters", false)
+    <footer id="footer">
+        @Html.Partial("_Footer")
+    </footer>
+    @RenderSection("Modals", false)
+    @Html.Partial("_Questionare", new QuestionareFormModel())
+
+    <environment include="Development">
+        <!--[if lt IE 9]>
+        <script src="~/site/libs/html5shiv/es5-shim.min.js"></script>
+        <script src="~/site/libs/html5shiv/html5shiv.min.js"></script>
+        <script src="~/site/libs/html5shiv/html5shiv-printshiv.min.js"></script>
+        <script src="~/site/libs/respond/respond.min.js"></script>
+        <![endif]-->
+        <script src="~/site/libs/jquery/jquery-3.1.1.min.js"></script>
+        <script src="~/site/libs/spincrement/jquery.spincrement.min.js"></script>
+        <script src="~/site/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="~/site/libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
+        <script src="~/site/libs/waypoints/waypoints-1.6.2.min.js"></script>
+        <script src="~/site/libs/scrollto/jquery.scrollTo.min.js"></script>
+        <!-- Add fancyBox -->
+        <script src="~/site/libs/fancybox/jquery.fancybox.pack.js"></script>
+        <!-- Add angular -->
+        <script src="~/angular/angular.js"></script>
+        <script src="~/angular/controllers/client/clientApp.js"></script>
+        <script src="~/angular/controllers/client/callController.js"></script>
+
+        <script src="~/site/js/common.js"></script>
+        <script src="~/site/js/cbpHorizontalSlideOutMenu.js"></script>
+        <script src="~/site/js/main.js"></script>
+        @Html.Partial("_ValidationScriptsPartial")
+    </environment>
+    <environment exclude="Development">
+        <!--[if lt IE 9]>
+            <script src="~/site/libs/html5shiv/es5-shim.min.js"></script>
+            <script src="~/site/libs/html5shiv/html5shiv.min.js"></script>
+            <script src="~/site/libs/html5shiv/html5shiv-printshiv.min.js"></script>
+            <script src="~/site/libs/respond/respond.min.js"></script>
+        <![endif]-->
+        <script src="~/angular/angular.js"></script>
+        <script src="~/angular/controllers/client/clientApp.js"></script>
+        <script src="~/angular/controllers/client/callController.js"></script>
+        <script src="~/site/js/bundle.min.js"></script>
+        @Html.Partial("_ValidationScriptsPartial")
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

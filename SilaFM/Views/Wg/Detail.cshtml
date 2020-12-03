@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td>Возраст</td>
-                        <td class="cursivtext">@Model.VoiceAge.GetLocalizedDescription()</td>
+                        <td class="cursivtext">@(string.Join("; ", Model.ListVoiceAge))</td>
                     </tr>
                     <tr>
                         <td>Национальность</td>
@@ -36,15 +36,15 @@
                     </tr>
                     <tr>
                         <td>Стоимость до 30 слов</td>
-                        <td class="cursivtext">@Model.Price30 @Model.GetCurrency</td>
+                        <td class="cursivtext">@Model.Price30 @Model.GetCurrency(Model.Price30)</td>
                     </tr>
                     <tr>
-                        <td>Стоимость до 90 слов</td>
-                        <td class="cursivtext">@Model.Price90 @Model.GetCurrency</td>
+                        <td>Стоимость до 70 слов</td>
+                        <td class="cursivtext">@Model.Price90 @Model.GetCurrency(Model.Price90)</td>
                     </tr>
                     <tr>
                         <td>Стоимость за 1 стр</td>
-                        <td class="cursivtext">@Model.PricePage @Model.GetCurrency</td>
+                        <td class="cursivtext">@Model.PricePage @Model.GetCurrency(Model.PricePage)</td>
                     </tr>
                 </tbody>
             </table>
@@ -118,7 +118,7 @@
                         <div class="col-md-5">
                             <p class="smalltext">@item.Name</p>
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="@item.Path"></iframe>
+                                <iframe class="embed-responsive-item" src="@item.EmbedPath"></iframe>
                             </div>
                         </div>
                         if (i % 2 > 0)

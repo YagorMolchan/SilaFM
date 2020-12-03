@@ -2,120 +2,148 @@
 @using Pras.Web.Models.Forms
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
-<!--[if lt IE 7]><html lang="ru" class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
-<!--[if IE 7]><html lang="ru" class="lt-ie9 lt-ie8"><![endif]-->
-<!--[if IE 8]><html lang="ru" class="lt-ie9"><![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="ru">
-<!--<![endif]-->
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title | Sila.FM</title>
-    <meta name="description" content="@ViewBag.MetaDescription" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="~/site/img/favicon.png" />
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewBag.MetaDescription">
+    <title>@ViewBag.Title | Sila FM</title>
     <environment include="Development">
-        <link rel="stylesheet" href="~/site/libs/bootstrap/bootstrap.css" />
-        <link rel="stylesheet" href="~/site/libs/fontawesome/css/fontawesome-all.min.css" />
-        <link rel="stylesheet" href="~/site/css/fonts.css" />
-        <link rel="stylesheet" href="~/site/css/main.css" />
-        <link rel="stylesheet" href="~/site/css/media.css" />
-        <link rel="stylesheet" href="~/site/css/developer.css" />
-        <link rel="stylesheet" href="~/site/libs/fancybox/jquery.fancybox.css" />
-        <script src="~/site/js/modernizr.custom.js"></script>
+        <link rel="stylesheet" href="~/site2/css/fm.revealator.jquery.min.css">
+        <link rel="stylesheet" href="~/site2/css/style.css">
+        <link rel="stylesheet" href="~/site2/css/dev.css">
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="~/site/libs/bootstrap/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/site/libs/fontawesome/css/fontawesome-all.min.css" />
-        <link rel="stylesheet" href="~/site/css/bundle.min.css" />
-        <link rel="stylesheet" href="~/site/css/developer.css" />
-        <link rel="stylesheet" href="~/site/libs/fancybox/jquery.fancybox.min.css" />
-        <script src="~/site/js/modernizr.custom.js"></script>
+        <link rel="stylesheet" href="~/site2/css/fm.revealator.jquery.min.css">
+        <link rel="stylesheet" href="~/site2/css/style.css">
+        <link rel="stylesheet" href="~/site2/css/dev.css">
     </environment>
     @RenderSection("Styles", false)
 </head>
-<body data-ng-app="clientApp" class="country-@HttpContextAccessor.HttpContext.Session.GetString("CountryCode")">
+
+<body>
+    <!-- <div id="preloader" class="visible">
+    </div> -->
+    @Html.Partial("_SvgStore")
     <header>
-        <!--left Navigators-->
-        <div class="leftnavbar">
-            <ul id="navigationMenu">
-                <li><a class="cabinet" href="@Url.Action("Order", "Home")"><span>ONLINE ЗАКАЗ</span></a></li>
-                <li><a class="online_zakaz" href="@Url.Action("Order", "Home")"><span>ЛИЧНЫЙ КАБИНЕТ</span></a></li>
-                <li><a class="hronomer" href="@Url.Action("Chronomer", "Home")"><span>ХРОНОМЕР</span></a></li>
-                <li><a class="pagemeter" href="@Url.Action("Pages", "Home")"><span>СТРАНИЦЕМЕР</span></a></li>
-                <li><a class="contact" href="@Url.Action("Contact", "Home")"><span>КОНТАКТЫ</span></a></li>
-            </ul>
-        </div>
-        <!--Шапка-->
-        <div class="top_header">
-            <div class="header_topline">
-                <div class="container">
-                    @await Component.InvokeAsync("HeaderContent")
+        <a href="@Url.Action("Index", "Home")">
+            <img class="menu-logo" src="~/site2/img/SilaFM_logo.png" alt="logotip-Sila-FM">
+        </a>
+        <ul class="menu">
+            <li class="menu-item menu-dropdown">
+                <a href="@Url.Action("Speakers", "Home")">
+                    <svg class="menu-polygon">
+                        <use href="#menu-corner" />
+                    </svg>
+                    Дикторы
+                </a>
+                <div class="dropdown-content">
+                    <ul class="content-items">
+                        <li class="down-item"><a href="@Url.Action("SpeakersRu", "Home")">Дикторы россии</a></li>
+                        <li class="down-item"><a href="@Url.Action("SpeakersUk", "Home")">Дикторы Украины</a></li>
+                        <li class="down-item"><a href="@Url.Action("SpeakersFor", "Home")">Иностранные дикторы</a></li>
+                        <li class="down-item"><a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a></li>
+                        <li class="down-item"><a href="@Url.Action("SpeakersParodists", "Home")">Пародисты</a></li>
+                        <li class="down-item"><a href="@Url.Action("SpeakersChild", "Home")">Детские голоса</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="menu-item menu-dropdown">
+                <a href="#">
+                    <svg class="menu-polygon">
+                        <use href="#menu-corner" />
+                    </svg>
+                    Услуги
+                </a>
+                <div class="dropdown-content">
+                    <ul class="content-items">
+                        <li class="down-item"><a href="@Url.Action("Scenario", "Home")">Сценарии</a></li>
+                        <li class="down-item"><a href="@Url.Action("Audio", "Home")">Аудиоролики</a></li>
+                        <li class="down-item"><a href="@Url.Action("Games", "Home")">Озвучивание игр, сказок, квестов</a></li>
+                        <li class="down-item"><a href="@Url.Action("Video", "Home")">Озвучивание видеороликов</a></li>
+                        <li class="down-item"><a href="@Url.Action("VideoCreating", "Home")">Создание видеороликов</a></li>
+                        <li class="down-item"><a href="@Url.Action("Music", "Home")">Музыкальные подложки</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="menu-item"><a href="@Url.Action("Payment", "Home")">Оплата</a></li>
+            <li class="menu-item"><a href="@Url.Action("Contact", "Home")">Контакты</a></li>
+        </ul>
+        <ul class="header-number">
+            <li class="number-city">Киев<span class="phone-number">+38 /044/ 545 77 13</span></li>
+            <li class="number-city">Москва <span class="phone-number">+7 /800/ 551 0 551</span></li>
+        </ul>
+        <div class="burger">
+            <div id="myNav" class="overlay">
+                <a class="closebtn" onclick="closeNav()">
+                    <svg class="icon-close">
+                        <use href="#close" />
+                    </svg>
+                </a>
+                <div class="overlay-content">
+                    <div class="dropdown-burger">
+                        <a class="for-droptmenu dropbtn-burger">
+                            <svg class="menu-polygon-burger">
+                                <use href="#menu-corner" />
+                            </svg>
+                            Дикторы
+                        </a>
+                        <div class="dropdown-content-burger">
+                            <a href="@Url.Action("SpeakersRu", "Home")">Дикторы россии</a>
+                            <a href="@Url.Action("SpeakersUk", "Home")">Дикторы Украины</a>
+                            <a href="@Url.Action("SpeakersFor", "Home")">Иностранные дикторы</a>
+                            <a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a>
+                            <a href="@Url.Action("SpeakersParodists", "Home")">Пародиств</a>
+                            <a href="@Url.Action("SpeakersChild", "Home")">Детские голоса</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-burger">
+                        <a class="for-droptmenu dropbtn-burger">
+                            <svg class="menu-polygon-burger">
+                                <use href="#menu-corner" />
+                            </svg>Услуги
+                        </a>
+                        <div class="dropdown-content-burger">
+                            <a href="@Url.Action("Scenario", "Home")">Сценарии</a>
+                            <a href="@Url.Action("Audio", "Home")">Аудиоролики</a>
+                            <a href="@Url.Action("Games", "Home")">Озвучивание игр, сказок, квестов</a>
+                            <a href="@Url.Action("Video", "Home")">Озвучивание видеороликов</a>
+                            <a href="@Url.Action("VideoCreating", "Home")">Создание видеороликов</a>
+                            <a href="@Url.Action("Music", "Home")">Музыкальные подложки</a>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("Payment", "Home")">Оплата</a>
+                    <a href="@Url.Action("Contact", "Home")">Контакты</a>
+                    <div class="contacts">
+                        <p class="contact-elem">Киев<span class="phone-number">+38 /044/ 545 77 13</span></p>
+                        <p class="contact-elem">Москва <span class="phone-number">+7 /800/ 551 0 551</span></p>
+                    </div>
                 </div>
             </div>
-            <div class="menu">
-                @Html.Partial("_Menu")
-            </div>
+            <p class="icon-menu" onclick="openNav()">
+                <svg class="icon-burger">
+                    <use href="#burger" />
+                </svg>
+            </p>
         </div>
     </header>
-    <section>
-        @Html.Partial("_Helper", new OrderCallFormModel())
-        <div class="container-fluid">
-            @RenderSection("Slider", false)
-        </div>
-        <div class="container">
-            @RenderBody()
-        </div>
-        @RenderSection("AfterContent", false)
-    </section>
-    @RenderSection("Counters", false)
-    <footer id="footer">
-        @Html.Partial("_Footer")
-    </footer>
-    @RenderSection("Modals", false)
-    @Html.Partial("_Questionare", new QuestionareFormModel())
-
-    <environment include="Development">
-        <!--[if lt IE 9]>
-        <script src="~/site/libs/html5shiv/es5-shim.min.js"></script>
-        <script src="~/site/libs/html5shiv/html5shiv.min.js"></script>
-        <script src="~/site/libs/html5shiv/html5shiv-printshiv.min.js"></script>
-        <script src="~/site/libs/respond/respond.min.js"></script>
-        <![endif]-->
-        <script src="~/site/libs/jquery/jquery-3.1.1.min.js"></script>
-        <script src="~/site/libs/spincrement/jquery.spincrement.min.js"></script>
-        <script src="~/site/libs/bootstrap/bootstrap.min.js"></script>
-        <script src="~/site/libs/jquery-mousewheel/jquery.mousewheel.min.js"></script>
-        <script src="~/site/libs/waypoints/waypoints-1.6.2.min.js"></script>
-        <script src="~/site/libs/scrollto/jquery.scrollTo.min.js"></script>
-        <!-- Add fancyBox -->
-        <script src="~/site/libs/fancybox/jquery.fancybox.pack.js"></script>
-        <!-- Add angular -->
-        <script src="~/angular/angular.js"></script>
-        <script src="~/angular/controllers/client/clientApp.js"></script>
-        <script src="~/angular/controllers/client/callController.js"></script>
-
-        <script src="~/site/js/common.js"></script>
-        <script src="~/site/js/cbpHorizontalSlideOutMenu.js"></script>
-        <script src="~/site/js/main.js"></script>
-        @Html.Partial("_ValidationScriptsPartial")
-    </environment>
-    <environment exclude="Development">
-        <!--[if lt IE 9]>
-            <script src="~/site/libs/html5shiv/es5-shim.min.js"></script>
-            <script src="~/site/libs/html5shiv/html5shiv.min.js"></script>
-            <script src="~/site/libs/html5shiv/html5shiv-printshiv.min.js"></script>
-            <script src="~/site/libs/respond/respond.min.js"></script>
-        <![endif]-->
-        <script src="~/angular/angular.js"></script>
-        <script src="~/angular/controllers/client/clientApp.js"></script>
-        <script src="~/angular/controllers/client/callController.js"></script>
-        <script src="~/site/js/bundle.min.js"></script>
-        @Html.Partial("_ValidationScriptsPartial")
-    </environment>
-
-    @RenderSection("Scripts", required: false)
+    <main id="menu">
+        @RenderBody()
+        <footer>
+            @Html.Partial("_Footer")
+        </footer>
+    </main>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
+    <script src="~/site2/js/revealator-master/fm.revealator.jquery.js"></script>
+    <script src="~/site2/js/index.js"></script>
+    <script src="~/site2/js/hronomer.js"></script>
+    <script src="~/site2/js/pagemer.js"></script>
+    @Html.Partial("_ValidationScriptsPartial")
+    @RenderSection("Scripts", false)
 </body>
+
 </html>

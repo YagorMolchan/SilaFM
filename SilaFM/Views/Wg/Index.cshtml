@@ -48,9 +48,9 @@
                                 <td><a class="linkvoice" href="@Url.Action("Inner", "Wg", new { url = item.Url })" target="_blank">@item.Name</a></td>
                                 <td>@item.Status.GetLocalizedDescription()</td>
                                 <td>
-                                    @item.Price30 @item.GetCurrency / до 30 слов <br />
-                                    @item.Price90 @item.GetCurrency / до 90 слов <br />
-                                    @item.PricePage @item.GetCurrency / 1 стр.
+                                    @item.Price30 @item.GetCurrency(item.Price30) / до 30 слов <br />
+                                    @item.Price90 @item.GetCurrency(item.Price90) / до 70 слов <br />
+                                    @item.PricePage @item.GetCurrency(item.PricePage) / 1 стр.
                                 </td>
                                 <td>
                                     <audio controls>
@@ -87,9 +87,9 @@
                                 <td><a class="linkvoice" href="@Url.Action("Inner", "Wg", new { url = item.Url })" target="_blank">@item.Name</a></td>
                                 <td>@item.Status.GetLocalizedDescription()</td>
                                 <td>
-                                    @item.Price30 @item.GetCurrency / до 30 слов <br />
-                                    @item.Price90 @item.GetCurrency / до 90 слов <br />
-                                    @item.PricePage @item.GetCurrency / 1 стр.
+                                    @item.Price30 @item.GetCurrency(item.Price30) / до 30 слов <br />
+                                    @item.Price90 @item.GetCurrency(item.Price90) / до 70 слов <br />
+                                    @item.PricePage @item.GetCurrency(item.PricePage) / 1 стр.
                                 </td>
                                 <td>
                                     <audio controls>

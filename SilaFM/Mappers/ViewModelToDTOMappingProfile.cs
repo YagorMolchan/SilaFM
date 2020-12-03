@@ -10,6 +10,7 @@ namespace Pras.Web.Mappers
         {
             CreateMap<AudioViewModel, AudioDTO>();
             CreateMap<InformationViewModel, InformationDTO>();
+            CreateMap<ContactsViewModel, InformationDTO>();
             CreateMap<PersonViewModel, PersonDTO>();
             CreateMap<SpeakerViewModel, SpeakerDTO>();
             CreateMap<VideoViewModel, VideoDTO>();

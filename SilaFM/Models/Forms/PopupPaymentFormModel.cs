@@ -25,7 +25,7 @@ namespace Pras.Web.Models.Forms
         public string Amount { get; set; }
 
         [Display(Name = "Способ оплаты")]
-        [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
+        //[Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string PaymentMethod { get; set; }
 
         [Display(Name = "Плательщик")]
@@ -54,7 +54,7 @@ namespace Pras.Web.Models.Forms
         public string Email { get; set; }
 
         [Display(Name = "Документооборот")]
-        [Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
+        //[Required(ErrorMessage = "Пожалуйста, заполните поле \"{0}\"")]
         public string DocumentManagement { get; set; }
     }
 }

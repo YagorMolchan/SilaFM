@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Pras.Shared.Enums;
+using Pras.Shared.Enums.Extensions;
 using Pras.Web.Models.HelperModels;
 
 namespace Pras.Web.Models
@@ -12,7 +13,10 @@ namespace Pras.Web.Models
     public class FullSpeakerViewModel : SpeakerViewModel
     {
         public string Nationality { get; set; }
-        public VoiceAge VoiceAge { get; set; }
+        public string VoiceAge { get; set; }
+        public List<string> ListVoiceAge => (VoiceAge ?? "").Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+            .Select(p => Enum.Parse<VoiceAge>(p).GetLocalizedDescription()).ToList();
+
         public string Image { get; set; }
         public string DemoAdvertising { get; set; }
         public string DemoVoiceOver { get; set; }

@@ -1,0 +1,225 @@
+﻿.svg-store {
+    width: 0;
+    height: 0;
+}
+
+.menu-polygon {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    margin-left: -20px;
+    padding-top: 5px;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.menu-item {
+    display: inline-block;
+    text-transform: uppercase;
+    padding-top: 0;
+}
+
+.menu-polygon:hover {
+    display: initial;
+}
+
+.menu-item a {
+    text-decoration: none;
+    color: #000;
+}
+
+    .menu-item:hover > a,
+    .menu-item a:hover {
+        color: #671627;
+    }
+
+.menu-dropdown .menu-polygon {
+    stroke: #671627;
+    transition: transform 0.2s ease-in-out 0s
+}
+
+.menu-dropdown:hover .menu-polygon {
+    transform: rotate(-90deg);
+}
+
+.icon-close {
+    width: 22px;
+    height: 22px;
+}
+
+.icon-menu .icon-burger {
+    width: 42px;
+    height: 27px;
+}
+
+.menu-polygon-burger {
+    stroke: #fff;
+}
+
+.home-btn {
+    line-height: 70px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.box-svg {
+    width: 21px;
+    height: 12px;
+    display: block;
+}
+
+.btn-know-more {
+    display: inline-block;
+}
+
+.chronomer-results input {
+    background: transparent;
+    border: none;
+    color: inherit;
+    width: 40px;
+}
+
+.btn-general {
+    position: relative;
+    display: block;
+    margin: 135px auto 20px;
+}
+
+.modal-page .results {
+    margin: 20px 0;
+}
+
+.close-modal-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.icon-soc-email {
+    width: 22px;
+    height: 19px;
+}
+
+.icon-soc-viber {
+    width: 21px;
+    height: 22px;
+}
+
+.icon-soc-telegram {
+    width: 22px;
+    height: 20px;
+}
+
+.icon-soc-skype {
+    width: 23px;
+    height: 23px;
+}
+
+.icon-soc-instagram {
+    width: 21px;
+    height: 20px;
+}
+
+.icon-soc-twitter {
+    width: 21px;
+    height: 19px;
+}
+
+.base-box:hover p,
+.base-box:hover h4 {
+    color: rgb(199, 222, 225) !important;
+}
+
+.base-box .base-svg {
+    display: block;
+    fill: #39516e;
+}
+
+.base-box:hover .icon-soc {
+    fill: rgb(236, 246, 248);
+}
+
+.base-box:hover .base-svg {
+    fill: #C7DEE1;
+}
+
+.base-box .icon-soc {
+    fill: #404263;
+}
+
+.elem-svg:first-of-type {
+    margin-left: 0 !important;
+}
+
+.elem-svg a {
+    cursor: pointer;
+}
+
+.icon-playlist {
+    background: url('../img/girl.svg');
+    width: 44px;
+    height: 44px;
+    position: relative !important;
+    margin-left: 0 !important;
+    margin-top: -5px;
+    float: right;
+    margin-right: 20px !important;
+}
+
+    .icon-playlist.man-icon {
+        /*margin-left: 0;*/
+        background: url('../img/man.svg');
+    }
+
+.kind-item {
+    color: #3c4a69;
+}
+
+    .kind-item:hover {
+        background: linear-gradient(21.59deg,#483156 0%,#39516e 80.3%);
+        color: #c7dee1;
+    }
+
+    .kind-item .txt {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 26px;
+        text-transform: uppercase;
+        width: 147px;
+        margin-left: 0px;
+        margin-top: 12px;
+    }
+
+    .kind-item.active svg,
+    .kind-item:hover svg,
+    .select-pay svg {
+        fill: #C7DEE1;
+    }
+    .kind-item.active img:last-child,
+    .kind-item:hover img:last-child {
+        display: block!important;
+    }
+
+    .kind-item svg {
+        fill: #3c4a69;
+    }
+
+.field-validation-error {
+    display: block;
+    text-align: center;
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.playlist-element:nth-of-type(n+2) {
+    background: linear-gradient(19.81deg,#473a60 8.29%,#305e76 92.17%);
+}
+
+.playlist-element:nth-of-type(n+3) {
+    background: linear-gradient(196.17deg,#1e7a89 4.76%,#3f486a 100%);
+}
+.svg-boxes svg {
+    fill: #fff;
+}

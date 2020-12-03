@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Pras.Shared.Enums;
 using Pras.Shared.Enums.Extensions;
@@ -14,6 +15,7 @@ namespace Pras.Web.Models
         public SpeakerTypes Type { get; set; }
         public string Country { get; set; }
         public string Name { get; set; }
+        public string Summary { get; set; }
         public string Url { get; set; }
 
         public int Rating { get; set; }
@@ -60,10 +62,13 @@ namespace Pras.Web.Models
             }
         }
 
-        public DateTime VacationStartDate { get; set; }
-        public DateTime VacationEndDate { get; set; }
+        public DateTime? VacationStartDate { get; set; }
+        public DateTime? VacationEndDate { get; set; }
 
         public string Comment { get; set; }
+
+        public string CommentRaw => Comment?.Replace(Environment.NewLine, "<br/>");
+
         public DateTime Created { get; set; }
 
         public string GroupTitle
@@ -79,7 +84,7 @@ namespace Pras.Web.Models
                         title += " России";
                     if (Country == SpeakerCountries.Ukraine.ToString())
                         title += " Украины";
-                    title += ". " + EnumExtensions.GetDescription(Gender);
+                    title += ". " + (Gender == Gender.Male ? "Мужские голоса" : "Женские голоса");
                     return title;
                 }
                 if (Type == SpeakerTypes.Speaker)
@@ -91,7 +96,7 @@ namespace Pras.Web.Models
                         title += " Украины";
                     if (Country == SpeakerCountries.Other.ToString())
                         title = "Иностранные дикторы";
-                    title += ". " + EnumExtensions.GetDescription(Gender);
+                    title += ". " + (Gender == Gender.Male ? "Мужские голоса" : "Женские голоса");
                     return title;
                 }
 
@@ -110,18 +115,19 @@ namespace Pras.Web.Models
             {"24", "1 день" },
         };
 
-        public string GetCurrency
+        public string GetCurrency(string price)
         {
-            get
+            if (Regex.IsMatch(price, "^([^0-9]*)$"))
             {
-                switch (Currency)
-                {
-                    case Currency.Dollars: return "$";
-                    case Currency.Euro: return "Euro";
-                    case Currency.Hryvnia: return "грн.";
-                    case Currency.Rubles: return "руб.";
-                    default: return Currency.ToString();
-                }
+                return "";
+            }
+            switch (Currency)
+            {
+                case Currency.Dollars: return "$";
+                case Currency.Euro: return "Euro";
+                case Currency.Hryvnia: return "грн.";
+                case Currency.Rubles: return "руб.";
+                default: return Currency.ToString();
             }
         }
     }

@@ -1,0 +1,104 @@
+﻿@using Newtonsoft.Json
+@using Pras.Web.Areas.Administration.Models.HelperModels
+@model Pras.Web.Areas.Administration.Models.ContactsViewModel
+
+@{
+    ViewBag.Title = "Контакты";
+    Layout = "_Layout";
+    ViewBag.ngController = "data-ng-controller=contactsController";
+    ViewBag.Breadcrumb = new List<UIBreadcrumbs>
+{
+new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
+new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
+};
+
+    Html.RenderPartial("_ResultMessages");
+}
+@section Styles{
+    <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" />
+}
+@section Scripts{
+    <script src="~/lib/moment/moment.min.js"></script>
+    <script src="~/lib/moment/moment-with-locales.min.js"></script>
+    <script src="~/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    @Html.Partial("_ValidationScriptsPartial")
+
+    <script src="~/angular/angular.min.js"></script>
+    <script src="~/angular/controllers/admin/adminApp.js"></script>
+    <script>var model = @Html.Raw(JsonConvert.SerializeObject(Model));</script>
+    <script src="~/angular/controllers/admin/contactsController.js"></script>
+}
+<div class="col-sm-12 col-md-7 col-lg-9">
+    <div class="box box-danger">
+        <form action="@Url.Action("Edit", "Contacts")" method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Type)
+            <div class="box-header with-border">
+                <h3 class="box-title">@(Model.IsNew ? "Создание" : "Редактирование")</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Contacts.Email, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Contacts.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Contacts.Email)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Contacts.Address, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Contacts.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Contacts.Address)
+                </div>
+                <hr />
+                <h4>Телефоны <a href="#" data-ng-click="addItem($event, model.Contacts.PhonesList)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                @Html.Partial("_PhoneEditRow", new Item(), new ViewDataDictionary(ViewData) { { "Array", "Contacts.PhonesList" } })
+                <hr />
+                <h4>Социальные сети <a href="#" data-ng-click="addSocial($event)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                @Html.Partial("_SocialEditRow", new SocialContact())
+                <hr />
+                <h4>График работы <a href="#" data-ng-click="addItem($event, model.Contacts.ScheduleList)" title="Добавить"><i class="fa fa-plus-circle"></i></a></h4>
+                @Html.Partial("_PhoneEditRow", new Item(), new ViewDataDictionary(ViewData){{"Array", "Contacts.ScheduleList" }})
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Created, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Created, new { @class = "form-control datetimepicker" })
+                        @Html.ValidationMessageFor(model => model.Created)
+                    </div>
+                </div>
+                <hr />
+                <h3>Поисковая оптимизация</h3>
+                <div class="well">
+                    <div class="form-group">
+                        <div class="callout callout-info">
+                            <h4>Заголовок.</h4>
+                            <p>Заголовок страницы сайта в выдаче поисковиков. Должен содержать ключевые слова, быть информативным и привлекательным. Как правило, 50-80 символов.</p>
+                            <p class="help-block">Пример: Сила.ФМ - креативное агентство звука</p>
+                        </div>
+                        @Html.LabelFor(m => m.MetaTitle, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control" })
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="callout callout-info">
+                            <h4>Описание.</h4>
+                            <p>Краткое описание страницы сайта в выдаче поисковиков, используется поисковыми системами для индексации страницы. Отображается после ссылки при поиске страниц в поисковике.</p>
+                            <p class="help-block">Пример: Агентство Звука Сила.ФМ оказывает услуги по изготовлению аудио- и радиороликов, озвучке фильмов, анимации, корпоративного видео, записи аудиорекламы и радиорекламы.</p>
+                        </div>
+                        @Html.LabelFor(m => m.MetaDescription, new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.MetaDescription, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <input type="submit" class="btn btn-danger btn-lg pull-right" value="Сохранить" />
+            </div>
+        </form>
+    </div>
+</div>

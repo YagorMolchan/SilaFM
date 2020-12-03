@@ -33,15 +33,15 @@ namespace Pras.DAL.Entities
         public string Block5Link { get; set; }
         public string Block6Link { get; set; }
 
-        public string FullContacts { get; set; }
-        public string Projects { get; set; }
-        public string Partners { get; set; }
+        public string FullContacts { get; set; }//remove
+        public string Projects { get; set; }//remove
+        public string Partners { get; set; }//remove
 
         //Footer
         public string Principles { get; set; }
-        public string Shedule { get; set; }
-        public string Contacts { get; set; }
-        public string Address { get; set; }
+        public string Shedule { get; set; }//remove
+        public string Contacts { get; set; }//remove
+        public string Address { get; set; }//remove
         public string Partnership { get; set; }
         //SEO
         public DateTime Created { get; set; }

@@ -102,3 +102,15 @@
         box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         cursor: pointer;
     }
+
+    
+.valueLabel {
+    font-size: 0!important;
+}
+
+
+.simpletext:first-line, 
+.simpletext:first-letter {
+    margin: 0 !important;
+    padding: 0 !important;
+}

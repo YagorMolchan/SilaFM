@@ -15,5 +15,8 @@
         SpeakersVocalist,
         SpeakersVip,
         Video,
+        SpeakersFederal,
+        Speakers,
+        Contacts
     }
 }

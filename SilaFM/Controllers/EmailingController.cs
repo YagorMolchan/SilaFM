@@ -112,7 +112,8 @@ namespace Pras.Web.Controllers
                 TempData["OrderModel"] = JsonConvert.SerializeObject(new OrderViewModel { SpeakerFormModel = model });
             }
             TempData["Tab"] = "speakers";
-            return RedirectToAction("Order", "Home");
+            //return RedirectToAction("Order", "Home");
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         [HttpPost]

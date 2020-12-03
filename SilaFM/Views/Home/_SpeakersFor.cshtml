@@ -9,8 +9,9 @@
 
 <div class="tabbles tabs-left langs">
     <ul class="nav nav-tabs">
-        @foreach(var lang in langs){
-            <li class="@(i==0?"active":"")"><a href="#@(lang)" data-toggle="tab">@lang</a></li>
+        @foreach (var lang in langs)
+        {
+            <li class="@(i==0?"active":"")" style="overflow-wrap: break-word;"><a href="#@(lang.Replace(" ", "_"))" data-toggle="tab">@lang</a></li>
             i++;
         }
     </ul>
@@ -18,111 +19,114 @@
         @{i = 0;}
         @foreach (var lang in langs)
         {
-            <div class="tab-pane @(i==0?"active":"")" id="@(lang)">
+            <div class="tab-pane @(i==0?"active":"")" id="@(lang.Replace(" ", "_"))">
                 <table class="features-table search-bottom">
                     <thead>
-                    <tr style="height: 70px;">
-                        <td class="grey players">Слушать</td>
-                        <td>Фамилия, имя диктора</td>
-                        <td class="grey">Статус</td>
-                        @if ((bool) ViewData["isLang"])
-                        {
-                            <td class="grey">Язык</td>
-                        }
-                        @if (ViewData["price"].ToString() != "у.е.")
-                        {
-                            <td class="grey">Цена до 30 слов,<br> @ViewData["price"].</td>
-                            <td class="grey">Цена до 90 слов,<br> @ViewData["price"].</td>
-                        }
-                        else
-                        {
-                            <td class="grey">Цена,<br> @ViewData["price"]</td>
-                        }
-                        <td class="green">Сроки выполнения*</td>
-                        <td class="grey">Скачать</td>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <td class="grey"></td>
-                        <td nowrap></td>
-                        <td class="grey"></td>
-                        @if ((bool) ViewData["isLang"])
-                        {
-                            <td class="grey" colspan="2">@(ViewData["price"].ToString() == "у.е." ? "Цены указаны в долларах" : "")</td>
-                        }
-                        else if (ViewData["price"].ToString() == "у.е.")
-                        {
-                            <td class="grey">Цены указаны в долларах</td>
-                        }
-                        else
-                        {
-                            if (ViewData["price"].ToString() == "грн")
+                        <tr style="height: 70px;">
+                            <td class="grey players">Слушать</td>
+                            <td>Фамилия, имя диктора</td>
+                            <td class="grey">Статус</td>
+                            @if ((bool)ViewData["isLang"])
                             {
-                                <td class="grey" colspan="2">Цены указаны в гривнах</td>
-                            }
-                            else
-                            {
-                                <td class="grey" colspan="2"></td>
-                            }
-                        }
-                        <td class="green">*после момента оплаты</td>
-                        <td class="grey"></td>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    @foreach (var item in Model.Where(p => p.VoiceLanguages.Any(l => l.Name == lang)))
-                    {
-                        var status = EnumExtensions.GetDescription(item.Status);
-                        <tr>
-                            <td class="grey">
-                                <audio controls><source src="@item.Demo" type="audio/mpeg"></audio>
-                            </td>
-                            <td>
-                                @if (item.IsNovelty)
-                                {
-                                    <img class="new_img" alt="new" src="~/site/img/new.gif">
-                                }
-                                    <a class="white" title="заказать: @item.Name" href="@Url.Action("Inner", new {url = item.Url})">@item.Name @(item.VacationEndDate > DateTime.Today ? $"(н/д до {item.VacationEndDate.ToShortDateString()})" : "")</a>
-                            </td>
-                            <td class="grey">
-                                @switch (item.Status)
-                                {
-                                    case SpeakerStatuses.InStudio:
-                                        <p style="display: none;">2</p>
-                                        <img src="~/site/img/green.png" alt="@status" title="@status" style="width: 30px;">
-                                        break;
-                                    case SpeakerStatuses.Order:
-                                        <p style="display: none;">1</p>
-                                        <img src="~/site/img/yellow.png" alt="@status" title="@status" style="width: 30px;">
-                                        break;
-                                    case SpeakerStatuses.OutOfService:
-                                        <img src="~/site/img/red.png" alt="@status" title="@status" style="width: 30px;">
-                                        break;
-                                    case SpeakerStatuses.Offline:
-                                        <img src="~/site/img/grey.png" alt="@status" title="@status" style="width: 30px;">
-                                        break;
-                                }
-                            </td>
-                            @if ((bool) ViewData["isLang"])
-                            {
-                                <td class="grey">@String.Join(", ", item.VoiceLanguages.Select(p => p.Name))</td>
+                                <td class="grey">Язык</td>
                             }
                             @if (ViewData["price"].ToString() != "у.е.")
                             {
-                                <td class="grey">@item.Price30</td>
-                                <td class="grey">@item.Price90</td>
+                                <td class="grey">Цена до 30 слов,<br> @ViewData["price"].</td>
+                                <td class="grey">Цена до 70 слов,<br> @ViewData["price"].</td>
                             }
                             else
                             {
-                                <td class="grey">@item.Price30</td>
+                                <td class="grey">Цена,<br> @ViewData["price"]</td>
                             }
-                            <td class="green">@item.TermsStr</td>
-                            <td class="grey">
-                                <a href="@item.Demo" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a>
-                            </td>
+                            <td class="green">Сроки выполнения*</td>
+                            <td class="grey">Заказать</td>
                         </tr>
-                    }
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td class="grey"></td>
+                            <td nowrap></td>
+                            <td class="grey"></td>
+                            @if ((bool)ViewData["isLang"])
+                            {
+                                <td class="grey" colspan="2">@(ViewData["price"].ToString() == "у.е." ? "Цены указаны в долларах" : "")</td>
+                            }
+                            else if (ViewData["price"].ToString() == "у.е.")
+                            {
+                                <td class="grey">Цены указаны в долларах</td>
+                            }
+                            else
+                            {
+                                if (ViewData["price"].ToString() == "грн")
+                                {
+                                    <td class="grey" colspan="2">Цены указаны в гривнах</td>
+                                }
+                                else
+                                {
+                                    <td class="grey" colspan="2"></td>
+                                }
+                            }
+                            <td class="green">*после момента оплаты</td>
+                            <td class="grey"></td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model.Where(p => p.VoiceLanguages.Any(l => l.Name.IndexOf(lang) >= 0)))
+                        {
+                            var status = EnumExtensions.GetDescription(item.Status);
+                            <tr>
+                                <td class="grey" >
+                                    <audio controls style="width: 250px"><source src="@item.Demo" type="audio/mpeg"></audio>
+                                </td>
+                                <td>
+                                    @if (item.IsNovelty)
+                                    {
+                                        <img class="new_img" alt="new" src="~/site/img/new.gif">
+                                    }
+                                    <a class="white" title="заказать: @item.Name" style="max-width: 100px;overflow-wrap: anywhere;" href="@Url.Action("Inner", new {url = item.Url})">
+                                        @item.Name @(item.VacationEndDate.HasValue && item.VacationEndDate > DateTime.Today ? $"(н/д до {item.VacationEndDate.Value.ToShortDateString()})" : "")
+                                    </a>
+                                </td>
+                                <td class="grey">
+                                    @switch (item.Status)
+                                    {
+                                        case SpeakerStatuses.InStudio:
+                                            <p style="display: none;">2</p>
+                                            <img src="~/site/img/green.png" alt="@status" title="@status" style="width: 30px;">
+                                            break;
+                                        case SpeakerStatuses.Order:
+                                            <p style="display: none;">1</p>
+                                            <img src="~/site/img/yellow.png" alt="@status" title="@status" style="width: 30px;">
+                                            break;
+                                        case SpeakerStatuses.OutOfService:
+                                            <img src="~/site/img/red.png" alt="@status" title="@status" style="width: 30px;">
+                                            break;
+                                        case SpeakerStatuses.Offline:
+                                            <img src="~/site/img/grey.png" alt="@status" title="@status" style="width: 30px;">
+                                            break;
+                                    }
+                                </td>
+                                @if ((bool)ViewData["isLang"])
+                                {
+                                    <td class="grey" style="max-width: 100px;overflow-wrap: break-word;">@String.Join(", ", item.VoiceLanguages.Select(p => p.Name))</td>
+                                }
+                                @if (ViewData["price"].ToString() != "у.е.")
+                                {
+                                    <td class="grey">@item.Price30</td>
+                                    <td class="grey">@item.Price90</td>
+                                }
+                                else
+                                {
+                                    <td class="grey">@item.Price30</td>
+                                }
+                                <td class="green">@item.TermsStr</td>
+                                <td class="grey">
+                                    @*<a href="@item.Demo" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a>*@
+                                    <a href="@Url.Action("Order", "Home", new { speaker = item.Name })"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -134,105 +138,105 @@
 
 
 @*<table class="features-table">
-    <thead>
-        <tr style="height: 70px;">
-            <td class="grey players">Слушать</td>
-            <td>Фамилия, имя диктора</td>
-            <td class="grey">Статус</td>
-            @if ((bool)ViewData["isLang"])
-            {
-            <td class="grey">Язык</td>
-            }
-            @if (ViewData["price"].ToString() != "у.е.")
-            {
-            <td class="grey">Цена до 30 слов,<br> @ViewData["price"].</td>
-            <td class="grey">Цена до 90 слов,<br> @ViewData["price"].</td>
-            }
-            else
-            {
-            <td class="grey">Цена,<br> @ViewData["price"]</td>
-            }
-            <td class="green">Сроки выполнения*</td>
-            <td class="grey">Скачать</td>
-        </tr>
-    </thead>
-    <tfoot>
-        <tr>
-            <td class="grey"></td>
-            <td nowrap></td>
-            <td class="grey"></td>
-            @if ((bool)ViewData["isLang"])
-            {
-            <td class="grey" colspan="2">@(ViewData["price"].ToString() == "у.е." ? "Цены указаны в долларах" : "")</td>
-            }
-            else if (ViewData["price"].ToString() == "у.е.")
-            {
-            <td class="grey">Цены указаны в долларах</td>
-            }
-            else
-            {
-                if (ViewData["price"].ToString() == "грн")
+        <thead>
+            <tr style="height: 70px;">
+                <td class="grey players">Слушать</td>
+                <td>Фамилия, имя диктора</td>
+                <td class="grey">Статус</td>
+                @if ((bool)ViewData["isLang"])
                 {
-            <td class="grey" colspan="2">Цены указаны в гривнах</td>
+                <td class="grey">Язык</td>
+                }
+                @if (ViewData["price"].ToString() != "у.е.")
+                {
+                <td class="grey">Цена до 30 слов,<br> @ViewData["price"].</td>
+                <td class="grey">Цена до 90 слов,<br> @ViewData["price"].</td>
                 }
                 else
                 {
-            <td class="grey" colspan="2"></td>
+                <td class="grey">Цена,<br> @ViewData["price"]</td>
                 }
-            }
-            <td class="green">*после момента оплаты</td>
-            <td class="grey"></td>
-        </tr>
-    </tfoot>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            var status = EnumExtensions.GetDescription(item.Status);
-        <tr>
-            <td class="grey">
-                <audio controls><source src="@item.Demo" type="audio/mpeg"></audio>
-            </td>
-            <td>
-                @if (item.IsNovelty)
-                    {<img class="new_img" alt="new" src="~/site/img/new.gif">}
-                <a class="white" title="заказать: @item.Name" onclick="open_popup('#modal_window', '@item.Name');">@item.Name @item.Comment</a>
-            </td>
-            <td class="grey">
-                @switch (item.Status)
+                <td class="green">Сроки выполнения*</td>
+                <td class="grey">Скачать</td>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td class="grey"></td>
+                <td nowrap></td>
+                <td class="grey"></td>
+                @if ((bool)ViewData["isLang"])
+                {
+                <td class="grey" colspan="2">@(ViewData["price"].ToString() == "у.е." ? "Цены указаны в долларах" : "")</td>
+                }
+                else if (ViewData["price"].ToString() == "у.е.")
+                {
+                <td class="grey">Цены указаны в долларах</td>
+                }
+                else
+                {
+                    if (ViewData["price"].ToString() == "грн")
                     {
-                        case SpeakerStatuses.InStudio:
-                <p style="display: none;">2</p>
-                <img src="~/site/img/green.png" alt="@status" title="@status" style="width: 30px;">
-                            break;
-                        case SpeakerStatuses.Order:
-                <p style="display: none;">1</p>  <img src="~/site/img/yellow.png" alt="@status" title="@status" style="width: 30px;">
-                            break;
-                        case SpeakerStatuses.OutOfService:
-                <img src="~/site/img/red.png" alt="@status" title="@status" style="width: 30px;">
-                            break;
-                        case SpeakerStatuses.Offline:
-                <img src="~/site/img/grey.png" alt="@status" title="@status" style="width: 30px;">
-                            break;
+                <td class="grey" colspan="2">Цены указаны в гривнах</td>
                     }
-            </td>
-            @if ((bool)ViewData["isLang"])
-                {
-            <td class="grey">@String.Join(", ", item.VoiceLanguages.Select(p=>p.Name))</td>
+                    else
+                    {
+                <td class="grey" colspan="2"></td>
+                    }
                 }
-            @if (ViewData["price"].ToString() != "у.е.")
-                {
-            <td class="grey">@item.Price30</td>
-            <td class="grey">@item.Price90</td>
-                }
-                else
-                {
-            <td class="grey">@item.Price30</td>
-                }
-            <td class="green">@item.TermsStr</td>
-            <td class="grey">
-                <a href="@item.Demo" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>*@
+                <td class="green">*после момента оплаты</td>
+                <td class="grey"></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var status = EnumExtensions.GetDescription(item.Status);
+            <tr>
+                <td class="grey">
+                    <audio controls><source src="@item.Demo" type="audio/mpeg"></audio>
+                </td>
+                <td>
+                    @if (item.IsNovelty)
+                        {<img class="new_img" alt="new" src="~/site/img/new.gif">}
+                    <a class="white" title="заказать: @item.Name" onclick="open_popup('#modal_window', '@item.Name');">@item.Name @item.Comment</a>
+                </td>
+                <td class="grey">
+                    @switch (item.Status)
+                        {
+                            case SpeakerStatuses.InStudio:
+                    <p style="display: none;">2</p>
+                    <img src="~/site/img/green.png" alt="@status" title="@status" style="width: 30px;">
+                                break;
+                            case SpeakerStatuses.Order:
+                    <p style="display: none;">1</p>  <img src="~/site/img/yellow.png" alt="@status" title="@status" style="width: 30px;">
+                                break;
+                            case SpeakerStatuses.OutOfService:
+                    <img src="~/site/img/red.png" alt="@status" title="@status" style="width: 30px;">
+                                break;
+                            case SpeakerStatuses.Offline:
+                    <img src="~/site/img/grey.png" alt="@status" title="@status" style="width: 30px;">
+                                break;
+                        }
+                </td>
+                @if ((bool)ViewData["isLang"])
+                    {
+                <td class="grey">@String.Join(", ", item.VoiceLanguages.Select(p=>p.Name))</td>
+                    }
+                @if (ViewData["price"].ToString() != "у.е.")
+                    {
+                <td class="grey">@item.Price30</td>
+                <td class="grey">@item.Price90</td>
+                    }
+                    else
+                    {
+                <td class="grey">@item.Price30</td>
+                    }
+                <td class="green">@item.TermsStr</td>
+                <td class="grey">
+                    <a href="@item.Demo" target="_blank"><i class="fa fa-download" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>*@
