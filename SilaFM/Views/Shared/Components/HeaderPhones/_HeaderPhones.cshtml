@@ -1,0 +1,11 @@
+﻿@model List<Pras.Web.Models.HelperModels.Item>
+
+@if (Model!=null && Model.Any())
+{
+    <ul class="header-number">
+        @foreach(var item in Model)
+        {
+            <li class="number-city">@item.Label<a href="@item.Link" class="phone-number">@item.Value</a></li>
+        }
+    </ul>
+}

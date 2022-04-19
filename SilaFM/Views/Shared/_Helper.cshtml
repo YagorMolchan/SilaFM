@@ -1,36 +1,61 @@
 ﻿@model Pras.Web.Models.Forms.OrderCallFormModel
-<!--Помощник правый-->
-<div id="panelr" data-ng-controller="callController">
-    ...
-    <div id="helpform">
-        <div class="kate">
-            <video autoplay loop width="200" height="200">
-                <source src="~/site/video/helper_female.mp4" type="video/mp4" />
-                <img src="~/site/video/helper_1.gif" width="200" height="200" />
-            </video>
-        </div>
-        <div class="kateoff">
-            <video autoplay loop width="200" height="200">
-                <source src="~/site/video/helper_female2.mp4" type="video/mp4" />
-                <img src="~/site/video/helper_2.gif" width="200" height="200" />
-            </video>
-        </div>
-        <form id="callForm">
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                <label for="namecallback">
-                    <p id="katetext" data-ng-class="{'err':status=='error', 'green':status=='success'}" data-ng-bind="message"></p>
-                </label>
-                @*<input type="text" class="form-control" id="namecallback" placeholder="Ваше имя">*@
-                @Html.TextBoxFor(model => model.Name, new {@class = "form-control", id = "namecallback", placeholder = Html.DisplayNameFor(model => model.Name), data_ng_model = "model.Name"})
-                @Html.ValidationMessageFor(model => model.Name)
-                <br>
-                @*<input type="tel" class="form-control" id="telcallback" placeholder="Ваш номер телефона">*@
-                @Html.TextBoxFor(model => model.Phone, new {type = "tel", @class = "form-control", id = "telcallback", placeholder = Html.DisplayNameFor(model => model.Phone), data_ng_model = "model.Phone"})
-                @Html.ValidationMessageFor(model => model.Phone)
+@*<!--Помощник правый-->
+    <div id="panelr" data-ng-controller="callController">
+            ...
+            <div id="helpform">
+                <div class="kate">
+                    <video autoplay loop width="200" height="200">
+                        <source src="~/site/video/helper_female.mp4" type="video/mp4" />
+                        <img src="~/site/video/helper_1.gif" width="200" height="200" />
+                    </video>
+                </div>
+                <div class="kateoff">
+                    <video autoplay loop width="200" height="200">
+                        <source src="~/site/video/helper_female2.mp4" type="video/mp4" />
+                        <img src="~/site/video/helper_2.gif" width="200" height="200" />
+                    </video>
+                </div>
+                <form id="callForm">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="namecallback">
+                            <p id="katetext" data-ng-class="{'err':status=='error', 'green':status=='success'}" data-ng-bind="message"></p>
+                        </label>
+                        @Html.TextBoxFor(model => model.Name, new {@class = "form-control", id = "namecallback", placeholder = Html.DisplayNameFor(model => model.Name), data_ng_model = "model.Name"})
+                        @Html.ValidationMessageFor(model => model.Name)
+                        <br>
+                        @Html.TextBoxFor(model => model.Phone, new {type = "tel", @class = "form-control", id = "telcallback", placeholder = Html.DisplayNameFor(model => model.Phone), data_ng_model = "model.Phone"})
+                        @Html.ValidationMessageFor(model => model.Phone)
+                    </div>
+                    <button type="button" data-ng-click="sendOrder($event)" class="btn btn-default" id="telback">Заказать звонок</button>
+                </form>
             </div>
-            <button type="button" data-ng-click="sendOrder($event)" class="btn btn-default" id="telback">Заказать звонок</button>
-        </form>
-    </div>
+        </div>
+        <!--Помощник правый end-->*@
+<div class="cost-forme" data-ng-controller="callController">
+    <h4>ОСТАВИТЬ ЗАЯВКУ</h4>
+    <form id="callForm" class="forn-request">
+        @Html.AntiForgeryToken()
+
+        <p data-ng-class="{'err':status=='error', 'green':status=='success'}" data-ng-bind="message"></p>
+
+        @Html.TextBoxFor(model => model.Name, new { placeholder = "Как к вам обращаться?", autocomplete = "off", data_ng_model = "model.Name" })
+        @Html.ValidationMessageFor(model => model.Name)
+
+        @Html.TextBoxFor(model => model.Phone, new { type = "tel", placeholder = "Номер телефона", data_ng_model = "model.Phone" })
+        @Html.ValidationMessageFor(model => model.Phone)
+
+        @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", data_ng_model = "model.Email" })
+        @Html.ValidationMessageFor(model => model.Email)
+
+        @Html.TextAreaFor(model => model.Message, new { @class = "input-message", placeholder = "Опишите ваши требования", data_ng_model = "model.Message" })
+        @Html.ValidationMessageFor(model => model.Message)
+
+        <button type="button" data-ng-click="sendOrder($event)" class="cost-btn-open  btn-send">
+            ОТПРАВИТЬ
+            <svg class="icon-btn-triangle btn-svg">
+                <use xlink:href="#icon-triangle"></use>
+            </svg>
+        </button>
+    </form>
 </div>
-<!--Помощник правый end-->

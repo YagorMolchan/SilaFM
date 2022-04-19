@@ -1,0 +1,74 @@
+﻿@model Pras.Web.Models.Forms.PopupVisaFormModel
+
+<div class="modal-overlay-bank">
+    <div class="modal-bank">
+        <a class="close-modal-bank">
+            <img src="/site2/img/icons/close-modal-svg.svg">
+        </a>
+        <div class="modal-content-cash">
+            <form action="order-visa" method="post">
+                @Html.AntiForgeryToken()
+                <h3 class="txt-chronomer online-calculate pay-bank-txt">
+                    ОПЛАТА БАНКОВСКОЙ КАРТОЙ
+                    <br>VISA / Mastercard / maestro
+                </h3>
+                <div class="container-bank">
+                    <p class="field-validation-error">@(TempData["ErrorVisa"])</p>
+                    <div class="cash-part1">
+                        <div style="margin: 0;">
+                            <div class="money-input number-order">
+                                <label class="label-data"><span class="suma-txt">НОМЕР ЗАКАЗА</span><br /><i class="italic-suma">(СЧЕТ) *</i></label>
+                                @Html.TextBoxFor(model => model.Account, new { @class = "date-input", placeholder = " 0.00" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Account)
+                        </div>
+                        <div>
+                            <div class="money-input bank-sum-input">
+                                <label class="label-data"><span class="bank-sum">СУММА *</span><br /><i class="italic-suma">(Комиссия 9%)</i></label>
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "date-input", placeholder = "0.00" })<span class="ryb-txt">руб</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Amount)
+                        </div>
+                        <div class="cash-part1">
+                            <div id="bank-box">
+                                <label class="label-data txt-bank-form">ФАМИЛИЯ *</label>
+                                @Html.TextBoxFor(model => model.LastName, new { @class = "date-input input-bank-form" })
+                                @Html.ValidationMessageFor(model => model.LastName)
+                            </div>
+                            <div>
+                                <label class="label-data txt-bank-form">ИМЯ *</label>
+                                @Html.TextBoxFor(model => model.FirstName, new { @class = "date-input input-bank-form" })
+                                @Html.ValidationMessageFor(model => model.FirstName)
+                            </div>
+                            <div>
+                                <label class="label-data txt-bank-form">EMAIL *</label>
+                                @Html.TextBoxFor(model => model.Email, new { @class = "date-input input-bank-form" })
+                                @Html.ValidationMessageFor(model => model.Email)
+                            </div>
+                            <div>
+                                <label class="label-data txt-bank-form">ТЕЛЕФОН</label>
+                                @Html.TextBoxFor(model => model.Phone, new { @class = "date-input input-bank-form" })
+                                @Html.ValidationMessageFor(model => model.Phone)
+                            </div>
+                            <div>
+                                <label class="label-data txt-bank-form">ГОРОД</label>
+                                @Html.TextBoxFor(model => model.City, new { @class = "date-input input-bank-form" })
+                                @Html.ValidationMessageFor(model => model.City)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cash-btn-form bank-btn-form">
+                    <button type="submit" class="home-btn btn-send-form">
+                        ОТПРАВИТЬ
+                        <svg class="icon-btn-triangle btn-svg">
+                            <use xlink:href="#icon-triangle"></use>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

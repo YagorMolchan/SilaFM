@@ -1,0 +1,93 @@
+﻿@*@model TModel*@
+
+<div class="modal-overlay-calculator">
+    <div class="modal-calculator">
+        <a class="close-modal-calculator">
+            <img src="~/site2/img/icons/modal-close-svg.svg" />
+        </a>
+        <div class="modal-content-calculator">
+            <h3 class="txt-chronomer online-calculate">ONLINE-КАЛЬКУЛЯТОР</h3>
+            <div class="text-definition text-use">Воспользуйтесь online-калькулятором и узнайте стоимость наших услуг</div>
+            <div class="container-calculator">
+                <div class="calcul-elem">
+                    <h5 class="text-create">СОЗДАНИЕ СЦЕНАРИЯ</h5>
+                    <div class="switch switch--horizontal">
+                        <input id="radio-a" type="radio" name="first-switch" checked="checked">
+                        <label for="radio-a">Не нужно</label>
+                        <input id="radio-b" type="radio" name="first-switch">
+                        <label for="radio-b">Нужно</label><span class="toggle-outside">
+                            <span class="toggle-inside"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="calcul-elem">
+                    <h5 class="text-create">КОЛИЧЕСТВО ДИКТОРОВ</h5>
+                    <div class="range">
+                        <input type="range" min="1" max="7" steps="1" value="1">
+                    </div>
+                    <ul class="range-labels arrows-range">
+                        <li>|</li>
+                        <li>|</li>
+                        <li class="third-label">|</li>
+                        <li>|</li>
+                    </ul>
+                    <ul class="range-labels">
+                        <li>1</li>
+                        <li>2</li>
+                        <li class="third-label">3</li>
+                        <li>4</li>
+                    </ul>
+                </div>
+                <div class="calcul-elem2">
+                    <h5 class="text-create">Стоимость сценариев</h5>
+                    <ul class="list-valuta">
+                        <li>руб (₽)</li>
+                        <li>дол ($)</li>
+                        <li>грн (₴)</li>
+                    </ul>
+                    <div class="block-kind">
+                        <h5 class="kind-elem">информационный<span class="hr-dashed">....................................................................</span><span class="price-txt price-margin1">1 000 руб</span></h5>
+                        <h5 class="kind-elem">игровой/имиджевый<span class="hr-dashed">................................................................</span> <span class="price-txt price-margin">1500 руб</span></h5>
+                        <h5 class="kind-elem">вокальный<span class="hr-dashed">................................................................................</span><span class="price-txt price-margin2">2 000 руб</span></h5>
+
+                    </div>
+                    <button class="btn-see-example">
+                        СМОТРЕТЬ ПРИМЕРЫ<svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="calcul-elem2">
+                    <h5 class="text-create">Стоимость дикторов</h5>
+                    <label class="text-label">Общая стоимость выбранных дикторов</label><br class="br-calcul"><input class="input-cost" type="text"><br>
+                    <label class="text-label">На выбор студии</label><br class="br-calcul"><input class="input-cost" type="text"><br>
+                    <label class="text-label">На выбор студии, но не дороже</label><br class="br-calcul"><input class="input-cost" type="text"><label class="text-label">каждый</label>
+                </div>
+                <div class="calcul-elem3 music-phone">
+                    <h5 class="elem3-text">МУЗЫКАЛЬНЫЙ ФОН</h5>
+                    <div class="form_radio btn-rad-flex">
+                        <input id="radio-3" type="radio" name="radio" value="3" checked>
+                        <label for="radio-3" class="page-txt-chrono txt-calcul-range">Не нужен</label><br>
+                        <input id="radio-4" type="radio" name="radio" value="4">
+                        <label for="radio-4" class="page-txt-chrono  txt-calcul-range">Музыка заказчика</label><br>
+                        <input id="radio-5" type="radio" name="radio" value="5">
+                        <label for="radio-5" class="page-txt-chrono  txt-calcul-range">Лицензионная музыка РФ</label><br>
+                        <input id="radio-6" type="radio" name="radio" value="6">
+                        <label for="radio-6" class="page-txt-chrono width-for  txt-calcul-range">Лицензионная музыка ЕС и Северной Америки</label><br>
+                        <input id="radio-7" type="radio" name="radio" value="7">
+                        <label for="radio-7" class="page-txt-chrono  txt-calcul-range">Работа композитора</label><br>
+                    </div>
+                </div>
+                <div class="calcul-button">
+                    <span class="big-price">1000 ₽</span>
+                    <button class="home-btn btn-calcul">
+                        СДЕЛАТЬ ЗАКАЗ
+                        <svg class="btn-svg" width="8" height="15">
+                            <use href="#order-svg"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

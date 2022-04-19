@@ -31,10 +31,9 @@
         <hr class="hr-for-slider">
         <p class="txt-about-us txt-audioslot">ВСЕ Доступные голоса</p>
 
-        <button class="example-btn-all">ВСЕ</button><br class="over-btnall">
-
-        <span class="adaptive-block">
-            <span class="example-block-elem">
+        <ul class="audio-list" data-ng-init="tab='all'">
+            <li class="audio-list__item" data-ng-click="tab='all'" data-ng-class="{'active':tab=='all'}">все</li>
+            <li class="audio-list__item" data-ng-click="tab='man'" data-ng-class="{'active':tab=='man'}">
                 <svg width="44" height="44" viewBox="0 0 44 44" fill="#969cad" xmlns="http://www.w3.org/2000/svg">
                     <g>
                         <path d="M29.5098 32.2705C29.3017 32.2705 29.133 32.4392 29.133 32.6472V34.0799H26.8899V31.1404C26.8899 30.9323 26.7213 30.7637 26.5132 30.7637C26.3051 30.7637 26.1365 30.9323 26.1365 31.1404V34.0799H17.7128V31.1404C17.7128 30.9323 17.5441 30.7637 17.3361 30.7637C17.1281 30.7637 16.9594 30.9323 16.9594 31.1404V34.0799H14.7163V30.4172C14.7163 29.5876 14.8971 28.7909 15.2536 28.0493C15.3437 27.8618 15.2648 27.6367 15.0773 27.5465C14.8898 27.4564 14.6647 27.5354 14.5745 27.7229C14.1687 28.5671 13.9629 29.4737 13.9629 30.4172V34.4566C13.9629 34.6646 14.1316 34.8333 14.3396 34.8333H29.5098C29.7179 34.8333 29.8865 34.6646 29.8865 34.4566V32.6472C29.8865 32.4392 29.7179 32.2705 29.5098 32.2705Z" />
@@ -46,8 +45,8 @@
                     </g>
                 </svg>
                 Мужские голоса
-            </span><br class="over-btnall">
-            <span class="example-block-elem">
+            </li>
+            <li class="audio-list__item" data-ng-click="tab='woman'" data-ng-class="{'active':tab=='woman'}">
                 <svg width="44" height="44" viewBox="0 0 44 44" fill="#969cad" xmlns="http://www.w3.org/2000/svg">
                     <g>
                         <path d="M29.5851 31.517C29.7932 31.517 29.9618 31.3483 29.9618 31.1402V30.4171C29.9618 29.4882 29.757 28.6065 29.3908 27.8141C29.7018 21.7205 29.7017 15.6246 27.6646 12.2116C27.5579 12.0329 27.3265 11.9745 27.148 12.0812C26.9694 12.1878 26.911 12.4191 27.0176 12.5977C27.8591 14.0075 28.385 16.0101 28.6256 18.7199C28.8106 20.8031 28.8322 23.346 28.6909 26.652C27.7134 25.3685 26.2495 24.4747 24.5765 24.2478C26.099 23.3584 27.1243 21.7067 27.1243 19.8199V16.9111C27.1243 16.703 26.9556 16.5344 26.7475 16.5344C26.7374 16.5344 26.727 16.5348 26.7169 16.5356C26.6686 16.5396 21.8773 16.899 20.0008 14.3976C19.8274 14.1555 19.4272 14.2221 19.3413 14.507C19.3351 14.5259 18.7062 16.3962 17.1155 17.0163C16.9709 17.0727 16.8756 17.212 16.8756 17.3672V19.8199C16.8756 21.7067 17.9009 23.3584 19.4234 24.2478C17.7503 24.4747 16.2864 25.3686 15.3088 26.6522C15.2437 25.133 15.2134 23.7931 15.2168 22.5843C15.2174 22.3762 15.0492 22.2071 14.8412 22.2065C14.8408 22.2065 14.8404 22.2065 14.8401 22.2065C14.6325 22.2065 14.4639 22.3745 14.4633 22.5822C14.4591 24.0941 14.5069 25.8068 14.6091 27.814C14.2429 28.6065 14.0381 29.4882 14.0381 30.4171V34.4565C14.0381 34.6645 14.2067 34.8332 14.4148 34.8332H29.585C29.7931 34.8332 29.9617 34.6645 29.9617 34.4565V32.6471C29.9617 32.439 29.7931 32.2703 29.585 32.2703C29.3769 32.2703 29.2083 32.439 29.2083 32.6471V34.0797H26.9652V31.1402C26.9652 30.9321 26.7965 30.7635 26.5884 30.7635C26.3803 30.7635 26.2117 30.9321 26.2117 31.1402V34.0797H17.7881V31.1402C17.7881 30.9321 17.6194 30.7635 17.4113 30.7635C17.2033 30.7635 17.0346 30.9321 17.0346 31.1402V34.0797H14.7915V30.417C14.7915 28.0047 16.3604 25.9522 18.5314 25.2256L19.3608 27.9775C19.5633 28.6499 20.1712 29.1016 20.8734 29.1016H23.126C23.8282 29.1016 24.4361 28.6499 24.6387 27.9776L25.4682 25.2255C27.6393 25.952 29.2083 28.0047 29.2083 30.4171V31.1402C29.2083 31.3483 29.377 31.517 29.5851 31.517ZM17.6291 19.8199V17.6149C18.8024 17.06 19.4823 15.9936 19.8109 15.3262C21.7373 17.2613 25.1848 17.3417 26.3708 17.3069V19.8199C26.3708 22.23 24.4101 24.1908 21.9999 24.1908C19.5898 24.1908 17.6291 22.23 17.6291 19.8199ZM23.9174 27.7602C23.8114 28.1119 23.4934 28.3482 23.126 28.3482H20.8735C20.5061 28.3482 20.1882 28.1119 20.0821 27.7603L19.2613 25.0367C19.5866 24.9762 19.9218 24.9442 20.2644 24.9442H23.7355C24.078 24.9442 24.4131 24.9762 24.7383 25.0366L23.9174 27.7602Z" />
@@ -59,8 +58,8 @@
                     </g>
                 </svg>
                 Женские голоса
-            </span><br class="over-btnall">
-            <span class="example-block-elem">
+            </li>
+            <li class="audio-list__item" data-ng-click="tab='child'" data-ng-class="{'active':tab=='child'}">
                 <svg width="44" height="44" viewBox="0 0 44 44" fill="#969cad" xmlns="http://www.w3.org/2000/svg">
                     <g>
                         <g>
@@ -75,145 +74,144 @@
                     <defs>
                 </svg>
                 ДЕТСКИЕ голоса
-            </span>
-        </span>
+            </li>
+        </ul>
         <div class="container-playlist">
-            <div class="playlist-element">
-                <span class="txt-visa-free">Дикторы России</span>
+            <div class="playlist-element first-elem man" data-ng-show="tab=='all'||tab=='man'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Дикторы России</span>
                 <div class="icon-playlist man-icon"></div>
                 <p class="voices-people"><b>Мужские голоса</b></p>
                 <a href="@Url.Action("SpeakersRu", "Home")?man" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element sec-elem">
-                <span class="txt-visa-free">Дикторы России</span>
-                <div class="icon-playlist"></div>
+            <div class="playlist-element sec-elem woman" data-ng-show="tab=='all'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Дикторы России</span>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people"><b>Женские голоса</b></p>
                 <a href="@Url.Action("SpeakersRu", "Home")?woman" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element third-elem">
-                <span class="txt-visa-free">Федеральные дикторы России</span>
+            <div class="playlist-element third-elem man" data-ng-show="tab=='all'||tab=='man'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Федеральные дикторы России</span>
                 <div class="icon-playlist man-icon"></div>
                 <p class="voices-people for-margin-t"><b>Мужские голоса</b></p>
                 <a href="@Url.Action("SpeakersFederal", "Home")?man" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element">
-                <span class="txt-visa-free">Федеральные дикторы России</span>
-                <div class="icon-playlist"></div>
+            <div class="playlist-element woman" data-ng-show="tab=='all'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Федеральные дикторы России</span>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people  for-margin-t"><b>Женские голоса</b></p>
                 <a href="@Url.Action("SpeakersFederal", "Home")?woman" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element sec-elem">
-                <span class="txt-visa-free">Иностранные мужские голоса</span>
+            <div class="playlist-element sec-elem man" data-ng-show="tab=='all'||tab=='man'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Иностранные мужские голоса</span>
                 <div class="icon-playlist man-icon"></div>
                 <p class="voices-people for-margin-t"><b>Мужские голоса</b></p>
                 <a href="@Url.Action("SpeakersFor", "Home")?man" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element third-elem">
-                <span class="txt-visa-free">Иностранные женские голоса</span>
-                <div class="icon-playlist"></div>
+            <div class="playlist-element third-elem woman" data-ng-show="tab=='all'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Иностранные женские голоса</span>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people  for-margin-t"><b>Женские голоса</b></p>
                 <a href="@Url.Action("SpeakersFor", "Home")?woman" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element">
-                <span class="txt-visa-free">Дикторы Украины</span>
+            <div class="playlist-element man" data-ng-show="tab=='all'||tab=='man'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Дикторы Украины</span>
                 <div class="icon-playlist man-icon"></div>
                 <p class="voices-people"><b>Мужские голоса</b></p>
                 <a href="@Url.Action("SpeakersUk", "Home")?man" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element sec-elem">
-                <span class="txt-visa-free">Дикторы Украины</span>
-                <div class="icon-playlist"></div>
+            <div class="playlist-element sec-elem woman" data-ng-show="tab=='all'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Дикторы Украины</span>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people"><b>Женские голоса</b></p>
                 <a href="@Url.Action("SpeakersUk", "Home")?woman" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element third-elem">
-                <span class="txt-visa-free">Детские голоса от 5-ти до 14 лет</span>
+            <div class="playlist-element third-elem child" data-ng-show="tab=='all'||tab=='child'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Детские голоса от 5-ти до 14 лет</span>
                 <div class="icon-playlist man-icon"></div>
                 <p class="voices-people for-margin-t"><b>Детские голоса</b></p>
                 <a href="@Url.Action("SpeakersChild", "Home")" class="btn-download">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element">
-                <span class="txt-visa-free">Пародисты и актеры</span>
+            <div class="playlist-element man woman" data-ng-show="tab=='all'||tab=='man'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Пародисты и актеры</span>
                 <div class="icon-playlist man-icon"></div>
-                <div class="icon-playlist"></div>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people  for-margin-t"><b>Мужские голоса. Женские голоса.</b></p>
                 <a href="@Url.Action("SpeakersParodists", "Home")" class="btn-download for-posit-btn">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element sec-elem">
-                <span class="txt-visa-free">Вокалисты</span>
+            <div class="playlist-element sec-elem man woman" data-ng-show="tab=='all'||tab=='man'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">Вокалисты</span>
                 <div class="icon-playlist man-icon"></div>
-                <div class="icon-playlist"></div>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people"><b>Мужские голоса. Женские голоса.</b></p>
                 <a href="@Url.Action("SpeakersVocalists", "Home")" class="btn-download for-posit-btn">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
-            <div class="playlist-element third-elem">
-                <span class="txt-visa-free">VIP-голоса</span>
+            <div class="playlist-element third-elem man woman" data-ng-show="tab=='all'||tab=='man'||tab=='woman'">
+                <span class="txt-visa-free" id="sprakers-stick" style="margin-top: -10px;">VIP-голоса</span>
                 <div class="icon-playlist man-icon"></div>
-                <div class="icon-playlist"></div>
+                <div class="icon-playlist girl-icon"></div>
                 <p class="voices-people"><b>Мужские голоса. Женские голоса.</b></p>
                 <a href="@Url.Action("SpeakersVip", "Home")" class="btn-download for-posit-btn">
                     ПЕРЕЙТИ НА СТРАНИЦУ
-                    <svg width="11" height="17">
-                        <use href="#corner-right"></use>
+                    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="#C7DEE1" stroke-width="1.5" />
                     </svg>
                 </a>
             </div>
         </div>
-
     </div>
 </section>

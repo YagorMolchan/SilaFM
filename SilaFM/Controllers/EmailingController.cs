@@ -24,7 +24,9 @@ namespace Pras.Web.Controllers
             {
                 string message = $"<p><strong>Поступила просьба перезвонить:</strong></p>" +
                                  $"<p>Имя: {model.Name}</p>" +
-                                 $"<p>Телефон: {model.Phone}</p>";
+                                 $"<p>Телефон: {model.Phone}</p>" +
+                                 $"<p>Email: {model.Email}</p>" +
+                                 $"<p>Сообщение: {model.Message}</p>";
                 try
                 {
                     await emailService.SendFeedbackEmailAsync("Перезвоните мне - обратная связь SilaFM", message);
@@ -98,7 +100,7 @@ namespace Pras.Web.Controllers
                 try
                 {
                     await emailService.SendFeedbackEmailAsync("Новый заказ (дикторский голос) - обратная связь SilaFM",
-                        message, new List<IFormFile> {model.File});
+                        message, new List<IFormFile> { model.File });
                 }
                 catch (Exception e)
                 {
@@ -214,7 +216,7 @@ namespace Pras.Web.Controllers
                                  $"<p>Комментарии: {model.Comments}</p>" +
                                  $"<p>Параметры: {model.Parameters}</p>" +
                                  $"<p>Ссылки на видео: {(model.VideoLink1 != null ? $", <a href=\"{model.VideoLink1}\">{model.VideoLink1}</a>" : "")}" +
-                                 $"{(model.VideoLink2!=null? $", <a href=\"{model.VideoLink2}\">{model.VideoLink2}</a>":"")}</p>" +
+                                 $"{(model.VideoLink2 != null ? $", <a href=\"{model.VideoLink2}\">{model.VideoLink2}</a>" : "")}</p>" +
                                  $"<p>Код скидки: {model.Code}</p>" +
                                  $"<p>E-mail: {model.Email}</p>" +
                                  $"<p>Оплата: {model.Payment}</p>";
@@ -353,7 +355,7 @@ namespace Pras.Web.Controllers
                 try
                 {
                     await emailService.SendFeedbackEmailAsync("Оплата по безналичному расчету - обратная связь SilaFM", message);
-                    if (model.Action==0)
+                    if (model.Action == 0)
                     {
                         await emailService.SendEmailAsync("Оплата по безналичному расчету - SilaFM", model.Email, message);
                     }
@@ -365,7 +367,7 @@ namespace Pras.Web.Controllers
                 catch (Exception e)
                 {
                     Logger.Error(e);
-                    TempData["Error"+model.Type] = "Ошибка при отправке!";
+                    TempData["Error" + model.Type] = "Ошибка при отправке!";
                 }
             }
             else
@@ -376,9 +378,40 @@ namespace Pras.Web.Controllers
         }
 
         [HttpPost]
+        [Route("order-visa")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OrderVisa([FromForm] PopupVisaFormModel model, [FromServices] IEmailService emailService)
+        {
+            if (ModelState.IsValid)
+            {
+                string message = $"<p><strong>Оплата банковской картой</strong>:</p>" +
+                                 $"<p>Номер счета: {model.Account}</p>" +
+                                 $"<p>Сумма в рублях: {model.Amount}</p>" +
+                                 $"<p>Плательщик: {model.FirstName} {model.LastName}</p>" +
+                                 $"<p>Город: {model.City}</p>" +
+                                 $"<p>E-mail: {model.Email}</p>" +
+                                 $"<p>Телефон: {model.Phone}</p>";
+                try
+                {
+                    await emailService.SendFeedbackEmailAsync("Оплата банковской картой - обратная связь SilaFM", message);
+                }
+                catch (Exception e)
+                {
+                    Logger.Error(e);
+                    TempData["ErrorVisa"] = "Ошибка при отправке!";
+                }
+            }
+            else
+            {
+                TempData["ErrorVisa"] = "Неверно заполнены поля!";
+            }
+            return RedirectToAction("Payment", "Home");
+        }
+
+        [HttpPost]
         [Route("choice-speaker")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChoiceSpeaker([FromForm] ChoiceSpeakerViewModel model, [FromServices] IEmailService emailService)
+        public async Task<IActionResult> ChoiceSpeaker([FromForm] ChoiceSpeakerViewModel model, [FromServices] IEmailService emailService, string returnUrl=null)
         {
             if (ModelState.IsValid)
             {
@@ -392,7 +425,8 @@ namespace Pras.Web.Controllers
                 try
                 {
                     await emailService.SendFeedbackEmailAsync("Новый заказ (подбор диктора) - обратная связь SilaFM",
-                        message, model.File != null ? new List<IFormFile> {model.File} : null);
+                        message, model.File != null ? new List<IFormFile> { model.File } : null);
+                    TempData["SuccessChoice"] = "Ваше сообщение отправлено!";
                 }
                 catch (Exception e)
                 {
@@ -406,13 +440,14 @@ namespace Pras.Web.Controllers
                 TempData["ErrorChoice"] = "Неверно заполнены поля!";
                 TempData["OrderModel"] = JsonConvert.SerializeObject(model);
             }
-            return RedirectToAction("ChoiceSpeaker", "Home");
+            TempData["OpenChoiceSpeaker"] = true;
+            return Redirect(returnUrl);
         }
 
         [HttpPost]
         [Route("identify-voice")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> IdentifyVoice([FromForm] IdentifyVoiceViewModel model, [FromServices] IEmailService emailService)
+        public async Task<IActionResult> IdentifyVoice([FromForm] IdentifyVoiceViewModel model, [FromServices] IEmailService emailService, string returnUrl=null)
         {
             if (ModelState.IsValid)
             {
@@ -424,20 +459,22 @@ namespace Pras.Web.Controllers
                 {
                     await emailService.SendFeedbackEmailAsync("Новый заказ (опознание диктора) - обратная связь SilaFM",
                         message, model.File != null ? new List<IFormFile> { model.File } : null);
+                    TempData["SuccessIdentityVoice"] = "Ваше сообщение отправлено!";
                 }
                 catch (Exception e)
                 {
                     Logger.Error(e);
-                    TempData["ErrorChoice"] = "Ошибка при отправке!";
+                    TempData["ErrorIdentityVoice"] = "Ошибка при отправке!";
                     TempData["OrderModel"] = JsonConvert.SerializeObject(model);
                 }
             }
             else
             {
-                TempData["ErrorChoice"] = "Неверно заполнены поля!";
+                TempData["ErrorIdentityVoice"] = "Неверно заполнены поля!";
                 TempData["OrderModel"] = JsonConvert.SerializeObject(model);
             }
-            return RedirectToAction("IdentifyVoice", "Home");
+            TempData["OpenIdentityVoice"] = true;
+            return Redirect(returnUrl);
         }
     }
 }

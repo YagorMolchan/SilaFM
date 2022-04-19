@@ -235,8 +235,42 @@
         </script>
     }*@
 
-@section Styles{
-    <link href="~/site2/css/audio/audio.css" rel="stylesheet" />
+@section Styles {
+    <link rel="stylesheet" href="~/site2/js/revealator-master/fm.revealator.jquery.css">
+    <link rel="stylesheet" href="~/site2/css/cssBipolarChart.css">
+    <link href="~/site2/css/styleaudio.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script type="text/jаvascript" src="~/site2/js/easySlider1.7.js"></script>
+    <script type="text/javascript" src="~/site2/js/cssBipolarChart.js"></script>
+    <script>
+        let sampleData = [
+            ["Низкий", "Высокий", @((Model.VoiceParams.LowHighTone + 10) * 5)*0.01],
+            ["Мягкий", "Брутальный", @((Model.VoiceParams.ConfidentVoice + 10) * 5)*0.01],
+            ["Веселый", "Серьезный", @((Model.VoiceParams.RichVoice + 10) * 5)*0.01],
+            ["Спокойный", "Динамичный", @((Model.VoiceParams.EnergeticVoice + 10) * 5)*0.01],
+            ["Официальный", "Игривый", @((Model.VoiceParams.BusinessVoice + 10) * 5)*0.01],
+        ];
+
+        $('#example').drawCSSBipolarChart({
+            colors: {
+                left: 'linear-gradient(2.48deg, #483156 0%, #39516e 80.3%)',
+                right: 'linear-gradient(1.6deg, #257289 -0.93%, #188191 100%)'
+            },
+            data: sampleData,
+            bipolar: true,
+            simpleBar: false,
+            bothSides: true,
+            chartContainer: '<div class="chart-horiz-container"></div>',
+            ul: '<ul class="chart-horiz"></ul>',
+            li: '<li></li>',
+            divPos: '<div class="posValue"></div>',
+            divNeg: '<div class="negValue"></div>',
+            spanBar: '<div class="bar"></div>',
+            spanValue: '<div class="number-label"></div>',
+            spanValueLabel: '<div class="valueLabel"></div>'
+        });
+    </script>
 }
 
 <section id="1" class="home-page bg-speak-page">
@@ -244,208 +278,407 @@
         <p class="sila-fm-txt">СИЛА FM</p>
         <h2 class="professional-txt">@Model.Name</h2>
         <p class="txt-production">@Model.Summary</p>
-
     </div>
-
-
-
 </section>
-<section class="player general-music">
+<section class="player general-music js_music-inner" data-play-state="play" data-mute-state="unmute">
     <div class="details">
         <div class="now-playing"></div>
         <div class="track-art"></div>
         <div class="track-name"></div>
         <div class="track-artist"></div>
     </div>
-    <div class="buttons">
-        <div class="playpause-track" id="general-play" onclick="playpauseTrack()"><img src="~/site2/img/play.png"></div>
-    </div>
-    <div class="slider_container">
-        <input type="range" id="range-player" min="1" max="100" value="100" class="seek_slider seek-general" onchange="seekTo()">
-    </div>
-    <div class="slider_container">
-        <img class="icon-volume" src="~/site2/img/volume.png">
-        <input id="volume-general" type="range" min="1" max="100" value="99" id="rng" name="rng" class="volume_slider __range volume-adapt"
-               onchange="setVolume()">
-    </div>
-    <div>
-        <div class="playrepeat-track repeat-general" onclick="playTrackRepeat()"><img src="../img/repeat.png"></div>
-    </div>
-</section>
-<section class="services">
-    @Html.Partial("_FloatingPanel")
-    <div class="container-page">
-        <div class="bg-image">
-            <div class="advertise-demo">
-                <svg class="icon-prev" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.67182 2.65887L1.87194 8.62078L7.74435 14.3337L7.67182 2.65887Z" stroke="white" stroke-width="1.5" />
+    <audio src="@Model.DemoVoiceOver"></audio>
+    <div class="controls">
+        <div class="play-controls">
+            <button type="button" class="btn-control btn-play pause js_play">
+                <svg class="icon-play">
+                    <use xlink:href="#icon-play"></use>
                 </svg>
-                <span>Рекламное демо</span><svg class="icon-next" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="white" stroke-width="1.5" />
-                </svg>
-                <section id="music-page" class="player audio-playlist">
-                    <div class="details">
-                        <div class="now-playing1"></div>
-                        <div class="track-art1"></div>
-                        <div class="track-name1"></div>
-                        <div class="track-artist1"></div>
-                    </div>
-                    <div class="buttons">
-                        <div id="play-icon" class="playpause-track1 playpause-audio" onclick="playpauseTrack1()"><img src="~/site2/img/play.png"></div>
-                    </div>
-                    <div class="slider_container">
-                        <input type="range" id="page-player" min="1" max="100" value="100" class="seek_slider1" onchange="seekTo1()">
-                    </div>
-                    <div>
-                        <div id="repeat" class="playrepeat-track1 repeat" onclick="handleRepeat()">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22.4999 14.9917C22.4999 16.2344 21.4924 17.2417 20.2499 17.2417H2.56041L5.52287 14.2792L4.46233 13.2187L0.219589 17.4614C-0.0731964 17.7544 -0.0731964 18.2292 0.219589 18.522L4.46233 22.7647L5.52287 21.7042L2.56041 18.7417H20.2499C22.3199 18.7393 23.9973 17.0617 23.9999 14.9917V11.9917H22.4999V14.9917Z" />
-                                <path d="M1.5 8.99176C1.5 7.74921 2.50745 6.74176 3.75 6.74176H21.4395L18.477 9.70422L19.5375 10.7648L23.7803 6.52203C24.0731 6.22906 24.0731 5.75446 23.7803 5.46149L19.5375 1.21875L18.477 2.2793L21.4395 5.24176H3.75C1.67999 5.24432 0.00256348 6.92175 0 8.99176V11.9918H1.5V8.99176Z" />
-                            </svg>
-                        </div>
-                        <svg class="two-prew" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g opacity="0.5">
-                                <path d="M19.0449 0.639295L10.3547 7.50009L19.0449 14.3604V0.639295Z" stroke="white" />
-                                <path d="M9.27246 0.639295L0.582242 7.50009L9.27246 14.3604V0.639295Z" stroke="white" />
-                            </g>
-                        </svg>
-                        <svg class="two-next" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0.5 0.639295L9.19022 7.50009L0.5 14.3604V0.639295Z" stroke="white" />
-                            <path d="M10.2725 0.639295L18.9627 7.50009L10.2725 14.3604V0.639295Z" stroke="white" />
-                        </svg>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <table>
-            <tr>
-                <td>Статус</td>
-                <td>
-                    @switch (Model.Status)
-                    {
-                        case SpeakerStatuses.InStudio:
-                            <div class="in-studio-txt">
-                                <div class="eclips"></div>@Model.Status.GetLocalizedDescription()
-                            </div>
-                            break;
-                        case SpeakerStatuses.Order:
-                            <div class="in-studio-txt for-order">
-                                <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
-                            </div>
-                            break;
-                        case SpeakerStatuses.OutOfService:
-                            <div class="in-studio-txt for-order">
-                                <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
-                            </div>
-                            break;
-                        case SpeakerStatuses.Offline:
-                            <div class="in-studio-txt for-order">
-                                <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
-                            </div>
-                            break;
-                    }
-                </td>
-            </tr>
-            <tr>
-                <td>Пол</td>
-                <td>@Model.Gender.GetLocalizedDescription()</td>
-            </tr>
-            <tr>
-                <td>Возраст</td>
-                <td>@(string.Join("; ", Model.ListVoiceAge))</td>
-
-            </tr>
-            <tr>
-                <td>Язык</td>
-                <td>@String.Join(", ", Model.VoiceLanguages.Select(p => p.Name))</td>
-
-            </tr>
-            <tr>
-                <td>Стоимость до 30 слов</td>
-                <td>@Model.Price30 @Model.GetCurrency(Model.Price30)</td>
-
-            </tr>
-            <tr>
-                <td>Стоимость до 70 слов</td>
-                <td>@Model.Price90 @Model.GetCurrency(Model.Price90)</td>
-
-            </tr>
-            <tr>
-                <td>Стоимость за 1 страницу</td>
-                <td>@Model.PricePage @Model.GetCurrency(Model.PricePage)</td>
-
-            </tr>
-            <tr>
-                <td>Время записи</td>
-                <td>@Model.TermsStr</td>
-
-            </tr>
-            <tr>
-                <td>Возможность режиссирования</td>
-                <td>@(Model.CanDirect ? "да" : "нет")</td>
-            </tr>
-            @if (Model.VacationStartDate.HasValue && Model.VacationEndDate.HasValue && Model.VacationEndDate >= DateTime.Today)
-            {
-                <tr>
-                    <td>Отпуск</td>
-                    <td class="cursivtext"> с @Model.VacationStartDate.Value.ToShortDateString() по @Model.VacationEndDate.Value.ToShortDateString() </td>
-                </tr>
-            }
-            @if (!String.IsNullOrEmpty(Model.Demo))
-            {
-                <tr>
-                    <td>Общее демо</td>
-                    <td class="cursivtext"> <a href="@Model.Demo" target="_blank">cлушать</a></td>
-                </tr>
-            }
-            @if (!String.IsNullOrEmpty(Model.DemoAdvertising))
-            {
-                <tr>
-                    <td>Рекламная подача</td>
-                    <td class="cursivtext"> <a href="@Model.DemoAdvertising" target="_blank">cлушать</a></td>
-                </tr>
-            }
-            @if (!String.IsNullOrEmpty(Model.DemoVoiceOver))
-            {
-                <tr>
-                    <td>Закадровая озвучка</td>
-                    <td class="cursivtext"> <a href="@Model.DemoVoiceOver" target="_blank">cлушать</a></td>
-                </tr>
-            }
-        </table>
-        <div class="make-older">
-            <button class="btn-speaker">
-                ЗАКАЗАТЬ ДИКТОРА
-                <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.78125 14.5158H20.4846C20.7991 14.5158 21.0751 14.3078 21.1602 14.0057L23.9729 4.16174C24.0333 3.94953 23.9919 3.72156 23.8588 3.54523C23.7255 3.36945 23.5182 3.26563 23.2971 3.26563H6.15802L5.6554 1.00391C5.58398 0.681824 5.29834 0.453125 4.96875 0.453125H0.703125C0.314575 0.453125 0 0.7677 0 1.15625C0 1.54498 0.314575 1.85938 0.703125 1.85938H4.40442L6.94354 13.2852C6.19647 13.61 5.67188 14.3536 5.67188 15.2189C5.67188 16.382 6.61816 17.3283 7.78125 17.3283H20.4846C20.8733 17.3283 21.1877 17.0139 21.1877 16.6252C21.1877 16.2366 20.8733 15.9221 20.4846 15.9221H7.78125C7.39398 15.9221 7.07812 15.6069 7.07812 15.2189C7.07812 14.8309 7.39398 14.5158 7.78125 14.5158Z" fill="white" />
-                    <path d="M7.07812 19.4377C7.07812 20.601 8.02441 21.5471 9.18768 21.5471C10.3508 21.5471 11.2971 20.601 11.2971 19.4377C11.2971 18.2747 10.3508 17.3284 9.18768 17.3284C8.02441 17.3284 7.07812 18.2747 7.07812 19.4377Z" fill="white" />
-                    <path d="M16.9688 19.4377C16.9688 20.601 17.915 21.5471 19.0781 21.5471C20.2414 21.5471 21.1875 20.601 21.1875 19.4377C21.1875 18.2747 20.2414 17.3284 19.0781 17.3284C17.915 17.3284 16.9688 18.2747 16.9688 19.4377Z" fill="white" />
+                <svg class="icon-pause">
+                    <use xlink:href="#icon-pause"></use>
                 </svg>
             </button>
-            <p class="in-one-click">ЗАКАЗ В 1 КЛИК</p>
+            <input type="range" class="control-range range-music js_range-track" max="100" value="0">
         </div>
+        <div class="volume-controls">
+            <button type="button" class="btn-control btn-volume js_volume">
+                <svg class="icon-volume icon-volume-audio">
+                    <use xlink:href="#icon-volume"></use>
+                </svg>
+            </button>
+            <input type="range" class="control-range range-volume js_range-volume" max="100" value="100">
+        </div>
+        <div>
+            <button class="playrepeat-track"></button>
+        </div>
+    </div>
+</section>
+<section class="services" style="margin-top: 0;">
+    @Html.Partial("_FloatingPanel")
+    <div class="container-page" style="margin-left: 1px;">
+        <div class="slider">
+            <div class="w3-content w3-display-container">
+                <div class="mySlides">
+                    <div class="container-page-contain" id="container-page-contain">
+                        <div class="slider-content">
+                            <div class="slider-content-wrapper">
+                                <div class="slider-content__item">
+                                    <div class="bg-image">
+                                        <div class="advertise-demo">
+                                            <span style="position: relative; z-index: 2;">Рекламное демо</span>
+                                            <section style="background: url('@Model.Image')" class="player audio-playlist light music-page js_music-inner" data-play-state="play" data-mute-state="unmute">
+                                                <div class="details">
+                                                    <audio src="@Model.DemoAdvertising"></audio>
+                                                    <div class="controls">
+                                                        <div class="play-controls">
+                                                            <button type="button" class="btn-control btn-play pause js_play">
+                                                                <svg class="icon-play">
+                                                                    <use xlink:href="#icon-play"></use>
+                                                                </svg>
+                                                                <svg class="icon-pause">
+                                                                    <use xlink:href="#icon-pause"></use>
+                                                                </svg>
+                                                            </button>
+                                                            <input type="range" class="control-range range-music js_range-track" max="100" value="0">
+                                                        </div>
+                                                        <div class="volume-controls">
+                                                            <button type="button" class="btn-control btn-volume js_volume">
+                                                                <svg class="icon-volume icon-volume-audio">
+                                                                    <use xlink:href="#icon-volume"></use>
+                                                                </svg>
+                                                            </button>
+                                                            <input type="range" class="control-range range-volume js_range-volume" max="100" value="100">
+                                                        </div>
+                                                        <div>
+                                                            <button class="playrepeat-track"></button>
+                                                        </div>
+                                                    </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                    <table>
+                                        <tr>
+                                            <td>Статус</td>
+                                            <td>
+                                                @switch (Model.Status)
+                                                {
+                                                    case SpeakerStatuses.InStudio:
+                                                        <div class="in-studio-txt">
+                                                            <div class="eclips"></div>@Model.Status.GetLocalizedDescription()
+                                                        </div>
+                                                        break;
+                                                    case SpeakerStatuses.Order:
+                                                        <div class="in-studio-txt for-order">
+                                                            <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
+                                                        </div>
+                                                        break;
+                                                    case SpeakerStatuses.OutOfService:
+                                                        <div class="in-studio-txt for-order">
+                                                            <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
+                                                        </div>
+                                                        break;
+                                                    case SpeakerStatuses.Offline:
+                                                        <div class="in-studio-txt for-order">
+                                                            <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
+                                                        </div>
+                                                        break;
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Пол</td>
+                                            <td>@Model.Gender.GetLocalizedDescription()</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Возраст</td>
+                                            <td>@(string.Join("; ", Model.ListVoiceAge))</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Язык</td>
+                                            <td>@String.Join(", ", Model.VoiceLanguages.Select(p => p.Name))</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Стоимость до 30 слов</td>
+                                            <td>@Model.Price30 @Model.GetCurrency(Model.Price30)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Стоимость до 70 слов</td>
+                                            <td>@Model.Price90 @Model.GetCurrency(Model.Price90)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Стоимость за 1 страницу</td>
+                                            <td>@Model.PricePage @Model.GetCurrency(Model.PricePage)</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Время записи</td>
+                                            <td>@Model.TermsStr</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Возможность режиссирования</td>
+                                            <td>@(Model.CanDirect ? "да" : "нет")</td>
+                                        </tr>
+                                        @if (Model.VacationStartDate.HasValue && Model.VacationEndDate.HasValue && Model.VacationEndDate >= DateTime.Today)
+                                        {
+                                            <tr>
+                                                <td>Отпуск</td>
+                                                <td class="cursivtext"> с @Model.VacationStartDate.Value.ToShortDateString() по @Model.VacationEndDate.Value.ToShortDateString() </td>
+                                            </tr>
+                                        }
+                                        @if (!String.IsNullOrEmpty(Model.Demo))
+                                        {
+                                            <tr>
+                                                <td>Общее демо</td>
+                                                <td class="cursivtext"> <a href="@Model.Demo" target="_blank">cлушать</a></td>
+                                            </tr>
+                                        }
+                                        @if (!String.IsNullOrEmpty(Model.DemoAdvertising))
+                                        {
+                                            <tr>
+                                                <td>Рекламная подача</td>
+                                                <td class="cursivtext"> <a href="@Model.DemoAdvertising" target="_blank">cлушать</a></td>
+                                            </tr>
+                                        }
+                                        @if (!String.IsNullOrEmpty(Model.DemoVoiceOver))
+                                        {
+                                            <tr>
+                                                <td>Закадровая озвучка</td>
+                                                <td class="cursivtext"> <a href="@Model.DemoVoiceOver" target="_blank">cлушать</a></td>
+                                            </tr>
+                                        }
+                                    </table>
+
+                                    <div class="make-older" style="width: 100%; padding: 20px 0px">
+                                        <button type="button" class="btn-speaker js_open-modal">
+                                            ЗАКАЗАТЬ ДИКТОРА
+                                            <svg>
+                                                <use xlink:href="#icon-cart"></use>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="in-one-click js_open-modal">ЗАКАЗ В 1 КЛИК</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="bg-image">
+                <div class="advertise-demo">
+                    <svg class="icon-prev" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.67182 2.65887L1.87194 8.62078L7.74435 14.3337L7.67182 2.65887Z" stroke="white" stroke-width="1.5" />
+                    </svg>
+                    <span>Рекламное демо</span>
+                    <svg class="icon-next" width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.73931 2.65887L8.53919 8.62078L2.66678 14.3337L2.73931 2.65887Z" stroke="white" stroke-width="1.5" />
+                    </svg>
+                    <section id="music-page" style="padding-top: 338px;" class="player audio-playlist">
+                        <div class="details">
+                            <div class="now-playing1"></div>
+                            <div class="track-art1"></div>
+                            <div class="track-name1"></div>
+                            <div class="track-artist1"></div>
+                        </div>
+                        <div class="buttons">
+                            <div id="play-icon" class="playpause-track1 playpause-audio" onclick="playpauseTrack1()"><img src="~/site2/~/site2/img/play.png"></div>
+                        </div>
+                        <div class="slider_container">
+                            <input type="range" id="page-player" min="1" max="100" value="100" class="seek_slider1" onchange="seekTo1()">
+                        </div>
+                        <div>
+                            <div id="repeat" class="playrepeat-track1 repeat" onclick="handleRepeat()">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.4999 14.9917C22.4999 16.2344 21.4924 17.2417 20.2499 17.2417H2.56041L5.52287 14.2792L4.46233 13.2187L0.219589 17.4614C-0.0731964 17.7544 -0.0731964 18.2292 0.219589 18.522L4.46233 22.7647L5.52287 21.7042L2.56041 18.7417H20.2499C22.3199 18.7393 23.9973 17.0617 23.9999 14.9917V11.9917H22.4999V14.9917Z" />
+                                    <path d="M1.5 8.99176C1.5 7.74921 2.50745 6.74176 3.75 6.74176H21.4395L18.477 9.70422L19.5375 10.7648L23.7803 6.52203C24.0731 6.22906 24.0731 5.75446 23.7803 5.46149L19.5375 1.21875L18.477 2.2793L21.4395 5.24176H3.75C1.67999 5.24432 0.00256348 6.92175 0 8.99176V11.9918H1.5V8.99176Z" />
+                                </svg>
+                            </div>
+                            <svg class="two-prew" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g opacity="0.5">
+                                    <path d="M19.0449 0.639295L10.3547 7.50009L19.0449 14.3604V0.639295Z" stroke="white" />
+                                    <path d="M9.27246 0.639295L0.582242 7.50009L9.27246 14.3604V0.639295Z" stroke="white" />
+                                </g>
+                            </svg>
+                            <svg class="two-next" width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.5 0.639295L9.19022 7.50009L0.5 14.3604V0.639295Z" stroke="white" />
+                                <path d="M10.2725 0.639295L18.9627 7.50009L10.2725 14.3604V0.639295Z" stroke="white" />
+                            </svg>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <table style="margin-top: 1px;">
+                <tr>
+                    <td>Статус</td>
+                    <td>
+                        @switch (Model.Status)
+                        {
+                            case SpeakerStatuses.InStudio:
+                                <div class="in-studio-txt">
+                                    <div class="eclips"></div>@Model.Status.GetLocalizedDescription()
+                                </div>
+                                break;
+                            case SpeakerStatuses.Order:
+                                <div class="in-studio-txt for-order">
+                                    <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
+                                </div>
+                                break;
+                            case SpeakerStatuses.OutOfService:
+                                <div class="in-studio-txt for-order">
+                                    <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
+                                </div>
+                                break;
+                            case SpeakerStatuses.Offline:
+                                <div class="in-studio-txt for-order">
+                                    <div class="eclips for-order-e"></div>@Model.Status.GetLocalizedDescription()
+                                </div>
+                                break;
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Пол</td>
+                    <td>@Model.Gender.GetLocalizedDescription()</td>
+                </tr>
+                <tr>
+                    <td>Возраст</td>
+                    <td>@(string.Join("; ", Model.ListVoiceAge))</td>
+
+                </tr>
+                <tr>
+                    <td>Язык</td>
+                    <td>@String.Join(", ", Model.VoiceLanguages.Select(p => p.Name))</td>
+
+                </tr>
+                <tr>
+                    <td>Стоимость до 30 слов</td>
+                    <td>@Model.Price30 @Model.GetCurrency(Model.Price30)</td>
+
+                </tr>
+                <tr>
+                    <td>Стоимость до 70 слов</td>
+                    <td>@Model.Price90 @Model.GetCurrency(Model.Price90)</td>
+
+                </tr>
+                <tr>
+                    <td>Стоимость за 1 страницу</td>
+                    <td>@Model.PricePage @Model.GetCurrency(Model.PricePage)</td>
+
+                </tr>
+                <tr>
+                    <td>Время записи</td>
+                    <td>@Model.TermsStr</td>
+
+                </tr>
+                <tr>
+                    <td>Возможность режиссирования</td>
+                    <td>@(Model.CanDirect ? "да" : "нет")</td>
+                </tr>
+                @if (Model.VacationStartDate.HasValue && Model.VacationEndDate.HasValue && Model.VacationEndDate >= DateTime.Today)
+                {
+                    <tr>
+                        <td>Отпуск</td>
+                        <td class="cursivtext"> с @Model.VacationStartDate.Value.ToShortDateString() по @Model.VacationEndDate.Value.ToShortDateString() </td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.Demo))
+                {
+                    <tr>
+                        <td>Общее демо</td>
+                        <td class="cursivtext"> <a href="@Model.Demo" target="_blank">cлушать</a></td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.DemoAdvertising))
+                {
+                    <tr>
+                        <td>Рекламная подача</td>
+                        <td class="cursivtext"> <a href="@Model.DemoAdvertising" target="_blank">cлушать</a></td>
+                    </tr>
+                }
+                @if (!String.IsNullOrEmpty(Model.DemoVoiceOver))
+                {
+                    <tr>
+                        <td>Закадровая озвучка</td>
+                        <td class="cursivtext"> <a href="@Model.DemoVoiceOver" target="_blank">cлушать</a></td>
+                    </tr>
+                }
+            </table>
+            <div class="make-older">
+                <button class="btn-speaker">
+                    ЗАКАЗАТЬ ДИКТОРА
+                    <svg width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.78125 14.5158H20.4846C20.7991 14.5158 21.0751 14.3078 21.1602 14.0057L23.9729 4.16174C24.0333 3.94953 23.9919 3.72156 23.8588 3.54523C23.7255 3.36945 23.5182 3.26563 23.2971 3.26563H6.15802L5.6554 1.00391C5.58398 0.681824 5.29834 0.453125 4.96875 0.453125H0.703125C0.314575 0.453125 0 0.7677 0 1.15625C0 1.54498 0.314575 1.85938 0.703125 1.85938H4.40442L6.94354 13.2852C6.19647 13.61 5.67188 14.3536 5.67188 15.2189C5.67188 16.382 6.61816 17.3283 7.78125 17.3283H20.4846C20.8733 17.3283 21.1877 17.0139 21.1877 16.6252C21.1877 16.2366 20.8733 15.9221 20.4846 15.9221H7.78125C7.39398 15.9221 7.07812 15.6069 7.07812 15.2189C7.07812 14.8309 7.39398 14.5158 7.78125 14.5158Z" fill="white" />
+                        <path d="M7.07812 19.4377C7.07812 20.601 8.02441 21.5471 9.18768 21.5471C10.3508 21.5471 11.2971 20.601 11.2971 19.4377C11.2971 18.2747 10.3508 17.3284 9.18768 17.3284C8.02441 17.3284 7.07812 18.2747 7.07812 19.4377Z" fill="white" />
+                        <path d="M16.9688 19.4377C16.9688 20.601 17.915 21.5471 19.0781 21.5471C20.2414 21.5471 21.1875 20.601 21.1875 19.4377C21.1875 18.2747 20.2414 17.3284 19.0781 17.3284C17.915 17.3284 16.9688 18.2747 16.9688 19.4377Z" fill="white" />
+                    </svg>
+                </button>
+                <p class="in-one-click">ЗАКАЗ В 1 КЛИК</p>
+            </div>*@
     </div>
     <div class="box-grapfic">
         <hr class="hr-for-slider">
         <p class="txt-about-us txt-audioslot">График доступности диктора</p>
-        
-        <div class="line-box">
-            <div class="ecliple-box @(Model.ListDays.Contains(1)?"completed":"")"><span>ПН</span></div>
-            <div class="ecliple-box @(Model.ListDays.Contains(2)?"completed":"")"><span>ВТ</span></div>
-            <div class="ecliple-box @(Model.ListDays.Contains(3)?"completed":"")"><span>СР</span></div>
-            <div class="ecliple-box @(Model.ListDays.Contains(4)?"completed":"")"><span>ЧТ</span></div>
-            <div class="ecliple-box @(Model.ListDays.Contains(5)?"completed":"")"><span>ПТ</span></div>
-            <div class="ecliple-box @(Model.ListDays.Contains(6)?"completed":"")"><span>СБ.</span></div>
-            <div class="ecliple-box @(Model.ListDays.Contains(7)?"completed":"")"><span>ВС.</span></div>
-        </div>                      
-        <div class="hour-box">
-            <div>@Html.Raw(Model.ListDays.Contains(1) ? Model.Hours : "--")</div>
-            <div>@Html.Raw(Model.ListDays.Contains(2) ? Model.Hours : "--")</div>
-            <div>@Html.Raw(Model.ListDays.Contains(3) ? Model.Hours : "--")</div>
-            <div>@Html.Raw(Model.ListDays.Contains(4) ? Model.Hours : "--")</div>
-            <div>@Html.Raw(Model.ListDays.Contains(5) ? Model.Hours : "--")</div>
-            <div>@Html.Raw(Model.ListDays.Contains(6) ? Model.Hours : "--")</div>
-            <div>@Html.Raw(Model.ListDays.Contains(7) ? Model.Hours : "--")</div>
+
+        <div class="schedule-block">
+            <ul class="line-block">
+                <li class="line-block__item @(Model.ListDays.Contains(1)?"start in-range":"") @(!Model.ListDays.Contains(2)?"end":"")">
+                    <span class="line-block__title">пн</span>
+                    @if (Model.ListDays.Contains(1))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+                <li class="line-block__item @(!Model.ListDays.Contains(1)?"start":"") @(Model.ListDays.Contains(2)?"in-range":"") @(!Model.ListDays.Contains(3)?"end":"")">
+                    <span class="line-block__title">вт</span>
+                    @if (Model.ListDays.Contains(2))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+                <li class="line-block__item @(!Model.ListDays.Contains(2)?"start":"") @(Model.ListDays.Contains(3)?"in-range":"") @(!Model.ListDays.Contains(4)?"end":"")">
+                    <span class="line-block__title">ср</span>
+                    @if (Model.ListDays.Contains(3))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+                <li class="line-block__item @(!Model.ListDays.Contains(3)?"start":"") @(Model.ListDays.Contains(4)?"in-range":"") @(!Model.ListDays.Contains(5)?"end":"")">
+                    <span class="line-block__title">чт</span>
+                    @if (Model.ListDays.Contains(4))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+                <li class="line-block__item @(!Model.ListDays.Contains(4)?"start":"") @(Model.ListDays.Contains(5)?"in-range":"") @(!Model.ListDays.Contains(6)?"end":"")">
+                    <span class="line-block__title">пт</span>
+                    @if (Model.ListDays.Contains(5))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+                <li class="line-block__item @(!Model.ListDays.Contains(5)?"start":"") @(Model.ListDays.Contains(6)?"in-range":"") @(!Model.ListDays.Contains(7)?"end":"")">
+                    <span class="line-block__title">сб</span>
+                    @if (Model.ListDays.Contains(6))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+                <li class="line-block__item @(!Model.ListDays.Contains(6)?"start":"") @(Model.ListDays.Contains(7)?"in-range":"")">
+                    <span class="line-block__title">вс</span>
+                    @if (Model.ListDays.Contains(7))
+                    {
+                        <span class="line-block__label">@Html.Raw(Model.Hours)</span>
+                    }
+                </li>
+            </ul>
         </div>
         <div class="characteristic">
             <hr class="hr-for-slider">
@@ -453,29 +686,7 @@
             <p class="info-about-us adapt-text">
                 @Model.VoiceDescription
             </p>
-            <div class="charak-voice">
-                <div class="which-txt">
-                    <div>Низкий</div>
-                    <div>Мягкий</div>
-                    <div>Веселый</div>
-                    <div>Спокойный</div>
-                    <div>Официальный</div>
-                </div>
-                <div class="container-lines">
-                    <div class="bold-line"><div class="color-line"></div></div>
-                    <div class="bold-line"><div class="color-line"></div></div>
-                    <div class="bold-line"><div class="other-color"></div></div>
-                    <div class="bold-line"><div class="color-line"></div></div>
-                    <div class="bold-line"><div class="color-line"></div></div>
-                </div>
-                <div class="which-txt-side">
-                    <div>Высокий</div>
-                    <div>Брутальный</div>
-                    <div class="serious">Серьезный</div>
-                    <div>Динамичный</div>
-                    <div>Игривый</div>
-                </div>
-            </div>
+            <div class="charak-voice"><div id="example" class="characteristic-block"></div></div>
         </div>
         <div>
 
@@ -486,43 +697,15 @@
             </p>
         </div>
     </div>
-    <svg class="mesenger-icon" width="129" height="129" viewBox="0 0 129 129" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d)">
-            <circle cx="80.5" cy="40.5" r="40.5" fill="#FEFEFF" />
-            <circle cx="80.5" cy="40.5" r="40" stroke="url(#paintc0_linear)" />
-        </g>
-        <path d="M98.341 33.4595C98.0009 33.0037 97.3774 32.8673 96.8782 33.1394L84.9926 39.619L77.5984 33.2788C77.145 32.8901 76.4687 32.916 76.0465 33.3383L62.3323 47.0516C61.8873 47.4992 61.8895 48.2228 62.3372 48.6677C62.6952 49.0235 63.2441 49.1023 63.6878 48.8617L75.5733 42.3822L82.9744 48.7246C83.4278 49.1133 84.1041 49.0874 84.5263 48.6651L98.2405 34.9518C98.6401 34.5485 98.683 33.9128 98.341 33.4595Z" fill="url(#paintc1_linear)" />
-        <defs>
-            <filter id="filter0_d" x="0" y="0" width="129" height="129" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                <feOffset dx="-16" dy="24" />
-                <feGaussianBlur stdDeviation="12" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
-            </filter>
-            <linearGradient id="paintc0_linear" x1="44.2078" y1="81" x2="124.221" y2="13.9764" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#F7F7F7" />
-                <stop offset="1" stop-color="white" />
-            </linearGradient>
-            <linearGradient id="paintc1_linear" x1="62" y1="49" x2="67.1206" y2="29.7152" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#483156" />
-                <stop offset="1" stop-color="#39516E" />
-            </linearGradient>
-        </defs>
-    </svg>
-
+<a href="@Url.Action("Contact")" class="icon-message__inner">
+    <div class="icon-message">
+        <img src="~/site2/img/icons/messenger.svg" alt="">
+    </div>
+</a>
 </section>
-<a href="#" class="back-to-speakers">
-    <svg width="11" height="17" viewBox="0 0 11 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.67182 2.65887L1.87194 8.62078L7.74435 14.3337L7.67182 2.65887Z" stroke="url(#paint0_linear)" stroke-width="1.5" />
-        <defs>
-            <linearGradient id="paint0_linear" x1="10.411" y1="1.07747" x2="0.165671" y2="3.20313" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#483156" />
-                <stop offset="1" stop-color="#39516E" />
-            </linearGradient>
-        </defs>
+<a class="back-to-speakers" href="@(Context.Request.Headers["Referer"].ToString())">
+    <svg class="icon-btn-triangle btn-svg">
+        <use xlink:href="#icon-triangle"></use>
     </svg>
     НАЗАД К СПИСКУ ДИКТОРОВ
 </a>

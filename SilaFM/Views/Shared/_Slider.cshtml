@@ -47,15 +47,15 @@
         <a href="#carousel" class="left carousel-control" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"></span> </a> <a href="#carousel" class="right carousel-control" data-slide="next"> <span class="glyphicon glyphicon-chevron-right"></span> </a>
     </div>*@
 
-<section id="1" class="home-page">
+<section id="p1" class="home-page main-page">
     <div id="home-text" class="home-box-text">
         <p class="sila-fm-txt">СИЛА FM</p>
         <h2 class="professional-txt">ПРОФЕССИОНАЛЬНАЯ</h2>
         <h1 class="studio-txt">СТУДИЯ ЗВУКОЗАПИСИ</h1>
-        <a href="@Url.Action("Order", "Home")" id="Btn-home" class="home-btn">
+        <a href="#" id="Btn-home" class="home-btn js_open-modal">
             СДЕЛАТЬ ЗАКАЗ
-            <svg class="btn-svg" width="8" height="15">
-                <use href="#order-svg"></use>
+            <svg class="icon-btn-triangle btn-svg">
+                <use xlink:href="#icon-triangle"></use>
             </svg>
         </a>
     </div>
@@ -70,82 +70,8 @@
         <div id="slider-elem3" class="slider-items">
             <p class="slider-img1"><span class="slider-text">АУДИОРОЛИКИ</span></p>
         </div>
-        <button onclick="nextSlider()" id="next-slider" class="btn-slider">
-            <svg width="119" height="150" viewBox="0 0 119 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g filter="url(#filter0_dd)">
-                    <path d="M78.2659 75.3821C79.0448 76.1653 79.0412 77.4317 78.258 78.2105L47.9413 108.358C46.683 109.609 44.5395 108.724 44.5311 106.949L44.2414 46.0231C44.2329 44.234 46.398 43.3347 47.6596 44.6034L78.2659 75.3821Z"
-                          fill="#C7DEE1" />
-                    <path d="M77.5529 77.5014L47.2362 107.649C46.607 108.275 45.5353 107.832 45.5311 106.945L45.2414 46.0183C45.2372 45.1238 46.3197 44.6742 46.9505 45.3085L77.5569 76.0872C77.9463 76.4788 77.9445 77.112 77.5529 77.5014Z"
-                          stroke="#C7DEE1" stroke-width="2" />
-                </g>
-                <defs>
-                    <filter id="filter0_dd" x="0.0285645" y="0.190918" width="118.587" height="149.009"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                        <feOffset dx="16" dy="-20" />
-                        <feGaussianBlur stdDeviation="10" />
-                        <feColorMatrix type="matrix" values="0 0 0 0 0.3625 0 0 0 0 0.3625 0 0 0 0 0.3625 0 0 0 0.05 0" />
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                        <feOffset dx="-16" dy="20" />
-                        <feGaussianBlur stdDeviation="10" />
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" />
-                        <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow" />
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape" />
-                    </filter>
-                </defs>
-            </svg>
-        </button>
-        <button onclick="prevSlider()" id="prev-slider" class="btn-slider-prev">
-            <svg class="prev-svg" width="119" height="150" viewBox="0 0 119 150" fill="none"
-                 xmlns="http://www.w3.org/2000/svg">
-                <g filter="url(#filter0_dd)">
-                    <path d="M78.2659 75.3821C79.0448 76.1653 79.0412 77.4317 78.258 78.2105L47.9413 108.358C46.683 109.609 44.5395 108.724 44.5311 106.949L44.2414 46.0231C44.2329 44.234 46.398 43.3347 47.6596 44.6034L78.2659 75.3821Z"
-                          fill="#C7DEE1" />
-                    <path d="M77.5529 77.5014L47.2362 107.649C46.607 108.275 45.5353 107.832 45.5311 106.945L45.2414 46.0183C45.2372 45.1238 46.3197 44.6742 46.9505 45.3085L77.5569 76.0872C77.9463 76.4788 77.9445 77.112 77.5529 77.5014Z"
-                          stroke="#C7DEE1" stroke-width="2" />
-                </g>
-                <defs>
-                    <filter id="filter0_dd" x="0.0285645" y="0.190918" width="118.587" height="149.009"
-                            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                        <feOffset dx="16" dy="-20" />
-                        <feGaussianBlur stdDeviation="10" />
-                        <feColorMatrix type="matrix" values="0 0 0 0 0.3625 0 0 0 0 0.3625 0 0 0 0 0.3625 0 0 0 0.05 0" />
-                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                        <feOffset dx="-16" dy="20" />
-                        <feGaussianBlur stdDeviation="10" />
-                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" />
-                        <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow" />
-                        <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape" />
-                    </filter>
-                </defs>
-            </svg>
-        </button>
+        <button onclick="nextSlider()" id="next-slider" class="btn-slider"></button>
+        <button onclick="prevSlider()" id="prev-slider" class="btn-slider-prev"></button>
     </div>
-</section>
-<section class="player">
-    <div class="details">
-        <div class="now-playing"></div>
-        <div class="track-art"></div>
-        <div class="track-name"></div>
-        <div class="track-artist"></div>
-    </div>
-    <div class="buttons">
-        <div class="playpause-track" onclick="playpauseTrack()"><img src="~/site2/img/play.png"></div>
-    </div>
-    <div class="slider_container">
-        <input type="range" id="range-player" min="1" max="100" value="100" class="seek_slider" onchange="seekTo()">
-    </div>
-    <div class="slider_container">
-        <img class="icon-volume" src="~/site2/img/volume.png">
-        <input type="range" min="1" max="100" value="99" id="rng" name="rng" class="volume_slider __range"
-               onchange="setVolume()">
-    </div>
-    <div id="myAudio">
-        <div class="playrepeat-track" onclick="playTrackRepeat()"><img src="~/site2/img/repeat.png"></div>
-    </div>
+    @Html.Partial("_MainPlayer")
 </section>

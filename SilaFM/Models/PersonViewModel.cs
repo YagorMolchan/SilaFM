@@ -13,7 +13,7 @@ namespace Pras.Web.Models
         public string ImageSmall { get; set; }
 
         public string Socials { get; set; }
-        public List<SocialContact> SocialsList => JsonConvert.DeserializeObject<List<SocialContact>>(Socials);
+        public List<SocialContact> SocialsList => JsonConvert.DeserializeObject<List<SocialContact>>(Socials??"[]");
         public string Summary { get; set; }
     }
 }

@@ -1,0 +1,27 @@
+﻿<section class="player player-secondary js_music-inner" data-play-state="play" data-mute-state="unmute">
+    <audio src="~/site2/mp3/music2.mp3"></audio>
+    <div class="controls">
+        <div class="play-controls">
+            <button type="button" class="btn-control btn-play pause js_play">
+                <svg class="icon-play">
+                    <use xlink:href="#icon-play"></use>
+                </svg>
+                <svg class="icon-pause">
+                    <use xlink:href="#icon-pause"></use>
+                </svg>
+            </button>
+            <input type="range" class="control-range range-music js_range-track" max="100" value="0">
+        </div>
+        <div class="volume-controls">
+            <button type="button" class="btn-control btn-volume js_volume">
+                <svg class="icon-volume icon-volume-audio">
+                    <use xlink:href="#icon-volume"></use>
+                </svg>
+            </button>
+            <input type="range" class="control-range range-volume js_range-volume" max="100" value="100">
+        </div>
+        <div>
+            <button class="playrepeat-track"></button>
+        </div>
+    </div>
+</section>

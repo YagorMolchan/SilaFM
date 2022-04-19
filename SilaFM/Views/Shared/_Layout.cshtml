@@ -22,110 +22,99 @@
     @RenderSection("Styles", false)
 </head>
 
-<body>
+<body data-ng-app="clientApp" class="@ViewBag.BodyClass">
     <!-- <div id="preloader" class="visible">
     </div> -->
     @Html.Partial("_SvgStore")
     <header>
-        <a href="@Url.Action("Index", "Home")">
-            <img class="menu-logo" src="~/site2/img/SilaFM_logo.png" alt="logotip-Sila-FM">
-        </a>
-        <ul class="menu">
-            <li class="menu-item menu-dropdown">
-                <a href="@Url.Action("Speakers", "Home")">
-                    <svg class="menu-polygon">
-                        <use href="#menu-corner" />
-                    </svg>
-                    Дикторы
-                </a>
-                <div class="dropdown-content">
-                    <ul class="content-items">
-                        <li class="down-item"><a href="@Url.Action("SpeakersRu", "Home")">Дикторы россии</a></li>
-                        <li class="down-item"><a href="@Url.Action("SpeakersUk", "Home")">Дикторы Украины</a></li>
-                        <li class="down-item"><a href="@Url.Action("SpeakersFor", "Home")">Иностранные дикторы</a></li>
-                        <li class="down-item"><a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a></li>
-                        <li class="down-item"><a href="@Url.Action("SpeakersParodists", "Home")">Пародисты</a></li>
-                        <li class="down-item"><a href="@Url.Action("SpeakersChild", "Home")">Детские голоса</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="menu-item menu-dropdown">
-                <a href="#">
-                    <svg class="menu-polygon">
-                        <use href="#menu-corner" />
-                    </svg>
-                    Услуги
-                </a>
-                <div class="dropdown-content">
-                    <ul class="content-items">
-                        <li class="down-item"><a href="@Url.Action("Scenario", "Home")">Сценарии</a></li>
-                        <li class="down-item"><a href="@Url.Action("Audio", "Home")">Аудиоролики</a></li>
-                        <li class="down-item"><a href="@Url.Action("Games", "Home")">Озвучивание игр, сказок, квестов</a></li>
-                        <li class="down-item"><a href="@Url.Action("Video", "Home")">Озвучивание видеороликов</a></li>
-                        <li class="down-item"><a href="@Url.Action("VideoCreating", "Home")">Создание видеороликов</a></li>
-                        <li class="down-item"><a href="@Url.Action("Music", "Home")">Музыкальные подложки</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="menu-item"><a href="@Url.Action("Payment", "Home")">Оплата</a></li>
-            <li class="menu-item"><a href="@Url.Action("Contact", "Home")">Контакты</a></li>
-        </ul>
-        <ul class="header-number">
-            <li class="number-city">Киев<span class="phone-number">+38 /044/ 545 77 13</span></li>
-            <li class="number-city">Москва <span class="phone-number">+7 /800/ 551 0 551</span></li>
-        </ul>
-        <div class="burger">
-            <div id="myNav" class="overlay">
-                <a class="closebtn" onclick="closeNav()">
-                    <svg class="icon-close">
-                        <use href="#close" />
-                    </svg>
-                </a>
-                <div class="overlay-content">
-                    <div class="dropdown-burger">
-                        <a class="for-droptmenu dropbtn-burger">
-                            <svg class="menu-polygon-burger">
-                                <use href="#menu-corner" />
-                            </svg>
-                            Дикторы
-                        </a>
-                        <div class="dropdown-content-burger">
-                            <a href="@Url.Action("SpeakersRu", "Home")">Дикторы россии</a>
-                            <a href="@Url.Action("SpeakersUk", "Home")">Дикторы Украины</a>
-                            <a href="@Url.Action("SpeakersFor", "Home")">Иностранные дикторы</a>
-                            <a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a>
-                            <a href="@Url.Action("SpeakersParodists", "Home")">Пародиств</a>
-                            <a href="@Url.Action("SpeakersChild", "Home")">Детские голоса</a>
+        <div class="container">
+            <a href="@Url.Action("Index", "Home")" class="menu-logo-link">
+                <img class="menu-logo" src="~/site2/img/SilaFM_logo.png" alt="logo-Sila-FM">
+            </a>
+            <ul class="menu">
+                <li class="menu-item dropbtn">
+                    <a href="@Url.Action("Speakers", "Home")">
+                        <svg class="icon-menu-triangle triangle">
+                            <use xlink:href="#icon-triangle"></use>
+                        </svg>
+                        Дикторы
+                    </a>
+                    <div class="dropdown-content">
+                        <ul class="content-items">
+                            <li class="down-item"><a href="@Url.Action("SpeakersRu", "Home")">Дикторы россии</a></li>
+                            <li class="down-item"><a href="@Url.Action("SpeakersUk", "Home")">Дикторы Украины</a></li>
+                            <li class="down-item"><a href="@Url.Action("SpeakersFor", "Home")">Иностранные дикторы</a></li>
+                            <li class="down-item"><a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a></li>
+                            <li class="down-item"><a href="@Url.Action("SpeakersParodists", "Home")">Пародисты</a></li>
+                            <li class="down-item"><a href="@Url.Action("SpeakersChild", "Home")">Детские голоса</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item dropbtn">
+                    <a href="#">
+                        <svg class="icon-menu-triangle triangle">
+                            <use xlink:href="#icon-triangle"></use>
+                        </svg>
+                        Услуги
+                    </a>
+                    <div class="dropdown-content">
+                        <ul class="content-items">
+                            <li class="down-item"><a href="@Url.Action("Scenario", "Home")">Сценарии</a></li>
+                            <li class="down-item"><a href="@Url.Action("Audio", "Home")">Аудиоролики</a></li>
+                            <li class="down-item"><a href="@Url.Action("Games", "Home")">Озвучивание игр, сказок, квестов</a></li>
+                            <li class="down-item"><a href="@Url.Action("Video", "Home")">Озвучивание видеороликов</a></li>
+                            <li class="down-item"><a href="@Url.Action("VideoCreating", "Home")">Создание видеороликов</a></li>
+                            <li class="down-item"><a href="@Url.Action("Music", "Home")">Музыкальные подложки</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item"><a href="@Url.Action("Payment", "Home")">Оплата</a></li>
+                <li class="menu-item"><a href="@Url.Action("Contact", "Home")">Контакты</a></li>
+            </ul>
+            @await Component.InvokeAsync("HeaderPhones")
+            <div class="burger">
+                <div id="myNav" class="overlay">
+                    <button type="button" class="closebtn"></button>
+                    <div class="overlay-content">
+                        <div class="dropdown-burger">
+                            <a class="for-droptmenu dropbtn-burger">
+                                <svg class="menu-polygon-burger">
+                                    <use xlink:href="#icon-triangle"></use>
+                                </svg>
+                                Дикторы
+                            </a>
+                            <div class="dropdown-content-burger">
+                                <a href="@Url.Action("SpeakersRu", "Home")">Дикторы россии</a>
+                                <a href="@Url.Action("SpeakersUk", "Home")">Дикторы Украины</a>
+                                <a href="@Url.Action("SpeakersFor", "Home")">Иностранные дикторы</a>
+                                <a href="@Url.Action("SpeakersVocalists", "Home")">Вокалисты</a>
+                                <a href="@Url.Action("SpeakersParodists", "Home")">Пародиств</a>
+                                <a href="@Url.Action("SpeakersChild", "Home")">Детские голоса</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="dropdown-burger">
-                        <a class="for-droptmenu dropbtn-burger">
-                            <svg class="menu-polygon-burger">
-                                <use href="#menu-corner" />
-                            </svg>Услуги
-                        </a>
-                        <div class="dropdown-content-burger">
-                            <a href="@Url.Action("Scenario", "Home")">Сценарии</a>
-                            <a href="@Url.Action("Audio", "Home")">Аудиоролики</a>
-                            <a href="@Url.Action("Games", "Home")">Озвучивание игр, сказок, квестов</a>
-                            <a href="@Url.Action("Video", "Home")">Озвучивание видеороликов</a>
-                            <a href="@Url.Action("VideoCreating", "Home")">Создание видеороликов</a>
-                            <a href="@Url.Action("Music", "Home")">Музыкальные подложки</a>
+                        <div class="dropdown-burger">
+                            <a class="for-droptmenu dropbtn-burger">
+                                <svg class="menu-polygon-burger">
+                                    <use xlink:href="#icon-triangle"></use>
+                                </svg>
+                                Услуги
+                            </a>
+                            <div class="dropdown-content-burger">
+                                <a href="@Url.Action("Scenario", "Home")">Сценарии</a>
+                                <a href="@Url.Action("Audio", "Home")">Аудиоролики</a>
+                                <a href="@Url.Action("Games", "Home")">Озвучивание игр, сказок, квестов</a>
+                                <a href="@Url.Action("Video", "Home")">Озвучивание видеороликов</a>
+                                <a href="@Url.Action("VideoCreating", "Home")">Создание видеороликов</a>
+                                <a href="@Url.Action("Music", "Home")">Музыкальные подложки</a>
+                            </div>
                         </div>
-                    </div>
-                    <a href="@Url.Action("Payment", "Home")">Оплата</a>
-                    <a href="@Url.Action("Contact", "Home")">Контакты</a>
-                    <div class="contacts">
-                        <p class="contact-elem">Киев<span class="phone-number">+38 /044/ 545 77 13</span></p>
-                        <p class="contact-elem">Москва <span class="phone-number">+7 /800/ 551 0 551</span></p>
+                        <a href="@Url.Action("Payment", "Home")">Оплата</a>
+                        <a href="@Url.Action("Contact", "Home")">Контакты</a>
+                        @await Component.InvokeAsync("BurgerPhones")
                     </div>
                 </div>
+                <p class="icon-menu"><span class="iconmenu"></span></p>
             </div>
-            <p class="icon-menu" onclick="openNav()">
-                <svg class="icon-burger">
-                    <use href="#burger" />
-                </svg>
-            </p>
         </div>
     </header>
     <main id="menu">
@@ -134,15 +123,20 @@
             @Html.Partial("_Footer")
         </footer>
     </main>
+    @Html.Partial("_OrderModal")
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js"></script>
     <script src="~/site2/js/revealator-master/fm.revealator.jquery.js"></script>
     <script src="~/site2/js/index.js"></script>
+    <script src="~/site2/js/common.js"></script>
     <script src="~/site2/js/hronomer.js"></script>
     <script src="~/site2/js/pagemer.js"></script>
     @Html.Partial("_ValidationScriptsPartial")
+    <script src="~/angular/angular.js"></script>
+    <script src="~/angular/controllers/client/clientApp.js"></script>
+    <script src="~/angular/controllers/client/callController.js"></script>
     @RenderSection("Scripts", false)
 </body>
 

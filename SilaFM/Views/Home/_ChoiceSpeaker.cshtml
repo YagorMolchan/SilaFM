@@ -1,0 +1,82 @@
+﻿@using System.Windows.Forms
+@using Microsoft.AspNetCore.Http.Extensions
+@model Pras.Web.Models.Forms.ChoiceSpeakerViewModel
+
+<div class="modal-overlay-calculator @((TempData["OpenChoiceSpeaker"] is bool ? (bool) TempData["OpenChoiceSpeaker"] : false)?" active-calculator":"")">
+    <div class="modal-calculator @((TempData["OpenChoiceSpeaker"] is bool ? (bool) TempData["OpenChoiceSpeaker"] : false)?" active-calculator":"")" style="padding-top: 50px;" >
+        <a class="close-modal-calculator">
+            <img src="~/site2/img/icons/modal-close-svg.svg" />
+        </a>
+        <div class="modal-content-calculator">
+            <form action="@Url.Action("ChoiceSpeaker", "Emailing", new {returnUrl=Context.Request.GetDisplayUrl()})" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <h3 class="txt-chronomer online-calculate">ПОДБОР ДИКТОРА</h3>
+                @if (TempData["ErrorChoice"] != null)
+                {
+                    <p class="field-validation-error text-definition">@TempData["ErrorChoice"]</p>
+                }
+                @if (TempData["SuccessChoice"] != null)
+                {
+                    <p class="text-definition">@TempData["SuccessChoice"]</p>
+                }
+                <div class="container-speaker">
+                    <div class="form-speakers">
+                        <div class="box-email">
+                            <label class="txt-label-speaker email-txt-sp">EMAIL</label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "input-speaker", placeholder = "ваш электронный адрес" })
+                            <div>@Html.ValidationMessageFor(model => model.Email)</div>
+                        </div>
+                        <div>
+                            <label class="txt-label-speaker your-cash">ВАШ БЮДЖЕТ ДЛЯ ЗАПИСИ</label>
+                            @Html.TextBoxFor(model => model.Budget, new { @class = "input-speaker", placeholder = "ваш бюджет на даный момент" })
+                            <div>@Html.ValidationMessageFor(model => model.Budget)</div>
+                        </div>
+                    </div>
+                    <div class="form-speakers">
+                        <div class="form_radio form-speak">
+                            <p class="txt-label-speaker voices-txt">ГОЛОС</p>
+                            <input id="radio-3" type="radio" name="Voice" checked value="мужской">
+                            <label for="radio-3" class="page-txt-chrono txt-calcul-range">мужской</label><br>
+                            <input id="radio-4" type="radio" name="Voice" checked value="женский">
+                            <label for="radio-4" class="page-txt-chrono  txt-calcul-range">женский</label><br>
+                        </div>
+                        <div class="pick-file">
+                            <label class="txt-label-speaker">ПРИКРЕПИТЕ ЗАДАНИЕ</label>
+                            <label class="custom-file-upload">
+                                Выбрать файл
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.3789 3.84755L14.9483 3.84755C13.5089 3.84755 12.2147 5.14178 12.2147 6.58112L12.2147 21.7233C12.2147 22.6003 12.5561 23.4249 13.1763 24.0452L14.0103 24.8792C14.742 25.6108 15.9319 25.6108 16.6636 24.8792L17.4976 24.0452C18.1178 23.4249 18.4592 22.6003 18.4592 21.7233L18.4592 8.29638C18.4592 8.03725 18.2493 7.82738 17.9902 7.82741C17.7311 7.82741 17.5212 8.03729 17.5212 8.29638L17.5212 21.7233C17.5212 22.3497 17.2773 22.9388 16.8343 23.3819L16.0003 24.2159C15.6346 24.5815 15.0393 24.5815 14.6737 24.2159L13.8397 23.3819C13.3966 22.9388 13.1527 22.3497 13.1527 21.7233L13.1527 6.58112C13.1527 5.63541 14.0026 4.78552 14.9483 4.78552L18.3789 4.78552C18.8518 4.78552 19.3143 4.97727 19.6485 5.31152C19.9827 5.64576 20.1745 6.10826 20.1745 6.58112L20.1745 23.9885C20.1745 24.8656 19.8328 25.6899 19.2129 26.3098L16.6636 28.8591C15.932 29.5907 14.742 29.5907 14.0103 28.8591L11.4611 26.3098C10.8411 25.6898 10.4994 24.8656 10.4994 23.9885L10.4995 8.29641C10.4995 8.03729 10.2896 7.82741 10.0305 7.82744C9.77138 7.82744 9.56151 8.03732 9.56154 8.29641L9.56151 23.9885C9.56151 25.1156 10.0003 26.1757 10.7978 26.9731L13.347 29.5224C14.4444 30.6197 16.2296 30.6197 17.3269 29.5224L19.8762 26.9731C20.6736 26.1757 21.1124 25.1156 21.1124 23.9885L21.1124 6.58112C21.1124 5.86145 20.8206 5.15701 20.3118 4.64821C19.803 4.13938 19.0985 3.84755 18.3789 3.84755Z" fill="#38366D" stroke="#38366D" stroke-width="0.5" />
+                                </svg>
+                                @Html.TextBoxFor(model => model.File, new { @type = "file", title = "Выберите файл",  data_ng_select_files="" })
+                                <span class="nofile">Файл не выбран</span>
+                            </label>
+                            <div>@Html.ValidationMessageFor(model => model.File)</div>
+                        </div>
+                    </div>
+                    <span id="correct-task" class="txt-label-speaker copy-task">
+                        или скопируйте сюда
+                        задание
+                    </span>
+                    @Html.TextAreaFor(model => model.Task, new { @class = "input-paste-text input-paste-speak", placeholder = "если задание не было прикреплено файлом" })
+                    <div>
+                        @Html.ValidationMessageFor(model => model.Task)
+                    </div>                    
+                    <br />
+                    <label class="txt-label-speaker copy-task place-txt">МЕСТО РАЗМЕЩЕНИЯ</label>
+                    @Html.TextBoxFor(model => model.Placement, new { @class = "input-speaker input-width", placeholder = "ТВ, радио, интернет, игровое приложение, ТЦ и тд" })
+                    @Html.ValidationMessageFor(model => model.Placement)
+                    <br />
+                    <label class="txt-label-speaker copy-task wish-txt">ВАШИ ПОЖЕЛАНИЯ</label>
+                    @Html.TextAreaFor(model => model.Comment, new { @class = "input-speaker input-width", placeholder = "не обязательно" })
+                    <div>@Html.ValidationMessageFor(model => model.Comment)</div>
+                </div>
+                <button type="submit" class="cost-btn-open btn-send btn-send-speaker">
+                    ОТПРАВИТЬ
+                    <svg width="9" height="17" viewBox="0 0 9 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.73931 2.65887L7.53919 8.62078L1.66678 14.3337L1.73931 2.65887Z" stroke="white" stroke-width="1.5" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

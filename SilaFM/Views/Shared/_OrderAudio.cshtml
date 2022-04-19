@@ -2,125 +2,149 @@
 
 <form action="order-audio" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-    <p class="field-validation-error">@TempData["ErrorAudio"]</p>
-    <div class="form-group">
-        <label for="Type" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Type)</label>
-        <div class="col-md-9">
-            @Html.DropDownListFor(model => model.Type, new SelectList(Model.ListTypes.ToDictionary(p => p, p => p), "Key", "Value", Model.Type), "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Type)
-        </div>
-    </div>
+    <div class="container-order">
+        @if (TempData["ErrorAudio"] != null)
+        {
+            <p class="field-validation-error">@TempData["ErrorAudio"]</p>
+        }
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="Type" class="txt-form-order">@Html.DisplayNameFor(model => model.Type)</label>
+                <div class="col-md-9">
+                    <div class="custom-select size-order">
+                        @Html.DropDownListFor(model => model.Type, new SelectList(Model.ListTypes.ToDictionary(p => p, p => p), "Key", "Value", Model.Type), "", new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Type)
+                </div>
+            </div>
 
-    <div class="form-group">
-        <label for="Voice" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Voice)</label>
-        <div class="col-md-9">
-            @Html.DropDownListFor(model=>model.Voice, new SelectList(Model.ListVoices.ToDictionary(p=>p, p=>p), "Key", "Value", Model.Voice), "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Voice)
+            <div class="form-group">
+                <label for="Voice" class="txt-form-order">@Html.DisplayNameFor(model => model.Voice)</label>
+                <div class="col-md-9">
+                    <div class="custom-select size-order">
+                        @Html.DropDownListFor(model => model.Voice, new SelectList(Model.ListVoices.ToDictionary(p => p, p => p), "Key", "Value", Model.Voice), "", new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Voice)
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Style" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Style)</label>
-        <div class="col-md-9">
-            @Html.DropDownListFor(model => model.Style, new SelectList(Model.ListStyles.ToDictionary(p => p, p => p), "Key", "Value", Model.Style), "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Style)
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="Style" class="txt-form-order">@Html.DisplayNameFor(model => model.Style)</label>
+                <div class="col-md-9">
+                    <div class="custom-select size-order">
+                        @Html.DropDownListFor(model => model.Style, new SelectList(Model.ListStyles.ToDictionary(p => p, p => p), "Key", "Value", Model.Style), "", new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Style)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Count" class="txt-form-order">@Html.DisplayNameFor(model => model.Count)</label>
+                <div>
+                    @Html.TextBoxFor(model => model.Count, new { @class = "input-order", placeholder = "сколько дикторов" })
+                    @Html.ValidationMessageFor(model => model.Count)
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Count" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Count)</label>
-        <div class="col-sm-9">
-            @Html.TextBoxFor(model => model.Count, new { @class = "form-control", placeholder = "сколько дикторов" })
-            @Html.ValidationMessageFor(model => model.Count)
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="dic1" class="txt-form-order">@Html.DisplayNameFor(model => model.SpeakerName)</label>
+                <div>
+                    @Html.TextBoxFor(model => model.SpeakerName, new { @class = "input-order", placeholder = "Имя Фамилия" })
+                    @Html.ValidationMessageFor(model => model.SpeakerName)
+                    <div class="chronomer-element check-elem">
+                        @Html.CheckBoxFor(model => model.StudioChoice)<span class="txt-required">@Html.DisplayNameFor(model => model.StudioChoice)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="txt-form-order">@Html.DisplayNameFor(model => model.Comments)</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.Comments, new { @class = "textarea-text", rows = 3 })
+                    @Html.ValidationMessageFor(model => model.Comments)
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="dic1" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.SpeakerName)</label>
-        <div class="col-sm-9">
-            @Html.TextBoxFor(model => model.SpeakerName, new { @class = "form-control", placeholder = "Имя Фамилия" })
-            @Html.ValidationMessageFor(model => model.SpeakerName)
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(model => model.StudioChoice)
-                    <p>@Html.DisplayNameFor(model => model.StudioChoice)</p>
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="time2" class="txt-form-order">@Html.DisplayNameFor(model => model.Timing)</label>
+                <div>
+                    @Html.TextBoxFor(model => model.Timing, new { @class = "input-order", placeholder = "укажите хронометраж или темп начитки (быстро, медленно)" })
+                    @Html.ValidationMessageFor(model => model.Timing)
+                    <div>
+                        <a href="@Url.Action("Chronomer", "Home")" target="_blank" class="small">проверить хронометраж <span class="glyphicon glyphicon-time"></span></a>
+                        <div class="chronomer-element check-elem">
+                            @Html.CheckBoxFor(model => model.IsFreeTiming)<span class="txt-required">@Html.DisplayNameFor(model => model.IsFreeTiming)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Text" class="txt-form-order">@Html.DisplayNameFor(model => model.Text)</label>
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.Text, new { @class = "textarea-text", rows = 8 })
+                    @Html.ValidationMessageFor(model => model.Text)
+                </div>
+            </div>
+        </div>
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="format" class="txt-form-order">@Html.DisplayNameFor(model => model.Parameters)</label>
+                <div class="col-md-9">
+                    <div class="custom-select size-order">
+                        @Html.DropDownListFor(model => model.Parameters, new SelectList(Model.ListParameters.ToDictionary(p => p, p => p), "Key", "Value", Model.Parameters), "", new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Parameters)
+                </div>
+            </div>
+            <div class="form-group pick-file your-file">
+                <label class="txt-form-order">@Html.DisplayNameFor(model => model.File)</label>
+                <label for="file-upload" class="custom-file-upload">
+                    Выбрать файл
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.3789 3.84755L14.9483 3.84755C13.5089 3.84755 12.2147 5.14178 12.2147 6.58112L12.2147 21.7233C12.2147 22.6003 12.5561 23.4249 13.1763 24.0452L14.0103 24.8792C14.742 25.6108 15.9319 25.6108 16.6636 24.8792L17.4976 24.0452C18.1178 23.4249 18.4592 22.6003 18.4592 21.7233L18.4592 8.29638C18.4592 8.03725 18.2493 7.82738 17.9902 7.82741C17.7311 7.82741 17.5212 8.03729 17.5212 8.29638L17.5212 21.7233C17.5212 22.3497 17.2773 22.9388 16.8343 23.3819L16.0003 24.2159C15.6346 24.5815 15.0393 24.5815 14.6737 24.2159L13.8397 23.3819C13.3966 22.9388 13.1527 22.3497 13.1527 21.7233L13.1527 6.58112C13.1527 5.63541 14.0026 4.78552 14.9483 4.78552L18.3789 4.78552C18.8518 4.78552 19.3143 4.97727 19.6485 5.31152C19.9827 5.64576 20.1745 6.10826 20.1745 6.58112L20.1745 23.9885C20.1745 24.8656 19.8328 25.6899 19.2129 26.3098L16.6636 28.8591C15.932 29.5907 14.742 29.5907 14.0103 28.8591L11.4611 26.3098C10.8411 25.6898 10.4994 24.8656 10.4994 23.9885L10.4995 8.29641C10.4995 8.03729 10.2896 7.82741 10.0305 7.82744C9.77138 7.82744 9.56151 8.03732 9.56154 8.29641L9.56151 23.9885C9.56151 25.1156 10.0003 26.1757 10.7978 26.9731L13.347 29.5224C14.4444 30.6197 16.2296 30.6197 17.3269 29.5224L19.8762 26.9731C20.6736 26.1757 21.1124 25.1156 21.1124 23.9885L21.1124 6.58112C21.1124 5.86145 20.8206 5.15701 20.3118 4.64821C19.803 4.13938 19.0985 3.84755 18.3789 3.84755Z" fill="#38366D" stroke="#38366D" stroke-width="0.5" />
+                    </svg>
                 </label>
+                @Html.TextBoxFor(model => model.File, new { id = "file-upload", @type = "file" })
+                <span class="nofile">Файл не выбрано </span>
+                @Html.ValidationMessageFor(model => model.File)
+            </div>
+        </div>
+
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="Code" class="txt-form-order">@Html.DisplayNameFor(model => model.Code)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Code, new { @class = "input-order", placeholder = "Код скидки" })
+                    @Html.ValidationMessageFor(model => model.Code)
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Payment" class="txt-form-order">@Html.DisplayNameFor(model => model.Payment)</label>
+                <div class="col-md-9">
+                    <div class="custom-select size-order">
+                        @Html.DropDownListFor(model => model.Payment, new SelectList(Model.ListPayments.ToDictionary(p => p, p => p), "Key", "Value", Model.Payment), "", new { @class = "form-control" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Payment)
+                </div>
+            </div>
+        </div>
+        <div class="box-make-order">
+            <div class="form-group">
+                <label for="Email" class="txt-form-order">@Html.DisplayNameFor(model => model.Email)</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "input-order", placeholder = "почта, куда будет отправлен заказ" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Comments)</label>
-        <div class="col-md-9">
-            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", rows = 3 })
-            @Html.ValidationMessageFor(model => model.Comments)
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Text)</label>
-        <div class="col-md-9">
-            @Html.TextAreaFor(model => model.Text, new { @class = "form-control", rows = 8 })
-            @Html.ValidationMessageFor(model => model.Text)
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="time2" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Timing)</label>
-        <div class="col-sm-9">
-            @Html.TextBoxFor(model => model.Timing, new { @class = "form-control", placeholder = "укажите хронометраж или темп начитки (быстро, медленно)" })
-            @Html.ValidationMessageFor(model => model.Timing)
-            <a href="@Url.Action("Chronomer", "Home")" target="_blank" class="small">проверить хронометраж <span class="glyphicon glyphicon-time"></span></a>
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(model => model.IsFreeTiming)
-                    <p>@Html.DisplayNameFor(model => model.IsFreeTiming)</p>
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="format" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Parameters)</label>
-        <div class="col-md-9">
-            @Html.DropDownListFor(model => model.Parameters, new SelectList(Model.ListParameters.ToDictionary(p => p, p => p), "Key", "Value", Model.Parameters), "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Parameters)
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-3 col-md-9">
-            <label>Прикрепите файл</label>
-            @Html.TextBoxFor(model => model.File, new { @type = "file", title = "Выберите файл" })
-            <p class="help-block">не более 3мб</p>
-            @Html.ValidationMessageFor(model => model.File)
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="Code" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Code)</label>
-        <div class="col-md-9">
-            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholder = "Код скидки" })
-            @Html.ValidationMessageFor(model => model.Code)
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="Email" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Email)</label>
-        <div class="col-md-9">
-            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "почта, куда будет отправлен заказ" })
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="Payment" class="col-md-3 control-label">@Html.DisplayNameFor(model => model.Payment)</label>
-        <div class="col-md-9">
-            @Html.DropDownListFor(model => model.Payment, new SelectList(Model.ListPayments.ToDictionary(p => p, p => p), "Key", "Value", Model.Payment), "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Payment)
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-3 col-md-9">
-            @*<form action="http://www.SnapHost.com/captcha/send.aspx" method="post" id="myform">
-                <input type="hidden" id="skip_WhereToSend" name="skip_WhereToSend" value="info@sila.fm" />
-                <input type="hidden" id="skip_Subject" name="skip_Subject" value="Test inline zakaz" />
-                <input type="hidden" id="skip_WhereToReturn" name="skip_WhereToReturn" value="www.yourdomain.com/thankyou.htm" />
-                <input type="hidden" id="skip_SnapHostID" name="skip_SnapHostID" value="LZR9DPCMJMGW" />
-                гуглкапча
-            </form>*@
-            <br>
-            <button type="submit" class="btn btn-primary btn-lg">Сделать заказ</button>
-        </div>
+    <div class="cash-btn-form bank-btn-form">
+        <button type="submit" class="home-btn btn-send-form btn-send-form-order">
+            ОТПРАВИТЬ
+            <svg class="btn-svg" width="8" height="15">
+                <use href="#order-svg"></use>
+            </svg>
+        </button>
     </div>
 </form>

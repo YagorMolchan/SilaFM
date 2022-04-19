@@ -1,0 +1,379 @@
+.audiopage-sila {
+    float: right;
+    margin-top: 102px;
+}
+.active-page-col {
+    color: #671627;
+    border-top: 2px solid #671627;
+    padding-left: 17px;
+    padding-right: 4px;
+}
+.home-page {
+    background: linear-gradient(
+            118.88deg,
+            rgba(74, 51, 91, 0.8) -10.09%,
+            rgba(47, 61, 83, 0.8) 22.66%,
+            rgba(17, 48, 62, 0.8) 58.86%,
+            rgba(76, 50, 90, 0.8) 98.42%
+        ),
+        url(../img-audio/bg-audiopage.png);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    background-repeat: no-repeat;
+    height: 681px;
+    background-size: cover;
+}
+.sila-fm-txt {
+    padding-top: 199px;
+    font-size: 18px;
+    line-height: 21px;
+    padding-bottom: 16px;
+}
+.txt-production {
+    width: 653px;
+    font-size: 22px;
+    line-height: 32px;
+    margin-top: 31px;
+    margin-left: 0px;
+    color: #c7dee1;
+}
+.player {
+    background: rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
+    height: 51px;
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    margin-top: -151px;
+}
+.box-element-audio {
+    background: linear-gradient(43.3deg, #483156 0%, #39516e 80.3%);
+    border-radius: 4px;
+    width: 360px;
+    height: 381px;
+    padding: 49px 60px 0px 33px;
+    transition: 0.7s ease;
+    box-sizing: border-box;
+    text-align: center;
+}
+.box-element-audio svg {
+    margin-top: 18px;
+    margin-bottom: 78px;
+}
+.text-element {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #c7dee1;
+}
+.txt-audioslot {
+    width: 612px;
+}
+.for-other-bg2 {
+    background: linear-gradient(30.35deg, #473a60 8.29%, #305e76 92.17%);
+}
+.for-other-bg3 {
+    background: linear-gradient(205.24deg, #1e7a89 4.76%, #3f486a 100%);
+}
+.for-other-bg4 {
+    background: linear-gradient(22.47deg, #257289 -0.93%, #188191 100%);
+}
+.about-us {
+    padding-top: 262px;
+    padding-bottom: 200px;
+    background-color: #ecf6f8;
+    margin-top: -560px;
+    padding-bottom: 0px;
+}
+.box-about-us {
+    padding-left: 78px;
+    width: 78%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    justify-content: space-between;
+}
+.box-about-element {
+    padding-right: 20px;
+}
+.info-about-us {
+    width: 100%;
+    font-family: Arial;
+}
+.info-about-last {
+    width: 100%;
+    padding-top: 149px;
+    margin-left: 0px;
+}
+.txt-voice {
+    width: 951px;
+}
+.base-box {
+    padding-bottom: 60px;
+}
+.base-btn-page {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #404263;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 40px;
+}
+#svg1 {
+    position: absolute;
+    margin-left: -20px;
+    margin-top: 2px;
+}
+#svg2 {
+    position: absolute;
+    margin-left: -20px;
+    margin-top: 2px;
+}
+@media only screen and (max-width: 1910px) {
+    .box-container {
+        display: flex;
+        width: 90%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+@media only screen and (max-width: 1825px) {
+    .home-page {
+        background-position-x: center;
+    }
+    .professional-txt {
+        font-size: 60px;
+    }
+    .txt-voice {
+        width: 90%;
+    }
+}
+@media only screen and (max-width: 1660px) {
+    .box-element-audio {
+        width: 310px;
+        height: 321px;
+        margin-left: 15px;
+    }
+    .box-element-audio svg {
+        margin-top: 18px;
+        margin-bottom: 58px;
+    }
+    .text-element {
+        font-size: 16px;
+    }
+    .about-us {
+        padding-top: 162px;
+    }
+}
+@media only screen and (max-width: 1444px) {
+    .box-element-audio {
+        padding: 40px 40px 0px 33px;
+        width: 280px;
+        height: 290px;
+        margin-left: 15px;
+    }
+    .box-element-audio svg {
+        margin-top: 7px;
+        margin-bottom: 30px;
+    }
+    .text-element {
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 1400px) {
+    .professional-txt {
+        font-size: 50px;
+    }
+}
+@media only screen and (max-width: 1311px) {
+    .box-container {
+        display: flex;
+        max-width: 650px;
+        margin: 0 auto;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .about-us {
+        padding-top: 462px;
+    }
+}
+@media only screen and (max-width: 1294px) {
+    .home-btn {
+        margin-top: 50px;
+    }
+    .professional-txt {
+        font-size: 45px;
+    }
+    .txt-production {
+        width: 90%;
+        font-size: 18px;
+        line-height: 28px;
+        margin-top: 31px;
+    }
+}
+@media only screen and (max-width: 1221px) {
+    .txt-audioslot {
+        width: 100%;
+        padding-bottom: 0px;
+    }
+    .info-about-us {
+        margin-top: 0px;
+    }
+    .svg-icon-text {
+        width: 10px;
+        height: 12px;
+    }
+    .base-btn-page {
+        font-size: 17px;
+    }
+}
+@media only screen and (max-width: 1087px) {
+    .icon-message {
+        margin-top: -110px;
+    }
+}
+@media only screen and (max-width: 960px) {
+    .base-box svg {
+        display: none;
+    }
+    .base-box #base-svg1 {
+        opacity: 0;
+    }
+    .base-box #base-svg2 {
+        opacity: 0;
+    }
+    .base-box #svg1 {
+        display: inline;
+    }
+    .base-box #svg2 {
+        display: inline;
+    }
+}
+@media only screen and (max-width: 792px) {
+    .box-container {
+        display: flex;
+        max-width: 520px;
+        height: 500px;
+    }
+    .text-element {
+        width: 120px;
+    }
+    .txt-production {
+        font-size: 14px;
+    }
+    .box-element-audio {
+        padding: 40px 40px 0px 33px;
+        width: 230px;
+        height: 230px;
+        margin-left: 15px;
+        margin-top: 25px;
+    }
+    .box-element-audio svg {
+        width: 50px;
+        margin-top: -20px;
+        margin-bottom: 10px;
+    }
+    .box-element-audio .time-svg {
+        width: 35px;
+    }
+    .about-us {
+        padding-top: 522px;
+    }
+}
+@media only screen and (max-width: 664px) {
+    .box-container {
+        max-width: 300px;
+    }
+    .text-element {
+        font-size: 14px;
+    }
+    .about-us {
+        padding-top: 1020px;
+    }
+    .base-btn-page {
+        font-size: 15px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .audiopage-sila {
+        display: none;
+    }
+    .player {
+        margin-top: -50px;
+    }
+    .txt-production {
+        width: 290px;
+    }
+}
+@media only screen and (max-width: 495px) {
+    .txt-production {
+        width: 260px;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .professional-txt {
+        font-size: 40px;
+        letter-spacing: 0.03em;
+    }
+    .box-about-element {
+        width: 99%;
+    }
+    .base-btn-page {
+        margin-left: -10px;
+        font-size: 11px;
+    }
+    .base-btn-page svg {
+        height: 10px;
+        padding-top: 3px;
+    }
+    .box-about-us {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 395px) {
+    .box-container {
+        margin-left: 80px;
+    }
+    .base-btn-page {
+        margin-left: -10px;
+        font-size: 10px;
+    }
+    .base-btn-page svg {
+        width: 60px;
+        height: 10px;
+        padding-top: 4px;
+    }
+    .box-element-audio {
+        padding: 40px 40px 0px 33px;
+        width: 210px;
+        height: 230px;
+        margin-left: 15px;
+        margin-top: 25px;
+    }
+    .box-element-audio svg {
+        width: 50px;
+        margin-top: -20px;
+        margin-bottom: 10px;
+    }
+    .text-element {
+        line-height: 20px;
+        font-size: 12px;
+        width: 120px;
+    }
+}
+@media only screen and (max-width: 363px) {
+    .sila-fm-txt {
+        font-size: 14px;
+    }
+    .professional-txt {
+        font-size: 30px;
+        letter-spacing: 0.03em;
+    }
+}

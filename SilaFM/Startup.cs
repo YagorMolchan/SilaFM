@@ -143,7 +143,8 @@ namespace Pras.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                // обработка ошибок HTTP
+                app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
             }
 
             app.UseStaticFiles();
