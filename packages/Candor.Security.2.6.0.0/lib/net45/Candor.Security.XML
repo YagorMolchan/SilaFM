@@ -1,0 +1,1234 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Candor.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Candor.Security.AuthenticationHistory">
+            <summary>
+            A record of an attempt to login by user name and password, successful or not.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.RecordID">
+            <summary>
+            The unique auto-incremented identity of the session.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.UserName">
+            <summary>
+            The user name that tried to login.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.IPAddress">
+            <summary>
+            The IP of the server the attempt came from.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.CreatedDate">
+            <summary>
+            The date and time of the attempt.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.IsAuthenticated">
+            <summary>
+            Determines if the attempt was successful or not.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.SessionID">
+            <summary>
+            If authenticated, this is the identity of the session that was created.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.AuthenticationHistory.UserSession">
+            <summary>
+            If authenticated, this is the Session details;  Otherwise null.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.CandorAuthorizationRoleProvider">
+            <summary>
+            A role provider that gets a list of roles from the AuthorizationManager if configured.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes this role provider given the specified config.
+            </summary>
+            <param name="name"></param>
+            <param name="config"></param>
+            <remarks>
+            If this provider is configured with 'useAuthorizationManager="false"' then the configuration
+            will also be passed down to the default web service implementation of an authorization provider
+            which will fulfull requests to this role provider.
+            </remarks>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.GetRolesForUser(System.String)">
+            <summary>
+            Gets all the roles assigned to the given user name.
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.IsUserInRole(System.String,System.String)">
+            <summary>
+            Determines if a user is in a given role.
+            </summary>
+            <param name="username"></param>
+            <param name="roleName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.AddUsersToRoles(System.String[],System.String[])">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.CreateRole(System.String)">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.DeleteRole(System.String,System.Boolean)">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.FindUsersInRole(System.String,System.String)">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.GetAllRoles">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.GetUsersInRole(System.String)">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.RemoveUsersFromRoles(System.String[],System.String[])">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.CandorAuthorizationRoleProvider.RoleExists(System.String)">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.CandorAuthorizationRoleProvider.ApplicationName">
+            <summary>
+            Not implemented/supported.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.Cryptography.HashManager">
+            <summary>
+            Classic provider model front end for <seealso cref="T:Candor.Security.Cryptography.HashProvider"/>.
+            Alternatively, you can use <seealso cref="T:Candor.Configuration.Provider.ProviderResolver`1"/>
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Cryptography.HashManager.SelectProvider">
+            <summary>
+            Gets a provider to use for creating a new hash (not hashing to match an existing hash)
+            </summary>
+            <returns>A pseudo-random hashprovider of the available non-obsolete providers.</returns>
+        </member>
+        <member name="P:Candor.Security.Cryptography.HashManager.DefaultProvider">
+            <summary>
+            Gets the default provider instance.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.Cryptography.HashManager.Providers">
+            <summary>
+            Gets all the configured Authorization providers.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.Cryptography.HashProvider">
+            <summary>
+            Provides cryptographic hash capabilities.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Cryptography.HashProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes this provider's base settings.
+            </summary>
+            <param name="name"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:Candor.Security.Cryptography.HashProvider.GetSalt">
+            <summary>
+            Creates a true random salt with a default length of 256.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.Cryptography.HashProvider.GetSalt(System.Int32)">
+            <summary>
+            Creates a true random salt.
+            </summary>
+            <param name="length">length of the salt to return</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.Cryptography.HashProvider.Hash(System.String,System.String,System.Int32)">
+            <summary>
+            Creates an unreversible hashed value consistently given the same input.
+            </summary>
+            <param name="salt">Another non-secret value paired with the secret to
+            make it more difficult to dictionary attack a collection of hashed values.</param>
+            <param name="originalValue">The original value to keep secret.</param>
+            <param name="iterations">The iterations to hash the originalValue and salt.</param>
+            <returns>The hashed value.</returns>
+        </member>
+        <member name="P:Candor.Security.Cryptography.HashProvider.IsObsolete">
+            <summary>
+            Gets or sets if this provider is obsolete, and thus should not be
+            used for generating new hashed passwords.
+            </summary>
+            <remarks>
+            Obsolete hash providers remain for users that have not changed their password
+            since it was made obsolete.  It remains so they can still sign in.  At that time
+            a new hash should be generated from that raw password using another non-obsolete
+            hash provider.
+            Making a provider obsolete is a way to migrate your database to use a new
+            algorithm in the future when the current one in use becomes insufficiently 
+            secure; all without requiring users to reset their passwords.
+            </remarks>
+        </member>
+        <member name="P:Candor.Security.Cryptography.HashProvider.SaltModifier">
+            <summary>
+            Gets or sets an additional salt to be added to all hashes.
+            </summary>
+            <remarks>
+            This allows for a code added salt in addition to the salt stored in a
+            database per user.  This should not replace a salt per user (or 
+            other record type).  Having a database and configuration salt requires
+            more of the system to be compromized before hashed data is compromized.
+            </remarks>
+        </member>
+        <member name="T:Candor.Security.Cryptography.SHA2HashProvider">
+            <summary>
+            A cryptographic hash provider based on the <seealso cref="T:System.Security.Cryptography.SHA256Managed"/> algorithm.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Cryptography.SHA2HashProvider.#ctor">
+            <summary>
+            Constructor for xml file configuration (web.config, app.config).
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Cryptography.SHA2HashProvider.#ctor(System.String)">
+            <summary>
+            Constructor for code configuration.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Candor.Security.Cryptography.SHA2HashProvider.GetSalt(System.Int32)">
+            <summary>
+            Creates a true random salt.
+            </summary>
+            <param name="length">length of the salt to return</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.Cryptography.SHA2HashProvider.Hash(System.String,System.String,System.Int32)">
+            <summary>
+            Creates a non-reversible hashed value consistently given the same input.
+            </summary>
+            <param name="salt">Another semi-secret value paired with the secret to
+            make it more difficult to dictionary attack a collection of hashed values.</param>
+            <param name="originalValue">The original value to keep secret.</param>
+            <param name="iterations">The iterations to hash the originalValue and salt.</param>
+            <returns>The hashed value.</returns>
+        </member>
+        <member name="T:Candor.Security.SecurityContextManager">
+            <summary>
+            Access to the current user of the application in an application type neutral way.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.LogProvider">
+            <summary>
+            Gets or sets the log destination for this type.  If not set, it will be automatically loaded when needed.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.Provider">
+            <summary>
+            Gets the default provider instance.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.Providers">
+            <summary>
+            Gets all the configured SecurityContext providers.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.CurrentUser">
+            <summary>
+            Gets or sets the current user.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.IsImpersonating">
+            <summary>
+            Determines if the current user is being impersonated.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.CurrentIdentity">
+            <summary>
+            Gets the current identity (or the impersonated identity)
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.CurrentRealIdentity">
+            <summary>
+            Gets the impersonator or logged in user if no impersonation is taking place.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.IsAnonymous">
+            <summary>
+            Determines if the current user is anonymous.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextManager.UserID">
+            <summary>
+            Gets the user identity of an authenticated user.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.SecurityContextProvider">
+            <summary>
+            The base contract that must be fullfilled by any SecurityContext provider.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.SecurityContextProvider.#ctor">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.SecurityContextProvider.#ctor(System.String)">
+            <summary>
+            Creates a new instance with a specific name.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Candor.Security.SecurityContextProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider with the specified values.
+            </summary>
+            <param name="name">The name of the provider.</param>
+            <param name="configValue">Provider specific attributes.</param>
+        </member>
+        <member name="P:Candor.Security.SecurityContextProvider.LogProvider">
+            <summary>
+            Gets or sets the log destination for this provider instance.  If not set, it will be automatically loaded when needed.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextProvider.CurrentUser">
+            <summary>
+            Gets or sets the current user.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextProvider.IsImpersonating">
+            <summary>
+            Determines if the current user is being impersonated.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextProvider.CurrentIdentity">
+            <summary>
+            Gets the current identity (or the impersonated identity)
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextProvider.CurrentRealIdentity">
+            <summary>
+            Gets the impersonator or logged in user if no impersonation is taking place.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.SecurityContextProvider.IsAnonymous">
+            <summary>
+            Determines if the current user is anonymous.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.UserNotificationProvider">
+            <summary>
+            A base provider definition to send notifications to users regarding their account.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserNotificationProvider.NotifyPasswordReset(System.String,Candor.ExecutionResults)">
+            <summary>
+            Sends a password reset notification to the specified user.
+            </summary>
+            <param name="userName">The user to notify.</param>
+            <param name="result">
+            A placeholder for errors in the system, such as email not available now.
+            Do not notify caller if the user does not exist, for security reasons.</param>
+            <remarks>
+            
+            </remarks>
+        </member>
+        <member name="T:Candor.Security.UserSessionDurationType">
+            <summary>
+            Types of session length.
+            </summary>
+        </member>
+        <member name="F:Candor.Security.UserSessionDurationType.PublicComputer">
+            <summary>
+            The session is valid only for the time the person is browsing; about 20 minutes of inactivity ends the session.
+            </summary>
+        </member>
+        <member name="F:Candor.Security.UserSessionDurationType.Extended">
+            <summary>
+            The session is valid for an extended time between visits; about 2 weeks of inactivity keeps the user logged in.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.User">
+            <summary>
+            A person or system able to interactively login and be assigned roles
+            that can be performed.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.RecordID">
+            <summary>
+            A unqiue record auto-increment identity.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.UserID">
+            <summary>
+            The system random generated unique value for this user.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.Name">
+            <summary>
+            The unique user picked name used at login.  This may be an email address.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.PasswordHash">
+            <summary>
+            The final hashed value of this user's password.  At registration,
+            this may be the raw password about to be hashed.  This value may also
+            be empty if loading the user from the database such as for another user to view.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.PasswordHashUpdatedDate">
+            <summary>
+            The date and time when the password was last hashed.  Old hashes may be
+            used to indicate that a user should change their password, and at the
+            password change the system should use the latest hash provider to
+            improve security.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.PasswordUpdatedDate">
+            <summary>
+            The date and time when the user last changed the password from the previous different password.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.IsDeleted">
+            <summary>
+            Determines if this user is deleted.  If deleted they cannot login anymore, but you can view
+            the user details that did some audited action.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.IsGuest">
+            <summary>
+            Determines if this is a guest user or not yet validated, false by default.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.CreatedDate">
+            <summary>
+            The date and time when the user was created.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.CreatedByUserID">
+            <summary>
+            The identity of the user that created this user, if any.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.UpdatedDate">
+            <summary>
+            The date and time when the user name was changed or it was undeleted (anything but password change).
+            </summary>
+        </member>
+        <member name="P:Candor.Security.User.UpdatedByUserID">
+            <summary>
+            The identity of the user that last updated this user, if any.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.UserIdentity">
+            <summary>
+            Represents an actor that can utilize the application.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserIdentity.#ctor">
+            <summary>
+            Creates a new instance of UserIdentity.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserIdentity.#ctor(Candor.Security.AuthenticationHistory,System.String)">
+            <summary>
+            Creates a user instance from an authentication attempt.
+            </summary>
+            <param name="ticket">The authentication results.</param>
+            <param name="authType">The provider that authentication this identity.</param>
+        </member>
+        <member name="M:Candor.Security.UserIdentity.#ctor(System.Guid,System.String,Candor.Security.UserIdentity)">
+            <summary>
+            Creates a new instance of an identity, but impersonated by the specified user.
+            </summary>
+            <param name="userID">The unique identity of the user to impersonate.</param>
+            <param name="name">The name of the user to impersonate.</param>
+            <param name="impersonator">The impersonator's authenticated identity.</param>
+        </member>
+        <member name="P:Candor.Security.UserIdentity.ImpersonatorIdentity">
+            <summary>
+            Gets the identity of the user impersonating the current identity, or null if not applicable.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserIdentity.Ticket">
+            <summary>
+            Gets a ticket that can be reused to authenticate the user
+            without their full credentials.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserIdentity.IsAuthenticated">
+            <summary>
+            Gets a flag indicating if the user is authenticated against
+            the authentication type.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserIdentity.Name">
+            <summary>
+            Gets the sign in name of the user.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserIdentity.AuthenticationType">
+            <summary>
+            Gets the type of authentication for this identity.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.UserManager">
+            <summary>
+            The user manager is a singleton access point to get to the collection of configured
+            UserProvider.  If the providers are already configured via code configuration then
+            this manager class will get the providers from there.  If they are not configured
+            by code then the providers must be defined in the configuration file for the AppDomain.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserManager.ValidatePassword(System.String,Candor.ExecutionResults)">
+            <summary>
+            Validates that a password meets minimum requirements.
+            </summary>
+            <param name="password"></param>
+            <param name="results"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.ValidateEmailAddressFormat(System.String)">
+            <summary>
+            Validates that a string is a valid email address format.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.ValidateName(System.String,Candor.ExecutionResults)">
+            <summary>
+            Validates that the specified name meets minimum requirements.
+            </summary>
+            <param name="name">The desired name/alias.</param>
+            <param name="result">Any error messages about the desired name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.GetUserByID(System.Guid)">
+            <summary>
+            Gets a user by identity.
+            </summary>
+            <param name="userID">The unique identity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.GetUserByName(System.String)">
+            <summary>
+            Gets a user by name.
+            </summary>
+            <param name="name">The unique sign in name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.AuthenticateUser(System.String,System.String,Candor.Security.UserSessionDurationType,System.String,Candor.ExecutionResults)">
+            <summary>
+            Authenticates against the data store and returns a UserIdentity given 
+            a user name, and password.
+            </summary>
+            <param name="name">The unique user name.</param>
+            <param name="password">The matching password.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="duration">The amount of time that the issued token will be valid.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>
+            A valid user instance.  If the user did not exist or the 
+            credentials are incorrect then the IsAuthenticated flag
+            will be false.  If the credentials were correct the 
+            IsAuthenticated flag will be true.
+            </returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.AuthenticateUser(System.String,Candor.Security.UserSessionDurationType,System.String,Candor.ExecutionResults)">
+            <summary>
+            Authenticates against the data store and returns a UserIdentity given
+            a token returned from a previous authentication.
+            </summary>
+            <param name="token">The unique token.</param>
+            <param name="duration">The amount of time that the renewed token will be valid.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>
+            A valid user identity instance.  If the token is incorrect or expired
+            then the IsAuthenticated flag will be false.  Otherwise the identity
+            will be authenticated.
+            </returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.InvalidateSession(System.String,System.String,Candor.ExecutionResults)">
+            <summary>
+            Invalidates a session token so it can no longer be used.
+            </summary>
+            <param name="token"></param>
+            <param name="ipAddress"></param>
+            <param name="result"></param>
+        </member>
+        <member name="M:Candor.Security.UserManager.RegisterUser(Candor.Security.User,Candor.Security.UserSessionDurationType,System.String,Candor.ExecutionResults)">
+            <summary>
+            Registers a new user.  The PasswordHash property should be the actual password.
+            </summary>
+            <param name="user">A user with a raw password which is turned into a password hash as part of registration.</param>
+            <param name="duration">The amount of time that the initial session will be valid.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>A boolean indicating success (true) or failure (false).</returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.UpdateUser(Candor.Security.User,System.String,System.String,Candor.ExecutionResults)">
+            <summary>
+            updates a user's name and/or password.
+            </summary>
+            <param name="item">The user details to be saved.  If Password is empty is it not changed.  If specified it should be the new raw password (not a hash).</param>
+            <param name="currentPassword">The current raw password for the user used to authenticate that the change can be made.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>A boolean indicating success (true) or failure (false).</returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.GenerateUserResetCode(System.String)">
+            <summary>
+            Generates a new password reset code for a user and stores that as the current code valid
+            for the next hour.
+            </summary>
+            <param name="name">The user name / email address.</param>
+            <returns>If the user exists, then a reset code string; otherwise null.</returns>
+        </member>
+        <member name="M:Candor.Security.UserManager.GetLatestUserSessions(System.Guid,System.Int32)">
+            <summary>
+            Gets the latest session(s) for a given user.
+            </summary>
+            <param name="userId">The unique identity.</param>
+            <param name="take">The maximum number of sessions to retrieve.</param>
+            <returns>A list of sessions; If empty then the user has never logged in (such as a no-show guest).</returns>
+        </member>
+        <member name="P:Candor.Security.UserManager.LogProvider">
+            <summary>
+            Gets or sets the log destination for this type.  If not set, it will be automatically loaded when needed.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserManager.Provider">
+            <summary>
+            Gets the default provider instance.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserManager.Providers">
+            <summary>
+            Gets all the configured User providers.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.UserPrincipal">
+            <summary>
+            Contains a user's system identity plus a means to get all
+            capabilities for the user.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserPrincipal.#ctor">
+            <summary>
+            Creates an anonymous principal
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserPrincipal.#ctor(Candor.Security.UserPrincipal,System.String)">
+            <summary>
+            Creates a principal from another principal
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserPrincipal.#ctor(Candor.Security.UserIdentity)">
+            <summary>
+            Creates a principal from another identity
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserPrincipal.GetReadOnlyRoleNames">
+            <summary>
+            Gets a list of the role names this user is within.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserPrincipal.IsInRole(System.String)">
+            <summary>
+            Determines if this user has access to perform actions of the specified role.
+            </summary>
+            <param name="role">The role name.  Use a value from KnownRoles for 
+            standard role names.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserPrincipal.IsInAnyRole(System.String[])">
+            <summary>
+            Determines if this user has access to perform actions in any of the specified roles.
+            </summary>
+            <param name="roles"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Candor.Security.UserPrincipal.System#Security#Principal#IPrincipal#Identity">
+            <summary>
+            Gets the user identity details for this principal.
+            </summary>
+            <remarks>
+            This override exists solely to meet the interface requirement.
+            The other <see cref="P:Candor.Security.UserPrincipal.Identity"/> property is of the wrong
+            return type.
+            </remarks>
+        </member>
+        <member name="P:Candor.Security.UserPrincipal.Identity">
+            <summary>
+            Gets the user identity details for this principal.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserPrincipal.IsAnonymous">
+            <summary>
+            Determines if this user is anonymous.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserPrincipal.UserID">
+            <summary>
+            Gets the user identity of an authenticated user.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserPrincipal.Name">
+            <summary>
+            Gets the user identity of an authenticated user.
+            </summary>
+        </member>
+        <member name="T:Candor.Security.UserProvider">
+            <summary>
+            The base contract that must be fullfilled by any User provider.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserProvider.#ctor">
+            <summary>
+            Creates a new instance, not initialized.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.UserProvider.#ctor(System.String)">
+            <summary>
+            Creates a new instance, initialized with a specific name, but with default property configuration values.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Initializes the provider with the specified values.
+            </summary>
+            <param name="name">The name of the provider.</param>
+            <param name="configValue">Provider specific attributes.</param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.ValidatePassword(System.String,Candor.ExecutionResults)">
+            <summary>
+            Validates that a password meets minimum requirements.
+            </summary>
+            <param name="password"></param>
+            <param name="results"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.ValidateEmailAddressFormat(System.String)">
+            <summary>
+            Validates that a string is a valid email address format.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.ValidateName(System.String,Candor.ExecutionResults)">
+            <summary>
+            Validates that the specified name meets minimum requirements.
+            </summary>
+            <param name="name">The desired name/alias.</param>
+            <param name="result">Any error messages about the desired name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetUserByID(System.Guid)">
+            <summary>
+            Gets a user by identity.
+            </summary>
+            <param name="userId">The unique identity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetUserByName(System.String)">
+            <summary>
+            Gets a user by name.
+            </summary>
+            <param name="name">The unique sign in name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.AuthenticateUser(System.String,System.String,Candor.Security.UserSessionDurationType,System.String,Candor.ExecutionResults)">
+            <summary>
+            Authenticates against the data store and returns a UserIdentity given 
+            a user name, and password.
+            </summary>
+            <param name="name">The unique user name.</param>
+            <param name="password">The matching password.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="duration">The amount of time that the issued token will be valid.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>
+            A valid user instance.  If the user did not exist or the 
+            credentials are incorrect then the IsAuthenticated flag
+            will be false.  If the credentials were correct the 
+            IsAuthenticated flag will be true.
+            </returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.AuthenticateUser(System.String,Candor.Security.UserSessionDurationType,System.String,Candor.ExecutionResults)">
+            <summary>
+            Authenticates against the data store and returns a UserIdentity given
+            a token returned from a previous authentication.
+            </summary>
+            <param name="token">The unique token.</param>
+            <param name="duration">The amount of time that the renewed token will be valid.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>
+            A valid user identity instance.  If the token is incorrect or expired
+            then the IsAuthenticated flag will be false.  Otherwise the identity
+            will be authenticated.
+            </returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.InvalidateSession(System.String,System.String,Candor.ExecutionResults)">
+            <summary>
+            Invalidates a session token so it can no longer be used.
+            </summary>
+            <param name="token"></param>
+            <param name="ipAddress"></param>
+            <param name="result"></param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.RegisterBase(Candor.Security.User,Candor.ExecutionResults)">
+            <summary>
+            Base logic to register a full user, or a guest user.  Creates the appropriate records and the proper validation.
+            </summary>
+            <param name="user">A user with a raw password which is turned into a password hash as part of registration.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>A boolean indicating success (true) or failure (false).</returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.RegisterUser(Candor.Security.User,Candor.Security.UserSessionDurationType,System.String,Candor.ExecutionResults)">
+            <summary>
+            Registers a new user.  The PasswordHash property should be the actual password.
+            </summary>
+            <param name="user">A user with a raw password which is turned into a password hash as part of registration.</param>
+            <param name="duration">The amount of time that the initial session will be valid.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>A boolean indicating success (true) or failure (false).</returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.RegisterGuestUser(Candor.Security.User,Candor.ExecutionResults)">
+            <summary>
+            Registers a new guest user.  The user is being created by another user
+            that is inviting this user to join.
+            </summary>
+            <param name="user">A user with a raw password which is turned into a password hash as part of registration.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>The guest password good for 14 days, or another configurable number of days.  
+            After that initial period the user can request a password reset when joining.</returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.AuthenticateUser(System.String,System.String,Candor.Security.UserSessionDurationType,System.String,System.Boolean,System.Boolean,Candor.ExecutionResults)">
+            <summary>
+            Authenticates a user with the requested rule options.  This internal method is called
+            by the other public versions of the method.  Override in a derived class if you want
+            to change the rule interpretations or add new rules.
+            </summary>
+            <param name="name"></param>
+            <param name="password"></param>
+            <param name="duration"></param>
+            <param name="ipAddress"></param>
+            <param name="checkHistory"></param>
+            <param name="allowUpdateHash"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.UpdateUser(Candor.Security.User,System.String,System.String,Candor.ExecutionResults)">
+            <summary>
+            updates a user's name and/or password.
+            </summary>
+            <param name="item">The user details to be saved.  If Password is empty is it not changed.  If specified it should be the new raw password (not a hash).</param>
+            <param name="currentPassword">The current raw password for the user used to authenticate that the change can be made, or the current resetcode last sent to this user.</param>
+            <param name="ipAddress">The internet address where the user is connecting from.</param>
+            <param name="result">A ExecutionResults instance to add applicable
+            warning and error messages to.</param>
+            <returns>A boolean indicating success (true) or failure (false).</returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GenerateUserResetCode(System.String)">
+            <summary>
+            Generates a new password reset code for a user and stores that as the current code valid
+            for the next hour.
+            </summary>
+            <param name="name">The user name / email address.</param>
+            <returns>If the user exists, then a reset code string; otherwise null.</returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GenerateUserResetCode(System.String,System.TimeSpan)">
+            <summary>
+            Generates a new password reset code for a user and stores that as the current code valid
+            for a configurable time.  Shared logic between normal user and guest user functionality.
+            </summary>
+            <param name="name">The user name / email address.</param>
+            <param name="resetExpiration">The configurable duration the reset code should last.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetLatestUserSessions(System.Guid,System.Int32)">
+            <summary>
+            Gets the latest session(s) for a given user.
+            </summary>
+            <param name="userId">The unique identity.</param>
+            <param name="take">The maximum number of sessions to retrieve.</param>
+            <returns>A list of sessions; If empty then the user has never logged in (such as a no-show guest).</returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.InsertUserHistory(Candor.Security.AuthenticationHistory)">
+            <summary>
+            Inserts a new user authentication history.
+            </summary>
+            <param name="history"></param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.SaveUserSession(Candor.Security.UserSession)">
+            <summary>
+            Saves a user session, insert or update.
+            </summary>
+            <param name="session"></param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.SaveUser(Candor.Security.User)">
+            <summary>
+            Saves a user, insert or update.
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.SaveUserSalt(Candor.Security.UserSalt)">
+            <summary>
+            Saves a user salt, insert or update.
+            </summary>
+            <param name="salt"></param>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetUserSalt(System.Guid)">
+            <summary>
+            Gets a user's salt metadata.
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetUserSession(System.Guid)">
+            <summary>
+            Gets a user session by the renewal token.
+            </summary>
+            <param name="renewalToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetRecentFailedUserNameAuthenticationCount(System.String)">
+            <summary>
+            Gets the number of times a user name has failed authentication within the configured allowable failure period.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.GetSessionAuthenticationHistory(Candor.Security.UserSession)">
+            <summary>
+            Gets the authentication history for a specific session.
+            </summary>
+            <param name="session"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.UserProvider.FailAuthenticateUser(System.String,System.String,Candor.ExecutionResults)">
+            <summary>
+            Returns a failed authentication attempt, an anonymous user identity.
+            </summary>
+            <param name="name">The user name.</param>
+            <param name="ipAddress">The IP address the user was coming from.</param>
+            <param name="result">A container for error messages.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Candor.Security.UserProvider.NameRegexExpression">
+            <summary>
+            A regular expression to validate names.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.NameRegex">
+            <summary>
+            Gets the name regular expression instance for the configured expression.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.EmailRegexExpression">
+            <summary>
+            A regular expression to validate emails.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.EmailRegex">
+            <summary>
+            Gets the email regular expression instance for the configured expression.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.PasswordRegexExpression">
+            <summary>
+            A regular expression to validate passwords.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.PasswordRegex">
+            <summary>
+            Gets or sets the validation expression that new passwords must meet.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.DisableIpAddressSessionLock">
+            <summary>
+            When true, turns off the requirement that a session can only be used from the source IP address.
+            This is on by default (value of false).  Setting this to true is recommended for mobile app sessions
+            that need to survive the app moving between signal towers and wifi to network.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.PasswordErrorMessage">
+            <summary>
+            An error message shown when the password does not match the required format.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.BaseHashIterations">
+            <summary>
+            The minimal number of hash iterations of a password.
+            </summary>
+            <remarks>
+            This should not change after going live in a database, unless 
+            deployment coordinated with updating hashgroup of all existing 
+            users at the same time.  However, the preferred option would be
+            to change the <see cref="P:Candor.Security.UserProvider.HashGroupMinimum"/> and <see cref="P:Candor.Security.UserProvider.HashGroupMaximum"/>
+            to change future new hashes to be of a higher mimimum security.
+            </remarks>
+        </member>
+        <member name="P:Candor.Security.UserProvider.HashGroupMinimum">
+            <summary>
+            Gets the minimum hash group to be set when users authenticate by password or register a new account.
+            </summary>
+            <remarks>This can change as often as desired without affecting storage of existing user password hashes.</remarks>
+        </member>
+        <member name="P:Candor.Security.UserProvider.HashGroupMaximum">
+            <summary>
+            Gets the maximum hash group to be set when users authenticate by password or register a new account.
+            </summary>
+            <remarks>This can change as often as desired without affecting storage of existing user password hashes.</remarks>
+        </member>
+        <member name="P:Candor.Security.UserProvider.ExtendedSessionDuration">
+            <summary>
+            Gets or sets the amount of time a remembered session (on a private computer) should be in minutes.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.PublicSessionDuration">
+            <summary>
+            Gets or sets the amount of time a session on a public computer should be in minutes.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.PasswordResetCodeExpirationHours">
+            <summary>
+            Gets or sets the number of hours a password reset code is valid for.
+            Any amount of time past this would just require a password reset to be emailed again.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.GuestUserExpirationDays">
+            <summary>
+            Gets or sets the number of days a newly setup guest user account password is valid for.
+            Any amount of time past this would just require a password reset to be emailed again.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.HashProvider">
+            <summary>
+            Gets the configured hash provider, or the default one if
+            one was not specifically configured for this authentication provider.
+            </summary>
+            <remarks>
+            This property will throw an exception if the provider that existed
+            at initialization has since been removed from the <see cref="T:Candor.Security.Cryptography.HashManager"/>.
+            </remarks>
+        </member>
+        <member name="P:Candor.Security.UserProvider.PasswordExpiration">
+            <summary>
+            Gets or sets the number of days before passwords expire.  Leave 0 for no expiration.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.LoginExceededFailureMessage">
+            <summary>
+            Gets or sets the message to display when the login fails due to too many failures.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.LoginCredentialsFailureMessage">
+            <summary>
+            Gets or sets the message to display when the login fails due to invalid credentials.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.FailurePeriodMinutes">
+            <summary>
+            Gets or sets the number of minutes to check for previous failed logins.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.AllowedFailuresPerPeriod">
+            <summary>
+            Gets or sets the number of allowed failed logins per user in a given
+            period.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserProvider.ImpersonationAllowedRoles">
+            <summary>
+            Gets or sets the roles that can impersonate other users
+            </summary>
+        </member>
+        <member name="T:Candor.Security.UserSalt">
+            <summary>
+            A salt and settings for a specific user used for generating the password hash.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.RecordID">
+            <summary>
+            A unique record Id.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.UserID">
+            <summary>
+            The unique user identity.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.PasswordSalt">
+            <summary>
+            The current salt value.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.ResetCodeExpiration">
+            <summary>
+            The expiration date of the current reset code for this user's password as set
+            by a forgot password request or in the generation of a guest user account
+            temporary password.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.ResetCode">
+            <summary>
+            A randomly generated long value that can be used as a short term temporary
+            password to login to the user's account.  Alternatively it may be a
+            temporary password for a guest user account.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.HashGroup">
+            <summary>
+            The number of times this user's password is crytographically hashed as a
+            modifier to a base number of iterations defined by the hash provider
+            defined by <see cref="P:Candor.Security.UserSalt.HashName"/>.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSalt.HashName">
+            <summary>
+            Gets or sets the hash algorithm key name to use when generating the hash.
+            </summary>
+            <remarks>
+            Limit: 10 characters.  This does make the row footprint smaller, but it is not the reason.
+            The reason to to keep the hash names cryptic to a viewer of the table.  They will need the
+            configuration file also to know what algorithm that hash key means.
+            </remarks>
+        </member>
+        <member name="T:Candor.Security.UserSession">
+            <summary>
+            A single authenticated session for a user.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSession.SessionID">
+            <summary>
+            The unique generated auto-increment identifier of the session,
+            generally not shared externally.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSession.UserID">
+            <summary>
+            The unique user identity that is authenticated.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSession.RenewalToken">
+            <summary>
+            The unique random identity of the session that can be used to
+            authenticate the user as long as it is still valid.  This should
+            not be shared outside the user secured headers or cookies before
+            it expires.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSession.CreatedDate">
+            <summary>
+            The date and time when the session began.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSession.ExpirationDate">
+            <summary>
+            The date and time when the session will expired if it is not
+            renewed beforehand.
+            </summary>
+        </member>
+        <member name="P:Candor.Security.UserSession.RenewedDate">
+            <summary>
+            The date and time when the session was last renewed by the user.
+            Typically the last time they hit a page (but it isn't renewed
+            each page hit if renewed less than a minute ago).
+            </summary>
+        </member>
+        <member name="T:Candor.Security.Web.CandorAuthenticationModule">
+            <summary>
+            Authenticates the current request from custom cookies.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Web.CandorAuthenticationModule.Init(System.Web.HttpApplication)">
+            <summary>
+            Initializes this instance from the application.
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:Candor.Security.Web.CandorAuthenticationModule.Dispose">
+            <summary>
+            Disposes of this instance.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Web.CandorAuthenticationModule.CheckRequireAuthentication(System.Web.HttpContext)">
+            <summary>
+            Checks if a request needs to be authentication based on the url requested.  Static resource files do not require authentication.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Candor.Security.Web.CandorAuthenticationModule.OnAuthenticate(System.Object,System.EventArgs)">
+            <summary>
+            Handles the OnAuthenticate event subscribed to during <see cref="M:Candor.Security.Web.CandorAuthenticationModule.Init(System.Web.HttpApplication)"/>.
+            </summary>
+            <param name="sender">The HttpApplication.</param>
+            <param name="e">Not used.</param>
+        </member>
+        <member name="M:Candor.Security.Web.CandorAuthenticationModule.OnAuthenticate(System.Web.HttpContext)">
+            <summary>
+            Authenticates the current context.
+            </summary>
+            <param name="context">The context containing the current request to be authenticated and the response.</param>
+        </member>
+        <member name="T:Candor.Security.Web.WebSecurityContextProvider">
+            <summary>
+            Implements a security context by using the <see cref="T:System.Web.HttpContext"/> to store the current user.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Web.WebSecurityContextProvider.#ctor">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="M:Candor.Security.Web.WebSecurityContextProvider.#ctor(System.String)">
+            <summary>
+            Creates a new instance with a specified name.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Candor.Security.Web.WebSecurityContextProvider.CurrentUser">
+            <summary>
+            Gets or sets the current user.
+            </summary>
+        </member>
+    </members>
+</doc>
