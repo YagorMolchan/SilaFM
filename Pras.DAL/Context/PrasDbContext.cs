@@ -20,9 +20,21 @@ namespace Pras.DAL.Context
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Settings> Settings { get; set; }
 
+        public DbSet<Character> Characters { get; set; }
+
+        public DbSet<Service> Services { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            //builder.Entity<Character>()
+            //    .HasOne<Speaker>()
+            //    .WithMany(s => s.Characters)
+            //    .HasForeignKey(c => c.Speaker.Id);
+
+
+
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);

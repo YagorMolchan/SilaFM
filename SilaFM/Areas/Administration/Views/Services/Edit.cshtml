@@ -1,0 +1,48 @@
+﻿@using Pras.Web.Areas.Administration.Models.HelperModels
+@model Pras.Web.Areas.Administration.Models.ServiceViewModel
+
+@{
+    ViewBag.Title = "Услуги";
+    Layout = "_Layout";
+
+    //ViewBag.Breadcrumb = new List<UIBreadcrumbs>
+    //{
+    //    new UIBreadcrumbs {Link = Url.Action("Index", "Admin"), Title = "Главная"},
+    //    new UIBreadcrumbs {Link = Url.Action("Index", "News"), Title = ViewBag.Title},
+    //    new UIBreadcrumbs {Link = string.Empty, Title = Model.IsNew ? "Создание" : "Редактирование"}
+    //};
+
+    Html.RenderPartial("_ResultMessages");
+}
+
+@section Scripts{
+    @Html.Partial("_ValidationScriptsPartial")
+}
+
+<div class="col-sm-12 col-md-7 col-lg-9">
+    <div class="box box-danger">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="box-header with-border">
+                <h3 class="box-title">@(Model.IsNew ? "Создание" : "Редактирование")</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Link, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Link, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Link)
+                </div>
+            </div>
+            <div class="box-footer">
+                <input type="submit" class="btn btn-danger btn-lg pull-right" value="Сохранить" />
+            </div>
+        </form>
+    </div>
+</div>

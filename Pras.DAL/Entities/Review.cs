@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pras.DAL.Entities
 {
+    [Table("Reviews", Schema = "db_owner")]
     public class Review : Entity
     {
         public string Name { get; set; }

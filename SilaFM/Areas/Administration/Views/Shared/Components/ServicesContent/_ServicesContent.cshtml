@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Pras.Web.Areas.Administration.Models.ServiceViewModel>
+
+<div class="box-element">
+    <hr class="hr-for-box" />
+    <h3 class="box-txt">УСЛУГИ СТУДИИ</h3>
+    <div class="box-items">
+        @foreach (var item in Model)
+       {
+           <li><a href="@item.Link">@item.Name</a></li>
+       }
+    </div>
+</div>

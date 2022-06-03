@@ -1,0 +1,46 @@
+﻿@model Pras.Web.Areas.Administration.Models.CharacterViewModels.CharacterEditViewModel
+
+@{
+    ViewBag.Title = "Персонажи";
+    Layout = "_Layout";
+}
+
+@section Scripts{
+    @Html.Partial("_ValidationScriptsPartial")
+}
+
+<div class="col-sm-12 col-md-7 col-lg-9">
+    <div class="box box-danger">
+        <form method="post">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div class="box-header with-border">
+                <h3 class="box-title">@(Model.IsNew ? "Создание" : "Редактирование")</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImagePath, new { @class = "control-label" })
+                    <div class="custom-file">
+                        @Html.TextBoxFor(model => model.ImageFile, new{@type="file", title = "Выберите файл"})
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ImageFile)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SpeakerId, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.SpeakerId, Model.Speakers, new {@class="form-control"})
+                    @Html.ValidationMessageFor(model => model.SpeakerId)
+                </div>
+            </div>
+            <div class="box-footer">
+                <input type="submit" class="btn btn-danger btn-lg pull-right" value="Сохранить" />
+            </div>
+        </form>
+    </div>
+</div>
+

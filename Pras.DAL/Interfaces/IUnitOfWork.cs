@@ -14,6 +14,8 @@ namespace Pras.DAL.Interfaces
         IRepository<News> NewsRepository { get; }
         IRepository<Review> ReviewsRepository { get; }
         IRepository<Settings> SettingsRepository { get; }
+        IRepository<Service> ServicesRepository { get; }
+        IRepository<Character> CharactersRepository { get; }
         PrasDbContext Context { get; }
         bool Commit();
     }

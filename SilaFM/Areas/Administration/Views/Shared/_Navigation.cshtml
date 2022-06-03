@@ -28,6 +28,11 @@
                 <i class="fa fa-microphone"></i> <span>Дикторы</span>
             </a>
         </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Characters", className)">
+            <a href="@Url.Action("Index", "Characters")">
+                <i class="fa fa-microphone"></i> <span>Персонажи</span>
+            </a>
+        </li>
         <li class="header text-upper">Информация</li>
         <li class="@Html.CurrentMenu(ViewContext.RouteData, "Settings", className)">
             <a href="@Url.Action("Edit", "Settings")">
@@ -119,6 +124,11 @@
         <li class="@Html.CurrentMenu(ViewContext.RouteData, "Reviews", className)">
             <a href="@Url.Action("Index", "Reviews")">
                 <i class="fa fa-comments"></i> <span>Отзывы</span>
+            </a>
+        </li>
+        <li class="@Html.CurrentMenu(ViewContext.RouteData, "Services", className)">
+            <a href="@Url.Action("Index", "Services")">
+                <i class="fa fa-comments"></i> <span>Услуги</span>
             </a>
         </li>
     </ul>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Pras.Shared.Enums;
 
 namespace Pras.DAL.Entities
@@ -49,5 +50,12 @@ namespace Pras.DAL.Entities
         public bool IsNovelty { get; set; }
         public bool IsVip { get; set; }
         public DateTime Created { get; set; }
+
+        public virtual ICollection<Character> Characters { get; set; }
+
+        public Speaker()
+        {
+            Characters = new List<Character>();
+        }
     }
 }

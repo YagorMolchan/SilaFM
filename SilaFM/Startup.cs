@@ -84,6 +84,8 @@ namespace Pras.Web
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IServiceService, ServiceService>();
+            services.AddTransient<ICharacterService, CharacterService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc()
@@ -166,7 +168,7 @@ namespace Pras.Web
                     name: "areas",
                     template: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
                 );
-
+                
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

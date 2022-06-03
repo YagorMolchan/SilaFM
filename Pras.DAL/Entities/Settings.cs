@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pras.DAL.Entities
 {
+    [Table("Settings", Schema = "db_owner")]
     public class Settings : Entity
     {
         //Header

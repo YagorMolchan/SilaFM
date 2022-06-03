@@ -15,6 +15,8 @@ namespace Pras.BLL.Mappers
             CreateMap<VideoDTO, Video>();
             CreateMap<ReviewDTO, Review>();
             CreateMap<SettingsDTO, Settings>();
+            CreateMap<ServiceDTO, Service>();
+            CreateMap<CharacterDTO, Character>();
         }
         public override string ProfileName
         {

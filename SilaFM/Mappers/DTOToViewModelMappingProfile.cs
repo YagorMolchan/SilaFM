@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Pras.BLL.DTO;
 using Pras.Web.Areas.Administration.Models;
+using Pras.Web.Areas.Administration.Models.CharacterViewModels;
 
 namespace Pras.Web.Mappers
 {
@@ -16,6 +17,14 @@ namespace Pras.Web.Mappers
             CreateMap<VideoDTO, VideoViewModel>();
             CreateMap<ReviewDTO, ReviewViewModel>();
             CreateMap<SettingsDTO, SettingsViewModel>();
+
+            //Services
+            CreateMap<ServiceDTO, ServiceViewModel>();
+
+            //Characters
+            CreateMap<CharacterDTO, CharacterViewModel>()
+                .ForMember(vm => vm.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(vm => vm.SpeakerName, opt => opt.MapFrom(src => src.Speaker.Name));
 
             CreateMap<SettingsDTO, Models.SettingsViewModel>();
             CreateMap<SpeakerDTO, Models.SpeakerViewModel>();

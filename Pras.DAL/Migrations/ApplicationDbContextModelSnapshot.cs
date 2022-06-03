@@ -202,6 +202,24 @@ namespace Pras.DAL.Migrations
                     b.ToTable("Audios");
                 });
 
+            modelBuilder.Entity("Pras.DAL.Entities.Character", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ImagePath");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("SpeakerId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpeakerId");
+
+                    b.ToTable("Characters");
+                });
+
             modelBuilder.Entity("Pras.DAL.Entities.Information", b =>
                 {
                     b.Property<Guid>("Id")
@@ -286,7 +304,21 @@ namespace Pras.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews","db_owner");
+                });
+
+            modelBuilder.Entity("Pras.DAL.Entities.Service", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("Pras.DAL.Entities.Settings", b =>
@@ -364,7 +396,7 @@ namespace Pras.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings","db_owner");
                 });
 
             modelBuilder.Entity("Pras.DAL.Entities.Speaker", b =>
@@ -514,6 +546,13 @@ namespace Pras.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Pras.DAL.Entities.Character", b =>
+                {
+                    b.HasOne("Pras.DAL.Entities.Speaker", "Speaker")
+                        .WithMany("Characters")
+                        .HasForeignKey("SpeakerId");
                 });
 #pragma warning restore 612, 618
         }

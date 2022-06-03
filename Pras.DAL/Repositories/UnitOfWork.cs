@@ -15,6 +15,8 @@ namespace Pras.DAL.Repositories
         private IRepository<News> _newsRepository;
         private IRepository<Review> _reviewsRepository;
         private IRepository<Settings> _settingsRepository;
+        private IRepository<Service> _servicesRepository;
+        private IRepository<Character> _charactersRepository;
 
         public UnitOfWork(PrasDbContext context)
         {
@@ -115,6 +117,30 @@ namespace Pras.DAL.Repositories
         }
 
         public PrasDbContext Context => _context;
+
+        public IRepository<Service> ServicesRepository
+        {
+            get
+            {
+                if(_servicesRepository == null)
+                {
+                    _servicesRepository = new Repository<Service>(_context);
+                }
+                return _servicesRepository;
+            }
+        }
+
+        public IRepository<Character> CharactersRepository
+        {
+            get
+            {
+                if (_charactersRepository == null)
+                {
+                    _charactersRepository = new Repository<Character>(_context);
+                }
+                return _charactersRepository;
+            }
+        }
 
         public bool Commit()
         {
